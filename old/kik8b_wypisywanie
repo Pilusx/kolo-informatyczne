@@ -1,0 +1,8 @@
+void dfs_rek_odtworz(unsigned x) {
+	wypisz_stan(x);
+	wypisz(x);
+	wypisz_sasiadow(x);
+	cout << endl;
+	
+	...
+}

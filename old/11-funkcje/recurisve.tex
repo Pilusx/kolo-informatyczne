@@ -1,0 +1,112 @@
+\documentclass{article}
+ 
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+ 
+\begin{document}
+\title{Ściąga o równaniach rekurencyjnych}
+
+\maketitle
+
+\section{Grupa}
+\begin{displaymath}
+	(G, +, 0)
+\end{displaymath}
+G - zbiór, + operacja dwuagrumentowa, 0 - element neutralny względem dodawania
+\begin{gather}
+\forall_{a, b \in G} a + b \in G \\
+\forall_{a, b, c \in G} (a + b) + c = a + (b + c) \\
+\exists_{e \in G} \forall_{a \in G} a + e = e + a = a \\
+\forall_{a \in G} \exists_{b \in G} a + b = b + a = e
+\end{gather}
+
+\section{Pierścień}
+\begin{displaymath}
+	(G, +, *, 0, 1)
+\end{displaymath}
+G - zbiór, + i * - operacje dwuargumentowe, 0 - element neutralny względem dodawania, 1 - element neutralny względem mnożenia
+\begin{gather}
+	(G, +, 0)	
+\end{gather}
+
+\section{Szybkie potęgowanie}
+\begin{gather}
+	n := \sum_{i=0}^{\lfloor log(n) \rfloor} a_i * 2^i, a_i \in \{0, 1\} \\
+	k^n = \prod_{i=0}^{\lfloor log(n) \rfloor} k^{a_i * 2^i} = k^{a_0} * k^{2a_1} * k^{4a_2} * \dots
+\end{gather}
+
+\section{Równania rekurencyjne (RR)}
+\subsection {RR drugiego rzędu}
+$((p_0, p_1), (a_0, a_1))$,  $ p_i $ - parametry równania, $a_i $ - wartości początkowe
+\begin{gather}
+a_0 = ?, a_1 = ? \\
+\forall_{n > 1}a_n = p_1 * a_{n-1} + p_0 * a_{n-2}
+\end{gather}
+\subsubsection{Fibonacci}
+\begin{gather*}
+a_0 = a_1 = p_0 = p_1 = 1 \\
+a_n = a_{n-1} + a_{n-2}
+\end{gather*}
+1, 1, 2, 3, 5, 8, 13 \dots
+
+\subsubsection{Lucas}
+\begin{gather*}
+a_0 = 2, a_1 = 1 \\
+p_0 = p_1 = 1 \\
+a_n = a_{n-1} + a_{n-2}
+\end{gather*}
+2, 1, 3, 4, 7, 11, 18 \dots
+
+\subsubsection{Wersja macierzowa}
+\begin{gather*}
+S = \begin{bmatrix}
+a_1 & a_0 \\
+a_0 & 0
+\end{bmatrix} \\
+I = \begin{bmatrix}
+p_1 & p_0 \\
+p_0 & 0
+\end{bmatrix} \\
+SI^n = \begin{bmatrix}
+a_{n+1} & a_{n} \\
+a_{n} & a_{n-1}
+\end{bmatrix}
+\end{gather*}
+
+\subsection {RR k-tego rzędu}
+$((p_0, p_1, \dots, p_{k-1}), (a_0, a_1, \dots, a_{k-1})) $
+\begin{gather*}
+\forall_{n > k - 1} a_n = \sum_{i=1}^{k} a_{n - i} p_{k - i} = a_{n-1} p_{k - 1} + a_{n-2} p_{k-2} + \dots + a_{n-k} p_{0}
+\end{gather*}
+
+\subsubsection{Wersja macierzowa}
+\begin{gather*}
+S = \begin{bmatrix}
+a_{k-1} & a_{k-2} & a_{k-3} & \dots & a_{1} & a_{0} \\
+a_{k-2} & a_{k-3} & a_{k-4} & \dots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+a_{1} & a_{0} & 0 & \dots & 0 & 0 \\
+a_{0} & 0 & 0 & \dots & 0 & 0
+\end{bmatrix} \\
+I = \begin{bmatrix}
+p_{k-1} & p_{k-2} & p_{k-3} & \dots & p_{1} & p_{0} \\
+p_{k-2} & p_{k-3} & p_{k-4} & \dots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+p_{1} & p_{0} & 0 & \dots & 0 & 0 \\
+p_{0} & 0 & 0 & \dots & 0 & 0
+\end{bmatrix} \\
+SI^n = \begin{bmatrix}
+a_{n + k-1} & a_{n + k-2} & a_{n + k-3} & \dots & a_{n + 1} & a_{n} \\
+a_{n + k-2} & a_{n+k-3} & a_{n+k-4} & \dots & a_{n} & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+a_{n + 1} & a_{n} & 0 & \dots & 0 & 0 \\
+a_{n} & 0 & 0 & \dots & 0 & 0
+\end{bmatrix}
+\end{gather*}
+Coś nie działają te równania
+
+
+
+\end{document}
+

@@ -1,0 +1,74 @@
+\documentclass{article}
+ 
+ 
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{ntheorem}
+\lstset{language=C++}
+
+\theoremstyle{break}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{corollary}{Wniosek}[theorem]
+\newtheorem{lemma}{Lemat}
+\newtheorem{proof}{Dowód}
+
+\usepackage{bbm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+ 
+\begin{document}
+\title{Kontest}
+
+\maketitle
+
+\section{Zasady}
+\begin{enumerate}
+\item Można korzystać z dowolnych materiałów.
+\item Kod ma być napisany samodzielnie tzn. 'kopiuj-wklej' jest niedozwolone, ale 'przepisz' już jest.
+\end{enumerate}
+\section{Wskazówki}
+\begin{enumerate}
+\item Rozwiązania nie powinny zająć więcej niż 60*2 linii (nie wliczając debuga).
+\item \href{https://www.oi.edu.pl/old/php/show.php?ac=p173000&module=show&file=oi18/przekierowanie}{Przekierowywanie wejścia, wyjścia z pliku.}
+\end{enumerate}
+
+\section{Zadania cz. I}
+
+\subsection{Collatz}
+Treść: \url{http://pl.spoj.com/problems/PTCLTZ/} \\
+Oczekiwana złożoność: $O(n)$
+
+\subsection{KMP (Knuth Morris Pratt)}
+Treść: \url{http://pl.spoj.com/problems/KMP/} \\
+Kod na którym można się wzorować: \href{https://gist.github.com/gongzhitaao/5e9d8f80aaba60e14a2c}{Kod pomocniczy} \\
+Wskazówki co do rozwiązania: \href{http://students.mimuw.edu.pl/~bw386389/13-str/str.pdf}{Skrypt o KMP} \\
+Stopnie rozwiązania zadania:
+\begin{enumerate}
+\item $O(n^2)$
+\item $O(n)$
+\end{enumerate}
+Kody muszą przechodzić dodatkowe testy postaci:
+\begin{enumerate}
+\item Wzorzec to prefiksosufiks dłuższego prefiksosufiksu.
+\end{enumerate}
+\subsubsection{Dodatkowe testy}
+\begin{tabular}{l l}
+\shortstack[l]{[INPUT] \\1 \\2 \\aa \\aaaaaaaa}&
+\shortstack[l]{[OUTPUT]\\0 \\1 \\2 \\3 \\4 \\5 \\6}
+\end{tabular}
+\\
+\subsubsection{Funkcja wypisująca obiekty iterowalne np. vector, string}
+\lstinputlisting[language=C++]{pvec.cpp}
+
+\end{document}

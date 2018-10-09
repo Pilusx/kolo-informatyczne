@@ -1,0 +1,57 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+      obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+    }
+  </script>
+
+</head>
+
+<body>
+<h1>Równania rekurencyjne</h1>
+<a href="rekurencja.pdf">Ściąga</a></br>
+<a href="pot.cpp">Kod, mnożenie macierzy, szybkie potęgowanie.</a> (Kod można przeczytać dopiero po rozwiązaniu zadań o numerach mniejszych niż 0.)
+<h2>Zadania</h2>
+<h3>Zadanie -1. Teoretyczne</h3>
+<p>Kolorujemy wieże rozmiaru n, na k-kolorów. Rozwiązanie polega na napisaniu odpowiedniego równania rekurencyjnego i wyznaczeniu kilku (istotnych) pierwszych elementów.</p>
+<p>a) Ile jest wież rozmiaru n, k-kolorowanych takich, że żadne dwa kolejne elementy nie są takie same?</p>
+<p>b) Ile jest wież rozmiaru n, k-kolorowanych takich, że żadne 4 kolejne elementy nie są takie same?</p>
+<p>Rozpatrujemy wieże rozmiaru n, złożone z kawałków o określonych grubościach</p>
+<p>a) Ile jest wież rozmiaru n, kawałki mają grubości 1, 2?</p>
+<p>b) Ile jest wież rozmiaru n, kawałki mają grubości 2 (każdy kawałek ma jeden z 3 kolorów), 5 (w jednym z 6 kolorów)?</p>
+<p>Udowodnić, że f(1)+f(2)+f(3)+... + f(n) = f(n+2)-1, gdzie f(x) oznacza x-tą liczbę Fibonacciego</p>
+<h3>Zadanie -0.5</h3>
+<p>a) Należy zaimplementować wypełnanie macierzy N*M (N nie zawsze jest równe M) we wszystkich poniższych przypadkach.</p>
+<ul>
+	<li>Macierz zerowa 0. (Wszystkie wartości są równe 0.</li>
+	<li>Macierz identycznościowa I. (Elementy na przekątnej (0,0 -> (n,n) są równe 1.)</li>
+	<li>Macierz jednostkowa 1. (Wszystkie wartości w macierzy są równe 1.)</li>
+</ul>
+<p>b) Należy zaimplementować operacje macierzowe.</p>
+<ul>
+	<li>Dodawanie macierzy A(30x30) z macierzą B(30x30). Jako test A=13  B=(7*I).   </li>
+	<li>Mnożenie macierzy A(30x30) z macierzą B(30x30). Jako test A=(3*I) B=(4*I), oraz A=3  B=7. (!= 21)</li>
+</ul>
+<h3>Zadanie 0. -Lukas</h3>
+<a href="https://en.wikipedia.org/wiki/Lucas_number#Extension_to_negative_integers">Definicja, którą warto przeczytać</a>
+<p>Należy napisać funkcję która oblicza L <sub>-n</sub>, bez użycia wzoru z (-1)<sup>n</sup></p>
+
+<h3>Zadanie 1. Napisać funkcję rekk dla równań k-tego rzędu. (Od tego momentu można korzystać z gotowej implementacji.)</h3>
+<h3>Zadanie 2. Poprawić wszystkie funkcje tak, żeby wyniki obliczane były modulo p. (2 * p < LLONG_MAX) </h3>
+<h3>Zadanie 3. Sprawdzić czy działa.</h3>
+<p>
+<a href="http://www.spoj.com/problems/FIBOSUM/">SPOJ - FIBOSUM</a>
+</p>
+<h3>Zadanie domowe.</h3>
+<p> Należy napisać nieprzekombinowaną wersję szybkiego potęgowania (dla int'ów).
+ 
+</body>
+
+</html>

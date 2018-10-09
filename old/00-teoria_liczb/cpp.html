@@ -1,0 +1,324 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+
+<div id="asd" class="outer">
+    <h1>Algorytmy<!-- i struktury danych--></h1>
+    <div id="sp1" class="box">
+        <h3> Suma prefiksowa 1D </h3>
+<!--
+const int N = 100006;
+int n;
+int t[N];
+// ...
+for(int i = 1; i < n; i++)
+    t[i] += t[i-1];
+-->
+<!-- HTML generated using hilite.me --><div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">int</span> N <span style="color: #666666">=</span> <span style="color: #666666">100006</span>;
+<span style="color: #B00040">int</span> n;
+<span style="color: #B00040">int</span> t[N];
+<span style="color: #408080; font-style: italic">// ...</span>
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>; i <span style="color: #666666">&lt;</span> n; i<span style="color: #666666">++</span>)
+    t[i] <span style="color: #666666">+=</span> t[i<span style="color: #666666">-1</span>];
+</pre></div>
+<h4>Obliczanie sumy na przedziale [i,j] tj. t<sub>i</sub> + t<sub>i+1</sub> + ... + t<sub>j</sub></h4>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">int</span> <span style="color: #0000FF">query</span>(<span style="color: #B00040">int</span> i, <span style="color: #B00040">int</span> j) {
+    <span style="color: #008000; font-weight: bold">return</span> t[j] <span style="color: #666666">-</span> t[i<span style="color: #666666">-1</span>];
+}
+</pre></div>
+
+
+
+    </div>
+
+    <div id="sp2" class="box">
+        <h3>Suma prefiksowa 2D </h3>
+        <h4>Deklaracja zmiennych</h4>
+<!-- HTML generated using hilite.me --><div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">int</span> N <span style="color: #666666">=</span> <span style="color: #666666">1003</span>, M <span style="color: #666666">=</span> <span style="color: #666666">502</span>;
+<span style="color: #B00040">int</span> n, m;
+<span style="color: #B00040">int</span> t[N][M];
+</pre></div>
+
+        <h4>Algorytm (wersja I)</h4>
+        <!-- Obrazki TODO -->
+<!-- HTML generated using hilite.me --><div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>; i <span style="color: #666666">&lt;</span> n; i<span style="color: #666666">++</span>)
+    <span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> j <span style="color: #666666">=</span> <span style="color: #666666">1</span>; j <span style="color: #666666">&lt;</span> m; j<span style="color: #666666">++</span>)
+        t[i][j] <span style="color: #666666">+=</span> t[i][j<span style="color: #666666">-1</span>];
+
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> j <span style="color: #666666">=</span> <span style="color: #666666">1</span>; j <span style="color: #666666">&lt;</span> m; j<span style="color: #666666">++</span>)
+    <span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>; i <span style="color: #666666">&lt;</span> n; i<span style="color: #666666">++</span>)
+        t[i][j] <span style="color: #666666">+=</span> t[i<span style="color: #666666">-1</span>][j];
+</pre></div>
+
+
+        <h4>Algorytm (wersja II)</h4>
+Założenie w momencie gdy obliczamy t[i][j], pozostałe sumy zostały już policzone</br>
+Obrazki
+<!--
+for(int i = 1; i < n; i++)
+    for(int j = 1; j < m; j++)
+        t[i][j] = t[i][j] - t[i-1][j] - t[i][j-1] + t[i-1][j-1];
+-->
+<!-- HTML generated using hilite.me --><div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>; i <span style="color: #666666">&lt;</span> n; i<span style="color: #666666">++</span>)
+    <span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> j <span style="color: #666666">=</span> <span style="color: #666666">1</span>; j <span style="color: #666666">&lt;</span> m; j<span style="color: #666666">++</span>)
+        t[i][j] <span style="color: #666666">=</span> t[i][j] <span style="color: #666666">-</span> t[i<span style="color: #666666">-1</span>][j] <span style="color: #666666">-</span> t[i][j<span style="color: #666666">-1</span>] <span style="color: #666666">+</span> t[i<span style="color: #666666">-1</span>][j<span style="color: #666666">-1</span>];
+</pre></div>
+    <h4>Obliczanie sumy w prostkacie w O(1)</h4>
+    Lewy górny róg (x0, y0), prawy dolny róg (x1, y1) tj. </br>
+    <code>
+    t<sub>x0,y0</sub> + t<sub>x0, y0+1</sub> + ... + t<sub>x0, y1</sub> +</br>
+    t<sub>x0+1,y0</sub> + t<sub>x0+1, y0+1</sub> + ... + t<sub>x0+1, y1</sub> +</br>
+    ... +</br>
+    t<sub>x1,y0</sub> + t<sub>x1, y0+1</sub> + ... + t<sub>x1, y1</sub></br>
+    </code>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">int</span> <span style="color: #0000FF">query</span>(<span style="color: #B00040">int</span> x0, <span style="color: #B00040">int</span> y0, <span style="color: #B00040">int</span> x1, <span style="color: #B00040">int</span> y1) {
+    <span style="color: #008000; font-weight: bold">return</span> t[x1][y1] <span style="color: #666666">-</span> t[x1][y0 <span style="color: #666666">-</span> <span style="color: #666666">1</span>] <span style="color: #666666">-</span> t[x0 <span style="color: #666666">-</span> <span style="color: #666666">1</span>][y1] <span style="color: #666666">+</span> t[x0 <span style="color: #666666">-</span> <span style="color: #666666">1</span>][y0 <span style="color: #666666">-</span> <span style="color: #666666">1</span>];
+}
+</pre></div>
+	
+
+    </div>
+    <div id="pie" class="box">
+        <h4>Test pierwszości O(n)</h4>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">bool</span> <span style="color: #0000FF">czy_pierwsza</span>(<span style="color: #B00040">int</span> n) {
+    <span style="color: #008000; font-weight: bold">if</span> (n <span style="color: #666666">&lt;</span> <span style="color: #666666">2</span>)
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">false</span>;
+    <span style="color: #008000; font-weight: bold">else</span> {
+        <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>; i <span style="color: #666666">&lt;</span> n; i<span style="color: #666666">++</span>)
+            <span style="color: #008000; font-weight: bold">if</span> (n <span style="color: #666666">%</span> i <span style="color: #666666">==</span> <span style="color: #666666">0</span>)
+                <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">false</span>;
+    }
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">true</span>;
+}
+</pre></div>
+
+
+        <h4>Test pierwszości O(&radic;<text class="root">n</text>))</h4>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">bool</span> <span style="color: #0000FF">czy_pierwsza</span>(<span style="color: #B00040">int</span> n) {
+    <span style="color: #008000; font-weight: bold">if</span> (n <span style="color: #666666">&lt;</span> <span style="color: #666666">2</span>)
+        <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">false</span>;
+    <span style="color: #008000; font-weight: bold">else</span> {
+        <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>; i <span style="color: #666666">*</span> i <span style="color: #666666">&lt;=</span> n; i<span style="color: #666666">++</span>)
+            <span style="color: #008000; font-weight: bold">if</span> (n <span style="color: #666666">%</span> i <span style="color: #666666">==</span> <span style="color: #666666">0</span>)
+                <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">false</span>;
+    }
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #008000">true</span>;
+}
+</pre></div>
+
+<h4> Rozklad na czynniki w O(&radic;<text class="root">n</text>)</h4>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">void</span> <span style="color: #0000FF">rozloz</span>(<span style="color: #B00040">int</span> n) {
+    cout <span style="color: #666666">&lt;&lt;</span> n <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot; = &quot;</span>;
+    <span style="color: #008000; font-weight: bold">if</span> (n <span style="color: #666666">&lt;</span> <span style="color: #666666">2</span>)
+        cout <span style="color: #666666">&lt;&lt;</span> n;
+
+    <span style="color: #B00040">int</span> k <span style="color: #666666">=</span> n;
+    <span style="color: #008000; font-weight: bold">for</span> (<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>; i <span style="color: #666666">*</span> i <span style="color: #666666">&lt;=</span> n; i<span style="color: #666666">++</span>)
+        <span style="color: #008000; font-weight: bold">while</span> (k <span style="color: #666666">%</span> i <span style="color: #666666">==</span> <span style="color: #666666">0</span>) {
+            cout <span style="color: #666666">&lt;&lt;</span> i <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot; &quot;</span>;
+            k <span style="color: #666666">/=</span> i;
+        }
+
+    <span style="color: #008000; font-weight: bold">if</span> (k <span style="color: #666666">&gt;</span> <span style="color: #666666">1</span>)
+        cout <span style="color: #666666">&lt;&lt;</span> k;
+
+    cout <span style="color: #666666">&lt;&lt;</span> endl;
+}
+</pre></div>
+
+
+
+</div>
+<div id="sito" class="box">
+        <h4>Sito Erastotenesa O(nlog(logn))</h4>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">int</span> N <span style="color: #666666">=</span> <span style="color: #666666">1003</span>;
+<span style="color: #B00040">bool</span> t[N];
+
+t[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #008000">false</span>;
+t[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #008000">false</span>;
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>; i <span style="color: #666666">&lt;</span> N; i<span style="color: #666666">++</span>)
+    t[i] <span style="color: #666666">=</span> <span style="color: #008000">true</span>;
+
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>; i <span style="color: #666666">&lt;</span> N; i<span style="color: #666666">++</span>)
+    <span style="color: #008000; font-weight: bold">if</span>(t[i])
+        <span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> j <span style="color: #666666">=</span> <span style="color: #666666">2</span>; i<span style="color: #666666">*</span>j <span style="color: #666666">&lt;</span> N; j<span style="color: #666666">++</span>)
+            t[j<span style="color: #666666">*</span>i] <span style="color: #666666">=</span> <span style="color: #008000">false</span>;
+</pre></div>
+
+<h4> Odpowiedz na zapytanie o pierwszosc w O(1) </h4>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">bool</span> <span style="color: #0000FF">czy_pierwsza</span>(<span style="color: #B00040">int</span> n){
+    assert(n <span style="color: #666666">&gt;=</span> <span style="color: #666666">0</span> <span style="color: #666666">&amp;&amp;</span> n <span style="color: #666666">&lt;</span> N);
+    <span style="color: #008000; font-weight: bold">return</span> t[n];
+}
+</pre></div>
+
+
+
+
+<h4>Zadanie #1 : Odpowiadaj na zapytania o długość rozkładu liczby k w O(log k) po preprocessingu O(Nlog(log N))</h4>
+
+
+<div class="io">
+<div class = "box" style="float:left">
+<h3> Wejscie</h3>
+<h4>W pierwszej linii jest liczba q.<br>
+Kolejne q linii zawiera liczby a<sub>1</sub> a<sub>2</sub> ... a<sub>q</sub><br></h4>
+
+5</br>
+2</br>
+8</br>
+16</br>
+21</br>
+17
+</div>
+
+<div class ="box">
+<h3> Wyjscie </h3>
+<h4>
+q linii. W i-tej linii należy wypisać długość rozkładu liczby a <sub>i</sub>
+</h4>
+
+1</br>
+3</br>
+4</br>
+2</br>
+1
+</div>
+<div class ="box">
+<h4> Ograniczenia </h4>
+2 <= a<sub>i</sub> < 10<sup>5</sup>, i = 1 .. q: liczby do rozlozenia</br>
+10<sup>5</sup> < q: gdzie q to liczba zapytan</br>
+Oczekiwana złożoność O(Nlog(log N) + qlog k) </br>
+<h4> Wyjaśnienie </h4>
+2 = 2, 8 = 2 * 2 * 2, 16 = 2 * 2 * 2 * 2, 21 = 3 * 7, 17 = 17
+</div>
+</div>
+
+
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">int</span> N <span style="color: #666666">=</span> <span style="color: #666666">100005</span>;
+<span style="color: #B00040">int</span> t[N];
+
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">1</span>; i <span style="color: #666666">&lt;</span> N; i<span style="color: #666666">++</span>)
+    t[i] <span style="color: #666666">=</span> i;
+
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">2</span>; i <span style="color: #666666">&lt;</span> N; i<span style="color: #666666">++</span>)
+    <span style="color: #008000; font-weight: bold">if</span>(t[i] <span style="color: #666666">==</span> i)
+        <span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> j <span style="color: #666666">=</span> <span style="color: #666666">2</span>; j<span style="color: #666666">*</span>i <span style="color: #666666">&lt;</span> N; j<span style="color: #666666">++</span>)
+            <span style="color: #008000; font-weight: bold">if</span>(t[i<span style="color: #666666">*</span>j] <span style="color: #666666">==</span> i<span style="color: #666666">*</span>j)
+                t[i<span style="color: #666666">*</span>j] <span style="color: #666666">=</span> i;
+</pre></div>
+
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">bool</span> <span style="color: #0000FF">czy_pierwsza</span>(<span style="color: #B00040">int</span> n) {
+    <span style="color: #008000; font-weight: bold">return</span> t[n] <span style="color: #666666">==</span> n <span style="color: #666666">&amp;&amp;</span> n <span style="color: #666666">&gt;</span> <span style="color: #666666">1</span>;
+}
+</pre></div>
+
+
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">int</span> <span style="color: #0000FF">dlugosc_rozkladu</span>(<span style="color: #B00040">int</span> n) {
+    <span style="color: #B00040">int</span> len <span style="color: #666666">=</span> <span style="color: #666666">1</span>, k <span style="color: #666666">=</span> n;
+    <span style="color: #008000; font-weight: bold">while</span>(k <span style="color: #666666">&gt;</span> <span style="color: #666666">1</span>) {
+        k <span style="color: #666666">=</span> k <span style="color: #666666">/</span> t[k];
+        len<span style="color: #666666">++</span>;
+    }
+    <span style="color: #008000; font-weight: bold">return</span> len;
+}
+</pre></div>
+
+
+<h4>Rozkladanie liczb w O(log k) po preprocessingu O(Nlog(log N))</h4>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">void</span> <span style="color: #0000FF">rozloz</span>(<span style="color: #B00040">int</span> n) {
+    <span style="color: #008000; font-weight: bold">if</span> (n <span style="color: #666666">&lt;</span> <span style="color: #666666">2</span>)
+        cout <span style="color: #666666">&lt;&lt;</span> n;
+
+    <span style="color: #B00040">int</span> k <span style="color: #666666">=</span> n;
+    <span style="color: #008000; font-weight: bold">while</span>(k <span style="color: #666666">&gt;</span> <span style="color: #666666">1</span>){
+        cout <span style="color: #666666">&lt;&lt;</span> t[k] <span style="color: #666666">&lt;&lt;</span> <span style="color: #BA2121">&quot; &quot;</span>;
+        k <span style="color: #666666">=</span> k <span style="color: #666666">/</span> t[k];
+    }
+    cout <span style="color: #666666">&lt;&lt;</span> endl;
+}
+</pre></div>
+<h4> Zadanie #2 : Liczby Bitusia</h4>
+Bituś bardzo polubił ostatnio liczby złożone. Dla zabawy wypisał sobie wszystkie liczby całkowite od a do b (włącznie z a i b).
+Rozpisał sobie kilka małych przykładów na kartce i zaczął się zastanawiać:</br>
+a) Jaka jest suma długości rozkładów dodatnich liczb złożonych (Bituś nie znosi liczb pierwszych) na przedziale od a do b. Wynik oznaczamy przez f(a,b)</br>
+b0) Mając daną liczbę x niech p(x) = 1, gdy x<sup>2</sup> + 1 jest pierwsza, 0 w przeciwnym wypadku</br>
+b) Mając dane liczby r, c<sub>1</sub> c<sub>2</sub> ... c<sub>r</sub>
+Bituś chciałby wiedzieć ile wynosi p(c<sub>1</sub>) * f(c<sub>1</sub>, c<sub>2</sub>) + p(c<sub>2</sub>) * f(c<sub>2</sub>, c<sub>3</sub>) + ... +  p(c<sub>r-1</sub>) * f(c<sub>r-1</sub>, c<sub>r</sub>)</br>
+</br>
+Wskazówka 1: Umiejąc obliczyć q(i,j) odpowiednio szybko (w O(1)), wystarczy policzyć powyższe wyrażenie wprost. </br>
+Wskazówka 2: Warto używać algorytmów z poprzednich zajęć i je modyfikować.
+
+<div class="io">
+<div class = "box" style="float:left">
+<h3> Wejscie</h3>
+<h4>W pierwszej są liczby a, b oraz q.<br>
+Kolejne q linii zawiera liczbę r<sub>i</sub> oraz r<sub>i</sub> liczb c<sub>i,1</sub> c<sub>i,2</sub> ... c<sub>i,r</sub><br></h4>
+
+-15 20 4</br>
+2 5 20</br>
+3 5 10 20</br>
+3 7 7 7</br>
+5 -13 4 5 6 7
+</div>
+
+<div class ="box">
+<h3> Wyjscie </h3>
+<h4>
+W pierwszej linii nalezy wypisac odpowiedz na podpunkt a) tj. f(a,b). </br>
+W kolejnych q liniach nalezy wypisac odpowiedzi na kolejne zapytania. (Podpunkt b)
+</h4>
+28</br>
+0</br>
+19</br>
+0</br>
+4</br>
+
+</br>
+
+</div>
+<div class ="box">
+<h4> Ograniczenia </h4>
+2 < b <= 10<sup>5</sup> </br>
+-10<sup>5</sup> <= 2 < b </br>
+c<sub>i, j</sub> <= c<sub>i, j+1</sub></br>
+a <= c<sub>i,j</sub> <= b <br>
+
+R = r<sub>1</sub> + r<sub>2</sub> + ... r<sub>q</sub>, R < 10<sup>4</sup> </br>
+
+Oczekiwana złozoność:</br>
+O(b log(log b) + R &radic;<text class="root">b</text>)
+
+<h4>Wyjaśnienie do linii 5 wyjścia.</h4>
+p(-13) = 0 (bo 170 jest zlozone), </br>
+p(4) = 1 (17 jest pierwsze),</br>
+p(5) = 0 (26 jest zlozone), <br>
+p(6) = 1 (37 jest pierwsze)</br>
+f(-13, 4) = 2 (bo 4 = 2 * 2), </br>
+f(4, 5) = 2 (bo 4 = 2 * 2),</br>
+f(5, 6) = 2 (bo 6 = 2 * 3),</br>
+f(6, 7) = 2 (bo 6 = 2 * 3)
+</div>
+</div>
+
+<div class="box">
+<a href="OI/zad-2/test.zip">Paczka testów</a> </br>
+*.in - wejscie, *.out - wyjscie</br>
+test1 - test przykladowy </br>
+test2, test3 - losowe male testy </br>
+wyd - Test wydajnosciowy, r = 999, a = -10<sup>5</sup>, b = 10<sup>5</sup> </br>
+pierw - dla wszystkich i oraz j p(r<sub>i,j</sub>) = 1</br>
+niepierw - dla wszystkich i oraz j p(r<sub>i,j</sub>) = 0 </br>
+
+<div>
+<a href="OI/zad-2/zad2.cpp">Wzorcowka</a>
+</div>
+</div>
+    
+
+</body>
+</html>

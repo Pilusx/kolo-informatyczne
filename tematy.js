@@ -135,7 +135,6 @@ function add_lessons() {
         }
     }
 }
-/* Zebrać najczęściej występujące twierdzenia z niebieskich książeczek */
 var Book = (function () {
     function Book(name, author, comment, link) {
         this.name = name;
@@ -190,6 +189,7 @@ var materials = [
     new Link("http://archom.ptm.org.pl/", "ARCHOM"),
     new Link("http://smurf.mimuw.edu.pl/", "Smurf"),
     new Link("http://was.zaa.mimuw.edu.pl/", "WAS"),
+    new Link("old", "Materiały z 2017/2018"),
 ];
 var books = [
     new Book("Kółko Matematyczne dla Olimpijczyków", "Pawłowski, Henryk", undefined, "https://www.matematyka.pl/3263.htm"),
@@ -208,27 +208,28 @@ var lessons = [
         new Link("https://en.cppreference.com/w/cpp/io/c/fprintf", "printf"),
         new Link("https://en.cppreference.com/w/cpp/io/c/fopen", "fopen"),
         new Link("https://en.cppreference.com/w/cpp/io/c/fclose", "fclose"),
-        new Link("http://www.cplusplus.com/reference/algorithm/max/", "max"),
-        new Link("https://stackoverflow.com/questions/30898575/inbuilt-gcda-b-function-in-c", "__gcd")
+        new Link("https://en.cppreference.com/w/cpp/string/byte/islower", "islower"),
+        new Link("files/IO_C/init", "Start"),
+        new Link("files/IO_C/final", "Koniec")
     ]),
-    new Lesson().intro().setCode("IO_2").setExpDate(10, 2018).setDate(11, 10, 2018)
+    new Lesson().intro().setCode("IO_2").setExpDate(10, 2018)
         .setIOI('PF3 (3)')
         .setSubject("&ltiostream&gt").setDesc("Operacje wejścia/wyjścia w C++, "),
     new Lesson().intro().setCode("SD_1").setExpDate(10, 2018)
         .setIOI('PF3 (7)')
         .setSubject("struct").setDesc("Struktury, tablice struktur, typedef")
         .setLinks([new Link("https://en.cppreference.com/w/c/language/struct", "struct")]),
+    new Lesson().intro().setCode("MAT_2").setExpDate(11, 2018).setIOI('M (2-4)')
+        .setSubject("Modulo").setDesc("Wstęp do arytmetyki modulo"),
     new Lesson().intro().setCode("MAT_1").setExpDate(11, 2018)
         .setSubject("Rekurencja").setDesc("Liczby pierwsze, równania rekurencyjne, szeregi ciągi, zapis n-arny, NWD")
         .setLinks([
         new Link("http://pldml.icm.edu.pl/pldml/element/bwmeta1.element.dl-catalog-a064b502-798f-4529-935f-9b132b5667dd", "Teoria Liczb, Sierpiński Wacław (1950)"),
         new Link("https://pl.spoj.com/problems/PRZEDSZK/", "Przeszkolanka (SPOJ)"),
-        new Link("https://szkopul.edu.pl/problemset/problem/yZeuTNLgpfpx2vNXSGNRr2RE/site/?key=statement", "Liczby drugie (PA 2017)")
+        new Link("https://stackoverflow.com/questions/30898575/inbuilt-gcda-b-function-in-c", "__gcd"),
+        new Link("https://szkopul.edu.pl/problemset/problem/yZeuTNLgpfpx2vNXSGNRr2RE/site/?key=statement", "Liczby drugie (PA 2017)"),
+        new Link("old/00-teoria_liczb/cpp.html", "Algorytmy (old)"),
     ]),
-    new Lesson().intro().setCode("~~").setExpDate(11, 2018)
-        .setSubject("Gąsienica/Szeregi?").setDesc("Gąsienica najlepiej powiązana z NWD"),
-    new Lesson().intro().setCode("MAT_2").setExpDate(11, 2018).setIOI('M (2-4)')
-        .setSubject("Modulo").setDesc("Wstęp do arytmetyki modulo"),
     new Lesson().intro().setCode("MAT_3").setExpDate(12, 2018)
         .setSubject("Macierze").setDesc(),
     new Lesson().intro().setCode("SD_2").setExpDate(12, 2018)
@@ -290,7 +291,7 @@ var lessons = [
         .setSubject("Geometria 1").setDesc("Liczby zespolone")
         .setLinks([
         new Link("https://en.cppreference.com/w/cpp/numeric/complex", "<complex>"),
-        new Link("http://codeforces.com/blog/entry/22175", "Triki (CodeForces)"),
+        new Link("http://codeforces.com/blog/entry/22175", "Triki (CodeForces By Hikari9)"),
     ]),
     new Lesson().ext().setCode("GE_2").setExpDate(11, 2018)
         .setIOI("AL10 (4-6)")

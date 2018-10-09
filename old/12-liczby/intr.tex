@@ -1,0 +1,189 @@
+\documentclass{article}
+ 
+ 
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{verbatim}
+\lstset{language=C++}
+ 
+\begin{document}
+\title{Matematyczne szlaczki}
+
+\maketitle
+
+\section{Matematyczne szlaczki}
+\begin{tabular}{ | l | l | m{3cm} | }
+\hline
+Napis matematyczny & Kod w C++ & Uwagi \\
+\hline
+$[a_{i}]_{i = 0, \dots, N-1 }$ &
+\begin{lstlisting}
+#define N 1003
+int a[N];
+\end{lstlisting}
+& Tablica zawierająca N elementów. (Ciąg / Wektor N-elementowy) \\
+& \begin{lstlisting}
+const int N = 1003;
+int a[N];
+\end{lstlisting}
+
+& Zmienna N deklarowana jako stała, a nie jako makro.\\
+\hline
+
+$[a_{i, j}]_{\substack{ i = 0, 1, 2, \dots, N-1 \\ j = 0, 1, 2 \dots, M-1}} $
+& 
+\begin{lstlisting}
+const int N = 1003, M = 1004;
+int a[N][M];
+\end{lstlisting}
+& Macierz $ N\times M $ \\
+\hline
+
+$ \forall_{i \in \{1, 2, \dots, n\}} $ & for(int i = 1; $ i <= n $; i++) & Pętla for \\
+\hline
+
+\begin{comment}
+$ min_{i \in \{0, \dots, N-1\}} a_{i} $ & 
+\begin{lstlisting}
+#include<algorithm> // min
+#include<climits> // INT_MAX
+int m = INT_MAX;
+for(int i = 0; i < N; i++)
+	c = min(a[i], c);
+\end{lstlisting}
+& Jeśli a jest tablicą typu int o N elementach. \\
+\hline
+$ argmin_{i \in \{0, \dots, N-1\}} a_i $ &
+\begin{lstlisting}
+#include<algorithm> // min
+#include<climits> // INT_MAX
+int k = -1;
+int m = INT_MAX;
+for(int i = 0; i < N; i++)
+	if(a[i] < m) {
+		k = i;
+		m = a[i];
+	}
+\end{lstlisting} & Pod zmienną k zapamiętujemy indeks dla którego wartość w tablicy jest najmniejsza. \\
+\hline
+\end{comment}
+$
+\sum_{i \in \{m, m+1, \dots, M \} } a_i
+$
+&
+\begin{lstlisting}
+int c = 0;
+for(int i = m; i <= M; i++)
+	c += a[i];
+\end{lstlisting}
+
+& \\
+$\sum_{ i = m }^{M} a_i $ & & \\
+\hline
+$f(x, y) = x + y$ & 
+\begin{lstlisting}
+int f(int x, int y) {
+	return x + y;
+} 
+\end{lstlisting}
+& Funkcja biorąca dwie liczby jako parametr i zwracająca jedną liczbę (ich sumę). \\
+\hline
+$
+f(x) = 
+\begin{cases} 
+3x + 1, & \text{gdy x nieparzyste} \\
+\frac{x}{2} & \text{w przeciwnym wypadku}
+\end{cases}
+$
+&
+\begin{lstlisting}
+int x = 17, y;
+if(x % 2 == 1) {
+	y = 3*x + 1;
+}
+else {
+	y = x / 2;
+}
+\end{lstlisting}
+& Instrukcje warunkowe \\
+&
+%\begin{lstlisting}
+%y = (x % 2 == 1 ? 3 * x + 1 : x / 2);
+%\end{lstlisting}
+& \\
+\hline
+\end{tabular}
+
+\section{Zadania}
+\subsection{Rozwiązanie polega na napisaniu kodu}
+We wszystkich poniższych zadaniach należy wyliczyć tablicę b na podstawie tablicy a.
+\subsubsection{Ciąg Fibonacciego $O(n)$}
+Tablica a jest dwuelementowa. n = 2018.
+\begin{gather*}
+a_0 = 0 \\
+a_1 = 1 \\
+\forall_{i \in \{ 0, 1 \} } b_i := a_i \\
+\forall_{i \in \{2, 3, \dots, n\} } b_i := b_{i-1} + b_{i-2}
+\end{gather*}
+Wskazówka.
+\begin{displaymath}
+\forall_{i \in \{0, 1, \dots, n\} } b_{i} = 
+\begin{cases} 
+a_i, & \text{gdy $i < 2$} \\
+b_{i-1} + b_{i -2} & \text{w przeciwnym wypadku}
+\end{cases}
+\end{displaymath}
+
+\subsubsection{Suma prefiksowa $O(n)$}
+\begin{displaymath}
+	\forall_{k \in \{ 0, 1, \dots, n-1 \} } b_{k} := \sum_{i = 0}^{k} a_{i} 
+\end{displaymath}
+Wskazówka.
+\begin{displaymath}
+\forall_{i > 0} b_i = a_i + b_{i - 1}
+\end{displaymath}
+
+\subsubsection{* Tablica 3d $ O(n^3)$}
+\begin{displaymath}
+	\forall_{\substack{ 0 \leqslant x \\ x \leqslant y \\ y \leqslant z < n} }
+	 b_{x, y, z} := x + y - z
+\end{displaymath}
+Wskazówka.
+\begin{displaymath}
+x \leqslant y, y \leqslant z, z < n \implies x \leqslant y \leqslant z < n \implies x < n, y < n
+\end{displaymath}
+Tam gdzie tablica b nie jest określona, wartość powinna być równa 0. \\
+(Kiedy tablice w C++ mają wartość domyślną równą 0?)
+
+\subsubsection{** Suma prefiksowa 2D $O(n^2)$}
+Tablica a jest dwuwymiarowa $(n \times n)$
+\begin{displaymath}
+\forall_{\substack{ 0 \leqslant i < n \\ 0 \leqslant j < n}} b_{i, j} := \sum_{x = 0}^{i} \sum_{y = 0}^{j} a_{x, y}
+\end{displaymath}
+Rozwiązanie wprost ma złożoność $O(n^4)$. 
+Można to zrobić szybiciej poprzez podzielenie zadania na mniejsze podzadania.
+\begin{gather*}
+\forall_{\substack{ 0 \leqslant i < n \\ 0 \leqslant j < n}} c_{i, j} := \sum_{y = 0}^{j} a_{i, y} = c_{i, j-1} + a_{i, j} \text{ (Liczymy sumę prefiksową wzdłuż kolumn. )} \\
+\forall_{\substack{ 0 \leqslant i < n \\ 0 \leqslant j < n}} b_{i, j} := \sum_{x = 0}^{i} c_{x, j} \text{ (Liczymy sumę prefiksową wzdłuż wierszy dla wyników częściowych.) }
+\end{gather*}
+
+\subsubsection{*** Suma w prostokącie $O(1)$}
+Mając policzoną tablicę b z zadania powyżej należy obliczyć wyrażenie.
+\begin{displaymath}
+f(x_1, y_1, x_2, y_2) := \sum_{ i = x_1 } ^ { x_2 } \sum_{ j = y_1 }^ {y_2} a_{i, j}
+\end{displaymath}
+Rozwiązanie. 
+\begin{displaymath}
+f(x_1, y_1, x_2, y_2) := b_{x_2, y_2} - b_{x_1 - 1, y_2} - b_{x_2, y_1 - 1} + b_{x_1 - 1, y_1 - 1}
+\end{displaymath}
+
+% $ \forall_{x \in X} $ & for(auto \&x : X) & Jeśli chcemy nadpisać x. \\
+% & for(auto x : X) & Jeśli potrzebujemy tylko wartości x. \\
+% \hline
+
+\end{document}
+

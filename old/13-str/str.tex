@@ -1,0 +1,264 @@
+\documentclass{article}
+ 
+ 
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{ntheorem}
+\lstset{language=C++}
+
+\theoremstyle{break}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{corollary}{Wniosek}[theorem]
+\newtheorem{lemma}{Lemat}
+\newtheorem{proof}{Dowód}
+
+\usepackage{bbm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+ 
+\begin{document}
+\title{Słowa, słowa, słowa.}
+
+\maketitle
+
+\section{Przydatny kod}
+\begin{tabular}{ | l | l | m{3cm} | }
+\hline
+Kod & Opis \\
+\hline
+\begin{lstlisting}
+#include<iostream> // cin, cout
+#include<string> // string
+
+using namespace std;
+...
+string s;
+...
+\end{lstlisting} & Przydatne biblioteki i deklaracja. \\
+\hline
+\begin{lstlisting}
+cin >> s;
+cout << s;
+\end{lstlisting} & 
+Wczytaj z stdin, wypisz na stdout. \\
+\hline
+\begin{lstlisting}
+s = "Hello!\n" + '#' + "lo";
+if(s.empty()) { ... }
+size_t len = s.length();
+char c = s[4];
+\end{lstlisting} &  \shortstack[l]{
+Zapisz napis do zmiennej. \\
+Czy string jest pusty? \\
+Jaka jest długość stringa? \\
+Jaki jest 5-ty znak? } \\
+\hline
+\begin{lstlisting}
+size_t p = s.find("lo");
+size_t p1 = s.find("H", 1);
+if(p != string::npos) { ... }
+\end{lstlisting} &
+\shortstack[l]{
+Znajdź pierwsze wystąpienie stringa. \\
+Znajdź pierwsze wystąpienie stringa w sufiksie s[i,...] \\
+Czy powyższy znak występuje w stringu? } \\
+\hline
+\end{tabular}
+
+Uwagi:
+\begin{enumerate}
+\item Nie należy odwoływać się do znaków o złych indeksach.
+\item Znak '\textbackslash n' może być elementem stringa.
+\item find zwraca std::string::npos jeśli znak nie należy do stringa.
+\end{enumerate}
+Linki:
+\begin{enumerate}
+\item http://www.cplusplus.com/reference/string/string/
+\end{enumerate}
+
+\section{Definicje cz. I}
+\subsection{Alfabet}
+Alfabetem nazywamy zbiór znaków.
+\begin{displaymath}
+\Sigma = \{a,b,c,d,e\}
+\end{displaymath}
+
+\subsection{Słowo}
+Słowem nazywamy ciąg znaków (najczęściej skończonej długości.
+\begin{displaymath}
+w = a_1a_2a_3\dots a_n
+\end{displaymath}
+Istnieje również słowo puste (długości 0), które oznaczamy jako $\epsilon$. \\
+Długość słowa oznaczamy przez $|w| = n$
+
+
+\subsection{Język}
+Językiem nazwiemy zbiór słów.
+\begin{displaymath}
+L = {ab, abbc, abbbd}
+\end{displaymath}
+
+Np. Niech $\Sigma=\{0,1\}$. Wówczas językiem złożonym ze słów długości 2 nad językiem $\Sigma$ będzie $\Sigma^2 = \Sigma \times \Sigma = \{00, 01, 10, 11\}$.
+Ogólniej $\Sigma^n$ jest zbiorem słów długości n.
+
+
+\subsection{Podsłowo}
+Podsłowem jest spójny podciąg znaków danego słowa.
+\begin{displaymath}
+w(i,j) = w_iw_{i+1}\dots w_j
+\end{displaymath}
+Np. Dla słowa $w=baaccd$, $aacc$ jest podsłowem, ale $bd$ nie jest.
+
+\subsection{Prefiks}
+Prefiksem nazywamy podsłowo które zaczyna się wraz z początkiem słowa.
+Tj, są to wszystkie podsłowa postaci $w(1, j)$. \\
+Np. $w=abbc$, $abb $ jest prefiksem, ale $c$ nim nie jest.
+
+\subsection{Sufiks}
+Jeśli słowo $w$ ma długość n, to sufiksami są wszystkie słowa postaci $w(i, n)$. (Wszystkie znaki od pewnego momemntu do końca słowa.)
+
+\subsection{Prefiksosufiks}
+Dla słowa $w$ prefiksosufiksem nazwiemy słowo $x$ takie, że $x$ jest sufiksem słowa $w$, oraz $x$ jest prefiksem słowa $w$. \\
+Np. $w=albatrosjordialba$, $x_1=alba$ $x_2=a$ są prefiksosufiksami, ale $x_3=ba$ nie jest.
+
+\section{Zadania}
+\subsection{Języki $O(z)$}
+$n$ - liczba słów do sprawdzenia \\
+$z$ - suma długości słów \\
+$str_i$ - słowo (dowolny ciąg cyfr, długości przynajmniej 1) \\
+$t_i$ - "TAK" lub "NIE" \\
+Należy sprawdzić czy dane słowa należą do języka L. Jeśli $i$-te słowo należy do języka w $i$-tej linii wyjścia należy wypisać TAK, w przeciwnym wypadku należy wypisać NIE.
+\begin{gather*}
+L = \{ 0^n1^n : n \geqslant 1 \} \\
+01 \in L \\ 0011 \in L \\ 011 \notin L
+\end{gather*}
+
+\begin{tabular}{ | l | l |}
+\hline
+Wejście & Wyjście \\
+\hline
+\shortstack[l]{$n$  \\
+$str_1$ \\ $str_2$ \\ $\dots$ \\ $str_n$ }
+&
+\shortstack[l]{$ t_1 $ \\ $t_2$ \\  $\dots$ \\ $t_n $} \\
+\hline
+\multicolumn{2}{| c |}{Przykład} \\
+\hline
+\shortstack[l]{3\\ 01\\ 0011\\ 011} & \shortstack[l]{TAK \\ TAK \\ NIE} \\
+\hline
+\end{tabular}
+\subsection{KMP}
+Zdefiniujmy funkcję $ps$ obliczającą długość najdłuższego prefiksosufiksu dla kolejnych prefiksów danego słowa. (takie które nie są tym słowem, co znaczy, że długość prefiksosufiksu jest mniejsza od długości prefiksu).
+\begin{displaymath}
+    ps(n) = \begin{cases}
+       max_{1 < i < n}( w(1, i) = w(n-i+1, n)), & \text{gdy istnieje prefiksosufiks} \\
+       0, & \text{gdy jedynym prefiksosufiksem jest $\epsilon$}
+        \end{cases}
+\end{displaymath}
+Zbadajmy kilka własności funkcji ps.\\
+\begin{enumerate}
+\item  Klasycznie warto sprawdzić kilka małych wartości. ps(1) = 0, bo $ i< n = 1 $.
+\item Można zaczać się zastanawiać, czy da się wyliczać funkcję ps szybicej niż poprzez sprawdzanie wszystkich możliwości dla wszystkich długości. Okazuje się, że tak.
+\end{enumerate}
+
+\begin{lemma}[Prefiksosufiks mojego prefiksosufiksu jest moim prefiksosufiksem]
+Rozpatrzmy prefiks w(1, n), oraz jego prefiksosufiksy $w(1, k_1), w(1, k_2), w(1, k_3), \dots w(1, k_r) $. $(k_1 < k_2 < \dots < k_r)$
+
+Wówczas dla dowolnego słowa $w(1, z)$, takiego, że $w(1, n)$ jest prefiksosufiksem wszystkie słowa $w(1, k_i)$ także są prefiksosufiksami $w(1,z)$.
+\end{lemma}
+\begin{proof}
+$w(1, n)$ jest prefiksosufiksem $w(1,z) \implies w(1,n) = w(z-n+1, z)$ \\
+$w(1, k_i)$ jest prefiksosufiksem $w(1, n) \implies w(1, k_i) = w(n - k_i + 1, n)$ \\ \\
+Wówczas $w(1, k_i) = w(n - k_i + 1, n) = w(z - n + 1 + (n - k_i + 1), n) = w(z - k_i, n)$. (W drugiej równości korzystamy z tego, że $w(n - k_i + 1, n)$ jest sufiksem $w(1, n)$ oraz $w(z-n+1, z)$. 
+\end{proof}
+\begin{lemma}
+$ps(n+1) \in \{0, ps(n) + 1, ps(ps(n)) + 1, ps(ps(ps(n))) + 1, \dots \}$ \\
+\end{lemma}
+\begin{proof}
+Niech $w=a_1$, wówczas słowo jedynym prefiksosufiksem słowa $w$ jest słowo puste $\epsilon$.
+\\
+Niech $w=a_1\dots a_na_{n+1}$, oraz niech $\{\epsilon, w(1, k_1), w(1, k_2), \dots w(1, k_r)\}$ będzie zbiorem prefiksosufiksów słowa $w(1,n)$. \\
+Wówczas poniższe warunki są równowazne.
+\begin{enumerate}
+\item $w(1, k_i + 1)$ jest prefiksosufiksem słowa $w$
+\item $w(1,k_i) = w(n - k_i, n) \land a_{k_i + 1} = a_{n+1}$ (Po prostu przedłużamy słowo o jedną literę, która musi się zgadzać.
+\end{enumerate} 
+\end{proof}
+\begin{lemma} Wartości $ps(1), \dots, ps(n)$ da się wyliczyć w $O(n)$.
+\end{lemma}
+\begin{proof}[Koszt zamortyzowany]
+ps(n+1) może zmaleć kilka razy lub w ogóle, i urosnąć tylko raz lub w ogóle. Wiemy, również, że $ps(n+1) < n+1$ oraz, że funkcja $ps$ nie zmaleje bardziej niż wzrosła. W takim przypadku liczba operacji nie przekracza $c * 2n = O(n)$.
+\end{proof}
+
+\subsubsection{Wystąpienie słowa}
+Rozpatrzmy alfabet $\Sigma$, taki, że $ \# \not\in \Sigma$ oraz słowa $p, x_1, x_2, \dots, x_r$ składają się ze znaków z $\Sigma$. \\
+Wówczas dla słowa $w=p\#x_1\#x_2\#\dots\#x_r$ zachodzi warunek: \\
+Jeśli $p = w(1,|p|) = w(n-|p| + 1, n)$ (Słowo wzorcowe $p$ wystąpiło). to zachodzi dokładnie jeden z poniższych warunków: \\
+\begin{enumerate}
+\item $n = |p|$
+\item $ps(n) = |p|$
+\item Po wartościach ps, zaczynając od ps(n), da się doskoczyć do $ps(ps(...))) = |p|$. 
+\end{enumerate}
+
+
+\subsubsection{Minimalne pokrycie}
+Tresć: Szablon (12 OI) \url{https://main.edu.pl/pl/archive/oi/12/sza} (Jest też na szkopule)
+Rozpatrzmy słowo $w=a_1a_2\dots a_n$.
+\begin{lemma}Jeśli $w(l, r)$ pokrywa $w$ to $w(l, r)$ jest prefiksosufiksem.
+\end{lemma}
+\begin{proof}
+Słowo w(l, r) musimy przyłożyć do pierwszego i ostatniego znaku.
+\end{proof}
+\begin{lemma}$w(1, k)$ pokrywa $w(1, n)$ i jest prefiksosufiksem $w(1, n + k)$ to pokrywa $w(1, n+k)$.
+\end{lemma}
+
+\subsection{Karp-Rabin}
+Zdefiniujmy funkcję haszującą $h$ przyporządkującą danemu podsłowu liczbę.
+\begin{gather*}
+	w = a_1a_2\dots a_n \\
+	p, q \in \mathbb{P} \\
+	h(l, r) =  (\sum_{i=l}^r a_ip^i) \mod{q}
+\end{gather*}
+W szczególności zachodzi:
+\begin{enumerate}
+\item $h(1, n) = (\sum_{i=1}^n a_ip^i) \mod{q}$.
+\item $w(l, l+k) = w(r, r+k) \implies p^{r-l} hs(l, l+k) \equiv h(l, l+k) \pmod{q}$
+\end{enumerate}
+
+\subsubsection{Kolizje}
+O ile funkcja h jest dostatecznie losowa, to przypisuje wartości z przedziału $\{0, 1, \dots, n-1\}$ z podobnym (równym) prawdopodobieństwem. Dla k słów:
+\begin{displaymath}
+P(\text{kolizja nie wystąpi}) = \frac{|A|}{|\Omega|} = \frac{n!}{(n-k)!k^n}
+\end{displaymath} 
+A - zbiór funkcji różnowartościowych z $\{0, 1, \dots, n-1\}$ na $\{0, 1, \dots, k-1\}$\\ 
+$\Omega$ - zbiór funkcji z $\{0, 1, \dots, n-1\}$ na $\{0, 1, \dots, k-1\}$ \\
+Czasami można też wziąć więcej funkcji hashujących np. dwie, wówczas o ile są różne to prawdopodobieństwo kolizji maleje.
+
+\subsection{Zastosowanie}
+Mamy k wzorców o sumarycznej długości K oraz n słów (o sumarycznej długości N). Wówczas w czasie $O(nK)$ możemy sprawdzić wystąpienie wzorców w słowach. (o ile nie będziemy mieli pecha tzn. kolizji i nie będziemy ich sprawdzać).
+
+
+\begin{comment}
+\subsection{*** Manacher}
+Linki:
+\begin{enumerate}
+\item Palindromy (OI) https://main.edu.pl/pl/archive/oi/13/pal
+\end{enumerate}
+Wskazówki:
+\begin{enumerate}
+
+\end{enumerate}
+\end{comment}
+\end{document}
+

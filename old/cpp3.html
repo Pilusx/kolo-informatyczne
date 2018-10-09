@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+  }
+</script>
+
+</head>
+<body>
+<h1>DFS, BFS</h1>
+<div>
+	<div class ="box">
+	<h3> DFS - rekurencyjny </h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">const <span style="color: #007020">int</span> N <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">10000</span>;
+vector<span style="color: #333333">&lt;</span>vector<span style="color: #333333">&lt;</span><span style="color: #007020">int</span><span style="color: #333333">&gt;</span> <span style="color: #333333">&gt;</span> g;
+<span style="color: #007020">bool</span> odw[N]; <span style="color: #333333">//</span> odwiedzone
+
+void czysc() {
+	<span style="color: #008800; font-weight: bold">for</span>(<span style="color: #007020">int</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; i <span style="color: #333333">&lt;</span> N; i<span style="color: #333333">++</span>)
+		odw[i] <span style="color: #333333">=</span> false;
+}
+	
+void inicjuj() {
+	<span style="color: #333333">//</span> Wczytaj graf, lub wygeneruj
+	<span style="color: #333333">....</span>
+}
+
+	
+void dfs(<span style="color: #007020">int</span> x) {
+	odw[x] <span style="color: #333333">=</span> true; <span style="color: #333333">//</span> Ustaw jako odwiedzony
+
+	<span style="color: #333333">//</span> Odwiedz sasiednie nieodwiedzone
+	<span style="color: #008800; font-weight: bold">for</span>(unsigned i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; i <span style="color: #333333">&lt;</span> g[x]<span style="color: #333333">.</span>size(); i<span style="color: #333333">++</span>)
+		<span style="color: #008800; font-weight: bold">if</span>(<span style="color: #000000; font-weight: bold">not</span> odw[g[x][i]])
+			dfs(g[x][i]);
+}	
+</pre></div>
+</div>
+
+<div class="box">
+	<h3>BFS - kolejkowy</h3>
+	<h4>Struktura danych tak jak wyżej</h4>
+
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #BC7A00">#include &lt;queue&gt;</span>
+queue<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;</span> q;
+
+<span style="color: #B00040">void</span> <span style="color: #0000FF">bfs</span>(<span style="color: #B00040">int</span> x) {
+	q.push(x);
+	odw[x] <span style="color: #666666">=</span> <span style="color: #008000">true</span>;
+	
+	<span style="color: #008000; font-weight: bold">while</span>(not q.empty()) {
+		<span style="color: #B00040">int</span> z <span style="color: #666666">=</span> q.front();
+		q.pop();
+		
+		<span style="color: #408080; font-style: italic">// Zrób coś mądrego</span>
+		
+		<span style="color: #408080; font-style: italic">// Dodaj do kolejki wszystkie sasiadujace nieodwiedzone wierzcholki</span>
+		<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">unsigned</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> q[z].size(); i<span style="color: #666666">++</span>)
+			<span style="color: #008000; font-weight: bold">if</span>(not odw[q[z][i]]) {
+			    odw[q[z][i]] <span style="color: #666666">=</span> <span style="color: #008000">true</span>;
+				q.push(q[z][i]);
+			}
+	}
+}
+</pre></div>
+</div>
+	<div class="box">
+		<h3>Zadanie 1. Wypisz wszystkie wierzchołki do których można dojść ścieżką skierowaną (Oblicz wynik dla wszystkich wierzchołków osobno) O(V*E)</h3>
+		<div class="io">
+			<div class="iobox">
+			<h3>Wejscie przykladowe</h3>
+			<h4>W pierwszej linii liczby v oraz e oraz x. Oznaczające kolejno liczbę wierzchołków (numerujemy od 1 do v), liczbe krawędzi</br>
+				W kolejnych e liniach występują krawędzie skierowane jako pary numerów wierzchołków.
+			</h4>
+			8 8</br>
+			2 3</br>
+			3 4</br>
+			4 5</br>
+			6 3</br>
+			3 6</br>
+			6 7</br>
+			8 7</br>
+			</div>
+
+			<div class="iobox">
+				<h3>Wyjscie przykładowe</h3>
+				<h4>v linii w formacie [x : v<sub>1</sub> v<sub>2</sub> v<sub>3</sub> ...] - gdzie x to numer wierzcholka z ktorego wychodzimy, v<sub>i</sub> - numery wierzchołków do których możemy dojść uporządkowane rosnąco, bez tego wierzcholka (tj. v<sub>i</sub> !=x)</h4>
+				1 :</br>
+				2 : 3 4 5 6 7</br>
+				3 : 4 5 6 7</br>
+				4 : 3 5 6 7</br>
+				5 : 3 4 6 7</br>
+				6 : 3 4 5 7</br>
+				7 :</br>
+				8 : 7</br>
+			</div>
+		</div>
+	</div>
+	<div class="box">
+		<h3><a href="http://www.spoj.com/problems/PPATH/">Zadanie 2. PPath (SPOJ)</a></h3>
+		<h4><a href="OI/ppath.cpp">Rozwiązanie</a></h4>
+	</div>
+
+</div>
+
+<div>
+<div class="box">
+	<h3>Zadanie 3. Kółko i krzyżyk</h3>
+	<iframe class="text" src="kik1.html" data="txt/html" onload="resizeIframe(this)"></iframe>
+	<!--
+	<pre><code class="cpp hljs"><iframe class="code" src="OI/kik1.cpp" onload="resizeIframe(this)" ></iframe></code></pre>
+	<pre><code class="cpp hljs" style="vs">using namespace std; int x = 5;</code></pre>
+	<pre><code>using namespace;</code></pre> -->
+
+
+	<iframe class="text" src="kik2.html" data="txt/html" onload="resizeIframe(this)"></iframe>
+
+</div>
+
+</body>
+</html>

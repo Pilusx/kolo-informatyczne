@@ -1,0 +1,84 @@
+\documentclass[paper=a4, fontsize=11pt]{article}
+\usepackage[polish]{babel}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm, hyperref}
+\setlength\parindent{0pt} 
+
+\title{	
+\huge I/O w C
+}
+
+\date{\normalsize\today}
+
+\begin{document}
+
+\maketitle
+
+\newtheorem{mydef}{Definicja}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemma}{Lemat}
+
+\section{Definicje}
+\begin{mydef}Ciąg sum częściowych ciągu n liczb $(a_0, \dots, a_{n-1})$ to ciąg $(b_0, \dots, b_{n-1})$ taki, że:
+\begin{displaymath}
+	\forall_t b_t = \sum_{i=0}^{t} a_i = a_0 + a_1 + \dots + a_t
+\end{displaymath}	
+
+\end{mydef}
+
+\begin{mydef}Średnia arytmetyczna ciągu n liczb $(a_0, \dots, a_{n-1})$
+\begin{displaymath}
+\sum_{i=0}^{n-1} \frac{a_i}{n} = \frac{a_0 + a_1 + \dots + a_{n-2} + a_{n-1}}{n} = \frac{b_{n-1}}{n}
+\end{displaymath}
+
+\section{Zadanie}
+Waszym dzisiejszym zadaniem jest napisanie programu, który:
+
+
+\end{mydef}
+
+\begin{enumerate}
+\item wczyta ze standardowego wejścia (stdin) jedną literę c oraz jedną liczbę naturalną n ($0 \le n < 5 * 10^6$) oddzieloną napisem \textit{:))-}
+\item sprawdzi asercją czy wczytana liczba należy do odpowiedniego przedziału
+\item sprawdzi asercją czy znak c jest małą literą alfabetu lub liczbą. Jeśli jest to ma przestać działać.
+\item wczyta z pliku \textit{liczby.in} ciąg n liczb naturalnych $(a_0, \dots, a_{n-1})$ poodzielanych znakiem \textit{\#}.
+
+\item wypisze do pliku \textit{pref000000.out} ciąg sum prefiksowych $(p_0, \dots, p_{n-1})$, gdzie pod 000000 należy podstawić liczbę n z bieżącymi zerami
+\item wypisze na standardowe wyjście (stdout) ich średnią z dokładnością do 2 miejsc po przecinku (zawsze mają być 2 liczby po przecinku)
+\end{enumerate}
+
+Uwaga. 
+\begin{enumerate}
+\item Należy pamiętać o otwieraniu i zamykaniu plików.
+\item Litera i cyfra nie muszą być oddzielone spacją :)
+\item Tak. Na końcu napisu jest \textit{-} (Minus)
+\item Po ostatniej liczbie znak \textit{\#} może nie wystąpić, ale wyjątkowo występuje :)
+\item $0 \le a_i < 10^8 $
+\item $13 -> 000013$
+\item W pliku \textit{wejscia.txt} są dostępne przykładowe przypadki testowe wejścia (stdin).
+\end{enumerate}
+
+\section{Pliki nagłówkowe}
+Można używać jedynie języka C oraz poniższych funkcji zawartych w odpowiednich plikach nagłówkowych. 
+
+\subsection{$<stdio.h>$}
+\begin{enumerate}
+\item fopen
+\item fclose
+\item printf, fprintf, snprintf
+\item scanf, fscanf
+\end{enumerate}
+
+\subsection{$<assert.h>$}
+\begin{enumerate}
+\item assert
+\end{enumerate}
+
+\subsection{$<ctype.h>$}
+\begin{enumerate}
+\item islower
+\item isdigit
+\end{enumerate}
+
+\end{document}

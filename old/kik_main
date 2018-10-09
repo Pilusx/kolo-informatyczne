@@ -1,0 +1,14 @@
+int main() {
+	potegi(3);
+	g.resize(pot_n[8]*3);
+	wyniki.resize(pot_n[8]*3);
+	
+	int wynik = dfs_rek(0, 1);
+	cout << "Jesli X zaczyna gre na pustej planszy to przy optymalnej grze przeciwnika " <<
+		(wynik == 1 ? "wygra" : (wynik == 0 ? "zremisuje" : "przegra")) << endl;
+	
+	cout << "Przykladowa rozgrywka" << endl;
+	dfs_rek_odtworz(0);
+
+	return 0;
+}

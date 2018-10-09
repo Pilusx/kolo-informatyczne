@@ -1,0 +1,72 @@
+.box {
+    margin: 15px;
+    padding-left: 15px;
+    border-left: 4px solid black;
+}
+.outer {
+    border-bottom: 5px solid black;
+    margin-bottom: 30px
+}
+.adv {
+    color: red;
+}
+.code {
+    background: #f8f8f8;
+    overflow:auto;
+    width:auto;
+    border:solid gray;
+    border-width:.1em .1em .1em .8em;
+    padding:.2em .6em;
+}
+
+.io {
+    display:flex;
+    width:100%
+}
+
+.iobox {
+    margin: 15px;
+    padding-left: 15px;
+    border-left: 4px solid black;
+	width: 50%;
+	text-align: left;
+}
+.ioalone {
+    margin: 15px;
+    padding-left: 15px;
+    border-left: 4px solid black;
+	text-align: left;
+}
+
+.root {
+    text-decoration-line: overline;
+}
+
+a.hide {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+iframe.code {
+	frameborder: 1;
+	width: 100%;
+}
+iframe.text {
+	frameborder: 0;
+	border: 0;
+	width: 100%;
+}

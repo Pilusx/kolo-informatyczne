@@ -1,0 +1,134 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+      obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+    }
+  </script>
+
+</head>
+
+<body>
+  <h1>Minimalne drzewo rozpinające</br> (grafy nieskierowane, spójne, niewazone)</h1>
+  <p>Algorytm BFS/DFS wyznacza poszukiwane drzewo.</p>
+  <h1>Minimalne drzewo rozpinające</br> (grafy nieskierowane, spójne, ważone)</h1>
+  <h2>Find Union O(m * A(n))</h2>
+  m - liczba operacji Find / Union. </br>
+  n - liczba elementów </br>
+  <a href="fu.cpp">Kod do Find Union.</a>
+  <h2>Algorytm Kruskala O(E log V + E * a(V)) = O(E log V)</h2>
+  <p>
+    a(V) - funkcja odwrotna do funkcji Ackermanna. (chodzi o logarytm iterowany i stałą &lt 6 w FindUnion)</br>
+    Algorytm służy do znajdowania minimalnego drzewa rozpinającego.
+  </p>
+  <code>
+G = (V, E) </br>
+V - wierzchołki, zazwyczaj ponumerowane od 0, ... do |V| - 1  </br>
+E - vector krawędzi  </br>
+Krawędż to trójka liczb (skąd (v1), dokąd (v2), waga (w)) </br>
+1. Zainicjować tablice z FindUnion, tak żeby każdy wierzchołek z V był w osobnym zbiorze. </br>
+2. Posortować krawędzie E względem wag rosnąco. </br>
+3. Dla każdej krawędzi (v1, v2, w) </br>
+&emsp;&emsp;&emsp;&emsp; Jeśli wierzchołki na końcach są w różnych zbiorach robimy Union(v1, v2). oraz jeśli jest taka potrzeba to zapisujemy gdzieś tą krawędź. </br>
+</code>
+
+
+  <h2>Zadanie 0. Zaimplementować algorytm Kruskala</h2>
+  <h3>Uwagi.</h3>
+  <p>0. Warto napisać klasę / structa Krawędź.</p>
+  <p>1. Może się przydać
+    <a href="fu.cpp">kod do FindUnion. </a>
+  </p>
+  <p>2. Warto napisać komparator lub operator&lt i użyć sort'a z &ltalgorithm&gt. (Coś a'la zajęcia o drzewach potęgowych) </br>
+    <u>
+      <b>NIE</b> PISAĆ WŁASNEGO ALGORYTMU SORTOWANIA.</u>
+    <h4>Przykład.</h4>
+    <iframe type="text/txt" src="cmpex.txt" height="400" width="95%" onload="resizeIframe(this)"></iframe>
+  </p>
+  <code>
+
+  </code>
+  <h2>Algorytm Prima O(E log V)</h2>
+  <code>
+
+  </code>
+  <h2>Zadanie 1*. Zaimplementować algorytm Prima</h2>
+  <p>Służy do znajdowania minimalnego drzewa rozpinającego. </p>
+  <code>
+    G = (V, E) </br>
+    V - wierzchołki, zazwyczaj ponumerowane od 0, do |V|-1 </br>
+    E - reprezentowana jako listy sąsiedztwa vector&ltvector&ltX&gt&gt, gdzie X to para (dokąd (v2), waga (w))</br>
+    bool visited[x] - oznacza czy wierzchołek był odwiedzony (implementowany jako vector lub tablica)</br>
+  </br>
+    Zaczynamy z dowolnego wierzchołka (0).</br>
+    Zaznaczamy wszystkie wierzchołki jako nieodwiedzone (visited[i] = false).</br>
+  </br>
+    Zaznaczamy wierzchołek nr 0 jako odwiedzony (visited[0] = true)</br>
+    Wrzucamy wszystkie krawędzie wychodzące z wierzchołka nr 0 do kopca. </br>
+  </br>
+    Dopoki kopiec jest niepusty. </br>
+    &emsp;&emsp;  Wyciągamy najlżejszą krawędź (o najmniejszej wadze). </br>
+    &emsp;&emsp;  Jeśli wierzchołek (v2) nie został odwiedzony to: </br>
+    &emsp;&emsp;&emsp;&emsp;   Zaznaczamy go jako odwiedzony. (visited[v2] = true)</br>
+    &emsp;&emsp;&emsp;&emsp;   Jakoś odnotowujemy użycie krawędzi. (krawędz do v2 należy do drzewa rozpinającego)</br>
+    &emsp;&emsp;&emsp;&emsp;   Wrzucamy krawędzie wychodzące z v2 do kopca.</br>
+      </br>
+  </code>
+  <h3>
+    Uwagi.
+  </h3>
+  <p>
+    0. Dosyć problematyczne może być tu trzymanie krawędzi jako pary, bo zapominamy, który wierzchołek był początkiem krawędzi.
+    </br>
+    Można temu zaradzić trzymając trójkę, tak jak w algorytmie Kruskala, jeśli potrzebujemy tej informacji.</br>
+  </p>
+  <p>
+    1. Kopiec jest już zaimplementowany w STLu.
+    <a href="http://en.cppreference.com/w/cpp/container/priority_queue">priority_queue</a>. Do przydatnych funkcji należą:
+    <ul>
+      <li>push(x) - dodaj do kopca</li>
+      <li>top() - zwróć największy element (wierzchołek stosu) </br>
+        Jeśli chcemy najmniejszy to są 3 opcje:
+        <ol>
+          <li>trzeba przeciążyć operator&lt, tak żeby zachowywał się jak operator&gt</li>
+          <li>napisać własną funkcję porównującą (lambdą, tak jest to opisane w przykładzie w dokumentacji)</li>
+          <li>napisać funktor, tj. klasę, która ma operator() (czyli da się ją wywołać jak funkcję)</li>
+          <li>w przypadku intów i floatów wrzucać wartości pomnożone przez -1 ;) </li>
+      </li>
+      </ol>
+      <li>pop() - usuwa wierzchołek stosu</li>
+      <li>empty() - true jeśli jest pusty</li>
+    </ul>
+  </p>
+  <h4>Przykład.</h4>
+  <iframe type="text/txt" src="kopiec.txt" height="400" width="95%" onload="resizeIframe(this)"></iframe>
+
+  <h2>Zadania Domowe</h2>
+  <p>
+    <a href="http://www.spoj.com/problems/MST/"> SPOJ - MST</a>
+    </br>
+    Wczytać graf. Znależć wagę minimalnego drzewa rozpinającego. </br>
+    Zadania nieprzetestowane, z bardzo dużym prawdopodobieństwem są błędne, dlatego proszę o sprawdzenie na sprawdzarce.</br>
+    Polecam zrobić to zadanie dwa razy, raz Prim'em , raz Kruskal'em</br>
+    Możecie również rozwiązać jakieś inne zadania.
+    <a href="http://www.spoj.com/problems/tag/mst">
+      Lista zadań na MST. </a>
+    </br>
+    Uwaga na long longi..., czasami.
+  </p>
+
+
+  <h2>Rozwiązania</h2>
+  <a href="kruskal.cpp">SPOJ - MST / KRUSKAL</a>
+  </br>
+  <a href="prim.cpp">SPOJ - MST / PRIM</a>
+
+</body>
+
+</html>

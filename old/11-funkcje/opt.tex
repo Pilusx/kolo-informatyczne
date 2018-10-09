@@ -1,0 +1,168 @@
+\documentclass{article}
+ 
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage[linguistics]{forest}
+ 
+\begin{document}
+\title{Optymalne mnożenie ciągu macierzy}
+
+\maketitle
+
+\section{Treść}
+
+Mamy ciąg $ N+1 $ liczb $ (a_{0}, a_{1}, \dots, a_{N - 1}, a_{N}) $. \\
+Mamy również ciąg $ N $ macierzy $ (M_{0}, M_{1}, \dots, M_{N - 2}, M_{N-1}) $ \\
+Macierz $ M_{i} (a_{i} \times a_{i+1}) $ ma $a_{i} $ wierszy i $ a_{i+1} $ kolumn. \\ \\
+Należy znaleźć takie nawiasowanie ciągu, aby liczba wykonanych mnożeń (liczb) była minimalna. \\ Zakładamy, że przemnożenie macierzy A $( n \times m $) oraz B $ (m \times r) $ polega na wykonaniu $ m * n * r $ mnożeń. (Standardowy algorytm mnożenia macierzy.)
+
+Należy napisać program, który:
+\begin{enumerate}
+\item Obliczy minimalną liczbę mnożeń.
+\item Wypisze optymalne nawiasowanie. np. $ (((0) * (1)) * (2)) = (0 * 1) * 2 $
+
+% \item (TODO???) Wypisze przehashowany napis optymalnego nawiasowania.
+% \item (TODO) n zapytań dla przehashowanych ciagow
+\end{enumerate}
+
+\section{Przykładowe mnożenie}
+\begin{forest}
+  [*
+    [*
+     [0]
+     [1]
+    ]
+    [*
+      [2]
+      [*
+        [*
+          [3]
+          [*
+            [4]
+            [*
+              [5]
+              [6]
+            ]
+          ]
+        ]
+        [7]
+      ]
+    ]
+  ]
+\end{forest}
+$ (0*1)*(2*((3*(4*(5*6)))*7)) $
+
+\section{Przykładowe ciągi}
+\subsection{ n = 1}
+Nie ma czego mnożyć.
+
+\subsection{ n = 2}
+\begin{gather*}
+n = 2 \\
+a = (3,4, 5)
+\end{gather*}
+\subsubsection{Nawiasowanie $ (0 * 1) $}
+Liczba mnożeń wynosi: $ 3 * 4 * 5 = 60 $ 
+
+
+\subsection{n = 3}
+\begin{gather*}
+n = 3 \\
+a = (10^6,10^6, 10^6, 1)
+\end{gather*}
+\subsubsection{Nawiasowanie $ (0 * 1) * 2 $}
+Liczba mnożeń wynosi: $ 10^6 * 10^6 * 10^6 + 10^6 * 10^6 * 1 = 10^{18} + 10^{12} $ 
+
+\subsubsection{Nawiasowanie $ 0 * (1 * 2) $}
+Liczba mnożeń wynosi: $ 10^6 * 10^6 * 1 + 10^6 * 10^6 * 1 = 2 * 10^{12} $
+
+\subsection{n = 5}
+\begin{gather*}
+n = 5 \\
+a = (30,1000,1000,1000,4,3)
+\end{gather*}
+\subsubsection{Nawiasowanie $ (((0 * 1) * 2) * 3) * 4 $}
+Liczba mnożeń wynosi: $ 30 * 1000 * 1000 + 30 * 1000 * 1000 + 30 * 1000 * 4 + 30 * 4 * 3  = 30.000.000 + 30.000.000 + 120.000 + 360 = 60.120.360 $
+
+\subsubsection{Nawiasowanie $ 0 * (1 * (2 * (3 * 4))) $}
+Liczba mnożeń wynosi: $ 1000 * 4 * 3 + 1000 * 1000 * 3 + 1000 * 1000 * 3 + 30 * 1000 * 3  =
+12.000 + 3.000.000 + 3.000.000 + 90.000 = 6.102.000 $
+
+\subsubsection{Nawiasowanie $  0 * (((1 * 2) * 3) * 4) $}
+Liczba mnożeń wynosi $ 1000 * 1000 * 1000 + 1000 * 1000 * 4 + 1000 * 4 * 3 + 30 * 1000 * 3 =
+1.000.000.000 + 4.000.000 + 12.000 + 90.000 = 1.004.102.000 $
+
+\section{Rozwiązanie cz. I $ O(n^3) $ }
+Zastosujemy programowanie dynamiczne. \\
+Niech $ dp(i, j) $ oznacza minimalną liczbę mnożeń dla podciągu macierzy $ (M_{i}, M_{i+1}, \dots , M_{j-1}, M_{j}). $
+\begin{enumerate}
+\item $ dp(i, j) $ jest nie określone, gdy $ j < i $.
+\item Nietrudno zauważyć, że $ dp(i, i) = 0 $. \\Mając tylko jedną macierz nie musimy jej mnożyć. 
+\item $ dp(i, j) = min_{k \in \{ i, i + 1,  \dots, j-1 \} } dp(i, k) + dp(k + 1, j) + a_i * a_{k +1} * a_{j + 1} $ \\
+Dzielimy ciąg na dwa ciągi, które osobno wymnarzamy. Następnie ze wszystkich podziałów wybieramy najlepszy. \\
+\begin{gather*}
+(M_{i}, \dots, M_{k}) \rightarrow A(a_i \times a_{k+1}) \\
+(M_{k+1}, \dots, M_{j}) \rightarrow B(a_{k+1} \times a_{j+1}) \\
+(M_{i}, \dots, M_{j}) \rightarrow A*B (a_i \times a_{j + 1})
+\end{gather*}
+
+\item Wartości obliczamy w kolejności rosnących różnic między indeksami. (tj. $ (j - i) $)
+\item Wynikiem jest $ dp(0, n-1) $
+
+\end{enumerate}
+
+\section{Rozwiązanie cz. II}
+Jak odtworzyć nawiasowanie?
+\subsection{argmin}
+Zwraca wartość ze zbioru X, taką, że wartość funkcji jest najmniejsza dla elementu $ k \in X $.
+
+\begin{displaymath}
+	k := argmin_{x \in X} f(x) \iff f(k) = min_{x \in X}f(x)
+\end{displaymath}
+
+\subsection{Rozwiązanie $ O(n^3) $}
+Wystarczy dla każdego podciągu macierzy $ (M_{i}, \dots M_{j}) $ wyznaczyć punkt podziału k.
+\begin{displaymath}
+k := argmin_{k \in \{ i, i + 1,  \dots, j-1 \} } dp(i, k) + dp(k + 1, j) + a_i * a_{k +1} * a_{j + 1}
+\end{displaymath}
+Wówczas poszukiwane nawiasowanie wygląda następująco.
+\begin{enumerate}
+\item nawias(i, i) = i
+\item nawias(i, j) = (nawias$(i, k)$)$*$(nawias$(k+1, j)$)
+\item Wynikiem jest nawias$(0, n-1)$.
+
+\end{enumerate}
+
+\subsection{Znajdowanie argmin}
+Można to zrobić na dwa sposoby.
+\begin{enumerate}
+\item Mając obliczoną tablicę dp obliczamy ją dopiero wtedy go ją potrzebujemy po prostu iterując.
+\item Obliczając tablice $dp$, możemy od razu zapamiętać w osobnej tablicy $ dpk$ odpowiednie wartości. (Wówczas cz. II działa w $ O(n) $)
+
+\end{enumerate}
+
+\subsection{Dowód złożoności}
+\begin{gather}
+	\sum_{i = 0}^n i = 0 + 1 + \dots + n = \frac{n(n+1)}{2} \\
+	\sum_{i = 0}^n i^2 = \frac{n(n+1)(2n+1)}{6} \\
+	\sum_{i = 0}^n i^3 = (\frac{n(n+1)}{2})^2 \\
+	\sum_{i = 0}^n i^k = \dots =  O(n^{k+1})
+\end{gather}
+\begin{equation}
+\begin{split}
+\sum_{0 <= i <= j <=n} j - i & = \sum_{j = 0}^{n} \sum_{i=0}^{j} (j - i) \quad\text{(robimy sumę po dwóch indeksach)}  \\
+&= \sum_{j = 0}^{n}(\sum_{i=0}^j j - \sum_{i = 0}^j i) \quad\text{(rozbijamy na dwie sumy)}\\
+&= \sum_{j = 0}^n j(j+1) - \frac{j(j+1)}{2} \quad\text{(obliczamy sumy osobno)} \\
+&= \sum_{j = 0}^n \frac{j(j+1)}{2} = \sum_{j = 0}^n \frac{j^2}{2} + \frac{j}{2} \quad\text{(wyciągamy j(j+1) przed nawias i upraszczamy)}\\
+&= \frac{\sum_{j = 0}^n j^2}{2} + \frac{\sum_{j = 0}^n j}{2} \quad\text{(sprowadzamy do wzoru na sumy)} \\
+&= \frac{n(n+1)(2n+1)}{12} + \frac{n(n+1)}{4} \quad\text{(podstawiamy)} \\
+&= O(n^3 + n^2) = O(n^3)
+\end{split}
+\end{equation}
+
+
+
+\end{document}
+

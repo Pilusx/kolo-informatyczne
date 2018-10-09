@@ -1,0 +1,83 @@
+\documentclass{article}
+ 
+ 
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{ntheorem}
+\lstset{language=C++}
+
+\theoremstyle{break}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{corollary}{Wniosek}[theorem]
+\newtheorem{lemma}{Lemat}
+\newtheorem{proof}{Dowód}
+
+\usepackage{bbm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+ 
+\begin{document}
+\title{Kontest 2}
+
+\maketitle
+
+\section{Zasady}
+\begin{enumerate}
+\item Można korzystać z dowolnych materiałów.
+\item Kod ma być napisany samodzielnie tzn. 'kopiuj-wklej' jest niedozwolone, ale 'przepisz' już jest.
+\end{enumerate}
+\section{Wskazówki}
+\begin{enumerate}
+\item Rozwiązania nie powinny zająć więcej niż 60*2 linii (nie wliczając debuga).
+\item \href{https://www.oi.edu.pl/old/php/show.php?ac=p173000&module=show&file=oi18/przekierowanie}{Przekierowywanie wejścia, wyjścia z pliku.}
+\end{enumerate}
+
+\section{Zadania cz. II}
+\subsection{Wielkie Twierdzenie Fermata}
+\subsubsection{Twierdzenia}
+\begin{lemma}
+\begin{displaymath}
+p \in \mathbb{P} \implies \forall_{(a \mod{p}) \not\in \{0, 1\}, b, c} (a^b \equiv a^c \pmod{p} \iff b \equiv c \pmod{(p-1)})
+\end{displaymath}
+\end{lemma}
+
+\begin{theorem}[Wielkie Twierdzenie Fermata]
+$n > 2 \implies \lnot \exists_{0 < a, b, c}a^n + b^n = c^n$
+\end{theorem}
+\subsubsection{Właściwe zadanie}
+Niech $k = 40097, m = 1000, p = 10^{9} + 7 \in \mathbb{P}$. \\
+Niech $a,b,c \in \{k, k+1, k+2, \dots k+m\}$ \\
+Należy wypisać jakąkolwiek krotkę $(a,b,c)$  taką, że:
+\begin{displaymath}
+a^{pk} + b^{pm} \equiv c^{p^2} \pmod{p}
+\end{displaymath}
+lub 'NIE', jeśli taka krotka nie istnieje. \\
+
+Stopnie rozwiązania zadania:
+\begin{enumerate}
+\item Pokazanie, że $\forall_{k} pk \equiv k \pmod{p-1}$, oraz że $p^2 \equiv 1 \pmod{p-1}$
+\item Pokazanie, że wystarczy sprawdzać $a^k + b^m \equiv c \pmod{p}$
+\item $O(m^3 p)$
+\item $O(m^3 log(p))$% $Wskazówka: pow.$
+\item $O(m^2 log(m) + m log(p))$ % Wskazówka: $<algorithm>$ sort, find / $<set>$. 
+\item ** Pokazanie, że gdyby zamiast $c^{p^2}$, wziąć $c^{p^2 - 1}$ i założyć, że:
+\begin{displaymath}
+k \equiv m \pmod{p-1},
+\end{displaymath} (tj. $a^m + b^m \equiv 1 \pmod{p}$) to istnieje algorytm sprawdzający istnienie krotki w $O(mlog(m))$.
+\end{enumerate}
+Odpowiedzi: $([a,a^k \pmod{p}],[b,b^m \pmod{p}],[c,c])$ \\
+([40723,675698371],[40482,675739095],[40724,40724]) \\
+([40931,18032244],[41018,18072866],[40622,40622]) \\
+
+\end{document}

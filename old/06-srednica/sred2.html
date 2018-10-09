@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+  }
+</script>
+
+</head>
+<body>
+
+<h1>Średnica drzewa + Cykl i ścieżka Eulera</h1>
+<h2>Zadania na zajęcia</h2>
+<div class="box">
+	<h3>Rozwiązanie zadania 1a z poprzednich zajęć, pozostawiam do przeanalizowania</h3>
+	Zakładamy, że grafem jest drzewo nieskierowane.</br>
+	<iframe src="sred.cpp" data="text/cpp" onload="resizeIframe(this)"></iframe></br>
+	<iframe src="sred.out" data="text/txt" onload="resizeIframe(this)"></iframe>
+	
+	<h3>Zadanie 1. Problem transmisji (Źródło: CLRS, Wprowadzenie do algorytmów)</h3>
+	Mamy graf, który jest drzewem. Rozpoczynamy transmisję z pewnego wierzchołka. Transmisja polega na przekazaniu informacji do wszystkich wierzchołków. Chcemy przekazywać informację z wierzchołka do jego sąsiada (łączy ich krawędź), ale w danym momencie możemy ją przekazać jedynie do JEDNEGO sąsiada. Znaleźć algorytm, który wyznaczy możliwie krótki ciąg przekazań informacji (najkrótszą ścieżkę). </br>
+	Przydatne pojęcia: <a href="https://pl.wikipedia.org/wiki/Broadcast">"Broadcast"</a></br>
+	Oczekiwana złożoność O(V). </br>
+	<h4>Przykładowy graf można wygenerować kodem z zadania wyżej przy użyciu funkcji add_edge i fragmentów kodów z funkcji test_bin i test_tree.</h4>
+	<code>
+	add_edge(int x, int y) - dodaje dwie krawędzie do grafu (x, y) i (y, x) (odpowiednio x->y i y->x) </br>
+	clear() - usuwa graf </br>
+	test_bin(int v_num) - generuje pełne drzewo binarne o v_num wierzchołkach, dodając krawędzie w obie strony. </br>
+	test_path(int v_num) - generuje ścieżkę długości v_num, dodając krawędzie w obie strony. </br>
+	</code>
+	<h4>Proponowane rozwiązanie:</h4>
+	<code>
+		1. Wczytujemy graf. </br>
+		2. Znajdujemy średnicę (2x BFS lub DFS). </br>
+		3. Usuwamy średnicę z grafu. </br>
+		Niech <b>u</b> - początek średnicy i korzeń drzewa przeszukiwania grafu po 2 iteracjach algorytmu, <b>v</b> - koniec średnicy. </br>
+		Po wykonaniu drugiego przeszukiwania grafu (DFS/BFS) np. przy użyciu przykładowego kodu każdy wierzchołek pod zmienną p trzyma ojca w drzewie ukorzenionym w jednym z końców średnicy. </br>
+		Wystarczy przejść ścieżką z <b>v</b> do <b>u</b> używając zapamiętanych ojców i usunąć ją z grafu. Należy usunąć krawędzie tylko w jedną stronę, tak jakby w kierunku <b>u</b>. </br>
+		Można to zrobić po prostu przeszukując listę sąsiedztwa i usuwając ojców. </br>
+		4. Używając algorytmu DFS szukamy ściezki Eulera z <b>u</b> do <b>v</b> w grafie bez ścieżki.
+	</code>
+</div>
+
+
+
+</body>
+</html>

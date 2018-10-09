@@ -1,0 +1,187 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+  }
+</script>
+</head>
+<body>
+<div class="io">
+	<div class="iobox">
+	<h3>Część 1) void potegi(unsigned x)</h3>
+	Mamy do dyspozycji globalną tablicę unsigned pot_n[N], której rozmiar ustalamy zmienną globalną const int N;</br>
+	Funkcja ma ustawiać zmienną globalną n na x. (tj n = x), a następnie wypełnić tablicę pot_n kolejnymi potęgami liczby n. tj. {1, n, n<sup>2</sup>, ... , n<sup>N-1</sup>}</br>
+
+
+	Oczekiwana złożoność O(N) </br>
+	</div>
+	<div class="iobox">
+	<h3> Przykład 1.</h3>
+	Tj. po wywołaniu funkcji potegi(2) tablica ma zawierać elementy {1, 2, 4, 8, 16 ... }</br>
+	</div>
+</div>
+
+<div class="io">
+	<div class="iobox">
+	<h3>Część 2a) unsigned wyciagnij(unsigned x, unsigned k)</h3>
+	Mając daną liczbę n zapisaną globalnie. </br>
+	Zakładamy, że została wcześniej wykonana funkcja potegi(n). </br>
+	Napisać funkcję wyciagnij(x,k), która zwraca k-tą "cyfrę" liczby x w zapisie n-kowym. </br>
+	Oczekiwana złożoność O(1)</br>
+	</div>
+	
+	<div class ="iobox">
+	<h3>Przykład 1.</h3>
+	Wywołujemy funkcję potęgi(2) </br>
+	// 13 = 1101 (w systemie dwójkowym tj. 8 + 4 + 0*2 + 1) </br>
+	wyciagnij(13, 0) zwraca 1 </br>
+	wyciangij(13, 1) zwraca 0 </br>
+	wyciagnij(13, 2) zwraca 1 </br>
+	wyciagnij(13, 3) zwraca 1 </br>
+	wyciagnij(13, 4) zwraca 0 </br>
+	</br>
+	<h3>Przykład 2.</h3>
+	Wywołujemy funkcję potęgi(3) </br>
+	// 17 = 122 (w systemie trójkowym tj. 9 + 2*3 + 2*1) </br>
+	wyciagnij(17, 1) zwraca 2 </br>
+	</div>
+</div>
+
+<div class="io">
+	<div class="iobox">
+	<h3> Część 2b) void wypisz(unsigned x)</h3>
+	Mamy daną liczbę n zapisaną globalnie. </br>
+	Zakładamy, że została wcześniej wykonana funkcja potegi(n). </br>
+	Napisać funkcję wypisz(x), która wypiszę liczbę w systemie n-kowym. </br>
+	Kolejne "cyfry" proszę oddzielać spacją.</br>
+	Oczekiwana złożoność O(N)
+	</div>
+
+	<div class="iobox">
+	<h3> Przyklad 1. </h3>
+	Gdy N = 9</br>
+	Po wywołaniu potęgi(3), wypisz(17) powinno wypisać:</br>
+	0 0 0 0 0 0 1 2 2
+	
+	
+	</div>
+</div>
+
+<div class="io">
+	<div class="iobox">
+	<h3>Część 3a) void generuj(unsigned x)</h3>
+	N = 9 </br>
+	Mamy <a href="http://www.cplusplus.com/reference/vector/vector/">vector</a> vectorów (vector&ltvector&ltunsigned> > g) trzymany globalnie.
+	Przed wywołaniem funkcji generuj należy wywołać funkcję potegi(3) i rozszerzyć vector g do rozmiaru 3<sup>9</sup> (resize)</br>
+	
+	Napisać funkcję generuj(x), która dla danej liczby x zapisuje do vectora g[x] (w dowolnej kolejności) wszystkie liczby, które spełniają jednocześnie wszystkie poniższe warunki
+	<ul>
+		<li>długość jej zapisu w systemie trójkowym nie przekracza 9 (&lt= 9)</li>
+		<li>można ją utworzyć poprzez zmianę jednego zera (0) w zapisie 3-kowym na jedynkę (1) lub dwójkę (2)</li>
+	</ul>
+	</div>
+</div>
+
+<div class="io">
+	<div class="iobox">
+	<h3>Część 3b) void wypisz_sasiadow(unsigned x)</h3>
+	Należy napisać funkcję, która wypisuje zawartość wektora g[x] w formacie podanym w Zadaniu 1 na tej stronie.
+	</div>
+	<div class="iobox">
+	<h3>Przykład 1.</h3>
+	generuj(0) powinna wypisać:</br>
+	0 : 1 3 9 27 81 243 729 2187 6561 2 6 18 54 162 486 1458 4374 13122 </br>
+	</div>
+</div>
+
+<div class="io">
+	<div class="iobox">
+	<h3>Część 4) unsigned zmien_gracza(unsigned x)</h3>
+	Funkcja ma zwracać:</br>
+	2, gdy x == 1 </br>
+	1, gdy x == 2 </br>
+	W pozostałych przypadkach może zwracać cokolwiek.
+	</div>
+</div>
+
+<div class="iobox">
+	<h3>Funkcja main, przykładowe użycie powyższych funkcji</h3>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #B00040">int</span> <span style="color: #0000FF">main</span>() {
+	potegi(<span style="color: #666666">2</span>);
+	<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;=</span> <span style="color: #666666">4</span>; i<span style="color: #666666">++</span>)
+		cout <span style="color: #666666">&lt;&lt;</span> wyciagnij(<span style="color: #666666">13</span>, i) <span style="color: #666666">&lt;&lt;</span> endl;
+	cout <span style="color: #666666">&lt;&lt;</span> endl;
+	
+	potegi(<span style="color: #666666">3</span>);
+	wypisz(<span style="color: #666666">17</span>);
+	g.resize(<span style="color: #666666">3*</span>pot_n[<span style="color: #666666">8</span>]);
+	generuj(<span style="color: #666666">0</span>);
+	wypisz_sasiadow(<span style="color: #666666">0</span>);
+	
+	<span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0</span>;
+}
+</pre></div>
+
+	<h3><a target="_blank" href="OI/kik1.cpp"> Rozwiązanie części 1-4 </a></h3>
+	Proszę nie czytać kodu jeśli nie jest to bezwzględnie konieczne, tzn. po wielu nieudanych próbach samodzielnego napisania </br>
+
+</div>
+
+<div class="io">
+	<div class="ioalone">
+	<h3> Wstęp do części dalszej</h3>
+	Gramy w kółko i krzyżyk. </br>
+	Pierwszy stawiamy krzyżyk (1), a następnie kółko (2), kolejne ruchy wykonywane są na zmianę. <br>
+		
+	Wyobraźmy sobie, że mamy jakieś ustawienie kółek i krzyżyków np. takie:
+	<table>
+		<tr>
+			<th>X</th>
+			<th>O</th>
+			<th></th>
+		</tr>
+		<tr>
+			<th></th>
+			<th>X</th>
+			<th></th>
+		</tr>
+		<tr>
+			<th>O</th>
+			<th></th>
+			<th>X</th>
+		</tr>
+	</table>
+	</br>
+	Możemy je przekształcić w liczbę w następujący sposób.</br>
+	Puste pole to 0, X to 1, O to 2
+		<table>
+		<tr>
+			<th>1*3<sup>0</sup></th>
+			<th>2*3<sup>1</sup></th>
+			<th>0*3<sup>2</sup></th>
+		</tr>
+		<tr>
+			<th>0*3<sup>3</sup></th>
+			<th>1*3<sup>4</sup></th>
+			<th>0*3<sup>5</sup></th>
+		</tr>
+		<tr>
+			<th>2*3<sup>6</sup></th>
+			<th>0*3<sup>7</sup></th>
+			<th>1*3<sup>8</sup></th>
+		</tr>
+	</table>
+	
+	Otrzymujemy wówczas liczbę 102010021 w zapisie trójkowym (tj. 8107), która jednoznacznie określa nam stan gry.</br>
+	Co więcej:</br>
+	Postawienie krzyżyka na planszy jest równoznaczne z dodaniem czynnika 1*3<sup>i</sup> </br>
+	Postawienie kółka na planszy jest równoznaczne z dodaniem czynnika 2*3<sup>i</sup>
+	
+	</div>
+</div>
+</body>
+</html>

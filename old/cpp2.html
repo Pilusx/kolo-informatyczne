@@ -1,0 +1,107 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Teoria grafów w praktyce</h1>
+<div class="box">
+	<h3>Implementacja grafów</h3>
+	<h4>Zakładamy, że każda mozliwa krawędź jest umieszczona na liście conajwyżej raz.</h4>
+	<div class="box">
+	<h3>Macierz sąsiedztwa</h3>
+	(Jeśli tablica nie jest początkowo wypełniona zerami, to trzeba ją nimi wypełnić)
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">//Gdzie t[i][j] == 0, gdy wierzchołki i oraz j nie są połaczone krawędzią (skierowaną) z i do j</span>
+<span style="color: #408080; font-style: italic">//Gdzie t[i][j] == 1, gdy wierzchołki i oraz j są połączone bezpośrednio krawędzią (skierowaną)</span>
+	
+<span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">int</span> N <span style="color: #666666">=</span> <span style="color: #666666">1003</span>;
+<span style="color: #B00040">int</span> t[N][N];
+	
+<span style="color: #B00040">int</span> v, e, x, y;
+cin <span style="color: #666666">&gt;&gt;</span> v <span style="color: #666666">&gt;&gt;</span> e;
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> e; i<span style="color: #666666">++</span>){
+	cin <span style="color: #666666">&gt;&gt;</span> x <span style="color: #666666">&gt;&gt;</span> y;
+	t[x][y] <span style="color: #666666">=</span> <span style="color: #666666">1</span>;
+}
+</pre></div>
+
+	
+	</div>
+	
+	<div class="box">
+<h3>Vectorowa</h3>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #BC7A00">#include &lt;vector&gt;</span>
+
+vector<span style="color: #666666">&lt;</span>vector<span style="color: #666666">&lt;</span><span style="color: #B00040">int</span><span style="color: #666666">&gt;</span> <span style="color: #666666">&gt;</span> g;
+<span style="color: #408080; font-style: italic">// v - liczba wierzchołków, e - liczba krawedzi</span>
+<span style="color: #B00040">int</span> v, e, x, y;
+
+<span style="color: #408080; font-style: italic">// Wczytywanie grafu w postaci listy krawedzi</span>
+cin <span style="color: #666666">&gt;&gt;</span> v <span style="color: #666666">&gt;&gt;</span> e;
+g.resize(v <span style="color: #666666">+</span> <span style="color: #666666">1</span>);
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> e; i<span style="color: #666666">++</span>) }
+	cin <span style="color: #666666">&gt;&gt;</span> x <span style="color: #666666">&gt;&gt;</span> y;
+	g[x].push_back(y); <span style="color: #408080; font-style: italic">// Wczytujemy krawedzie skierowane</span>
+	<span style="color: #408080; font-style: italic">// Jesli krawedzie są nieskierowane to dodajemy jeszcze jedna</span>
+	<span style="color: #408080; font-style: italic">//if(x != y) g[y].push_back(x); </span>
+}
+</pre></div>
+</div>
+		
+		
+</div>
+
+<div class="box">
+	<h3>Mnożenie macierzy O(N*M*R)</h3>
+<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">const</span> <span style="color: #B00040">int</span> N <span style="color: #666666">=</span> <span style="color: #666666">1003</span>, M <span style="color: #666666">=</span> <span style="color: #666666">1004</span>, R <span style="color: #666666">=</span> <span style="color: #666666">1005</span>;
+<span style="color: #B00040">int</span> a[N][M], b[M][R], c[N][R];
+
+<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> i <span style="color: #666666">=</span> <span style="color: #666666">0</span>; i <span style="color: #666666">&lt;</span> N; i<span style="color: #666666">++</span>)
+	<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> j <span style="color: #666666">=</span> <span style="color: #666666">0</span>; j <span style="color: #666666">&lt;</span> R; j<span style="color: #666666">++</span>) {
+		c[i][j] <span style="color: #666666">=</span> <span style="color: #666666">0</span>;
+		<span style="color: #008000; font-weight: bold">for</span>(<span style="color: #B00040">int</span> k <span style="color: #666666">=</span> <span style="color: #666666">0</span>; k <span style="color: #666666">&lt;</span> M; k<span style="color: #666666">++</span>)
+			c[i][j] <span style="color: #666666">+=</span> a[i][k]<span style="color: #666666">*</span>b[k][j];
+	} 
+</pre></div>
+
+
+	
+</div>
+
+
+<div class="box">
+	<h4>
+		Algorytm na liczbę ścieżek długości k z v1 do v2. O(k * |V|<sup>3</sup>)
+	</h4>
+	Rozwiązanie: Przemnoż przez siebie k macierzy sąsiedztwa.
+	
+	<div class="io">
+		<div class="box">
+		<h3> Wejscie przykladowe</h3>
+		<h4> W pierwszej linii: V - liczba wierzcholkow, K - dlugosc sciezki</br>
+		W kolejnych macierz sasiedztwa
+		</h4>
+6 3</br>
+0 1 0 0 0 0</br>
+0 0 1 0 0 0</br>
+0 0 0 1 0 0</br>
+0 0 0 0 1 0</br>
+0 0 0 0 0 1</br>
+0 0 0 0 0 0</br>
+
+		</div>
+		<div class="box" style="float:left">
+	<h3> Wyjscie </h3>
+	<h4> Macierz, w ktorej w polu o indeksie (i,j) wystepuje liczba sciezek z wierzchołka v<sub>i</sub> do wierzchołka v<sub>j</sub>.</h4>
+0 0 0 1 0 0</br>
+0 0 0 0 1 0</br>
+0 0 0 0 0 1</br>
+0 0 0 0 0 0</br>
+0 0 0 0 0 0</br>
+0 0 0 0 0 0</br>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

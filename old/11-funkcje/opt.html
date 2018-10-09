@@ -1,0 +1,83 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+      obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+    }
+  </script>
+
+</head>
+
+<body>
+<h1>Optymalne nawiasowanie ciągu macierzy</h1>
+
+<h3>Zadanie</h3>
+<a href="opt.pdf">Ściąga</a></br>
+
+<p>Wyniki są postaci:
+<ul>
+	<li>dp[0][n-1]</li>
+	<li>wyrażenie nawiasowe ze zbędnymi nawiasami</li>
+	<li>wyrażenie nawiasowe bez zbędnych nawiasów</li>
+	<li>poziom zagłębienia danych macierzy oraz liczba mnożeń potrzebna do scalenia lewej części z prawą</li>
+</ul>
+<table id="testy">
+	<tr>
+		<th>N</th>
+		<th>Input</th>
+		<th>Output</th>
+	</tr>
+</table>
+
+<script>
+	String.prototype.format = function () {
+        var a = this;
+        for (var k in arguments) {
+            a = a.replace(new RegExp("\\{" + k + "\\}", 'g'), arguments[k]);
+        }
+        return a
+    }
+	
+	var create_td  = function() {
+		return document.createElement("td")
+	};
+	
+	var linked = function(file) {
+		return "<a href='{0}'>{0}</a>".format(file);
+	};
+	
+	var size = [5, 5, 49, 49];
+	var node = document.getElementById("testy");
+	for(var i = 1; i <= 4; i++) {
+		var row = document.createElement("tr");
+		var input = linked("opt" + i + ".in");
+		var output = linked("opt" + i + ".out");
+		row.innerHTML = "<td> {0} </td> <td>{1}</td> <td>{2}</td>".format(size[i-1], input, output);
+		node.appendChild(row);
+	};
+	var zip = document.createElement("a");
+	var zip_name = "opt.zip";
+	zip.href = zip_name;
+	zip.text = zip_name;
+	node.appendChild(zip);
+	
+	
+
+</script>
+
+<h3>Zadanie domowe.</h3>
+<p>Zadanie 2, 3 z poprzednich zajęć.</p>
+
+<h3>Zadania dodatkowe.</h3>
+<p><a href="http://www.deltami.edu.pl/temat/informatyka/algorytmy/2018/04/22/Gotowka_Startup/">Deltami</a>: OIG - Gotówka</p>
+<p>Swoją drogą polecam poczytać sobie artykuły z Informatycznego Kącika Informatycznego na <a href="http://www.deltami.edu.pl/delta/rubryka/informatyczny_kacik_olimpijski/">Deltami. </a></p>
+ 
+</body>
+
+</html>

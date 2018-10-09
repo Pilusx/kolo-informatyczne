@@ -1,0 +1,183 @@
+\documentclass{article}
+ 
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{ntheorem}
+\usepackage{enumerate}
+\usepackage{hyperref}
+
+\usepackage{bbm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+ 
+\urlstyle{same}
+
+\theoremstyle{break}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{corollary}{Wniosek}[theorem]
+\newtheorem{lemma}{Lemat}
+\newtheorem{proof}{Dowód}
+
+\begin{document}
+\title{Teoria liczb}
+
+\maketitle
+
+\section{Twierdzenia}
+
+\begin{theorem}[Zasada szufladkowa Dirichleta]
+Mamy $n$ szufladek i przynajmniej $nk + 1$ przedmiotów. Wówczas w którejś szufladce będzie przynajmniej $k+1$ przedmiotów.
+\end{theorem}
+\begin{corollary}[k=1]
+Mamy $n+1$ przedmiotów, które wkładamy do $n$ szufladek. Wówczas w którejś szufladce będą przynajmniej 2 przedmioty.
+\end{corollary}
+
+\begin{corollary}
+Mamy $n$ szufladek i $m$ przedmiotów. Wówczas istnieje szufladka w której jest przynajmniej $ \floor*{\frac{m-1}{n}} + 1 $ przedmiotów.
+\end{corollary}
+
+\begin{theorem}[Małe twierdzenie Fermata]
+\begin{displaymath}
+p \in \mathbb{P} \land NWD(a,p) = 1 \implies a^{p-1} \equiv 1 \pmod{p}
+\end{displaymath}
+\end{theorem}
+
+\begin{lemma}
+\begin{displaymath}
+\{ka \pmod{p} : k \in \{0,1, \dots, p-1 \}\} = \{0,1, \dots, p-1 \}
+\end{displaymath}
+\end{lemma}
+\begin{proof}
+Załóżmy nie wprost, że $\exists_{k < l} ka \equiv la \pmod{p} $. \\
+Wówczas $ (l-k)a \equiv 0 \pmod{p}$\\
+Ale $(l-k) \in \{1, 2, \dots, p-1\} \implies (l-k) \nmid p$. \\
+Sprzeczność.
+\end{proof}
+
+\begin{lemma}
+\begin{displaymath}
+a^{p-1}(p-1)! \equiv (p-1)! \pmod{p}
+\end{displaymath}
+\end{lemma}
+\begin{proof}
+\begin{gather*}
+L = \prod_{k=1}^{p-1} ka = a \times 2a \times \dots \times (p-1)a = a^{p-1}(p-1)! \\
+R = \prod_{k=1}^{p-1} k = (p-1)!
+\end{gather*}
+Wystarczy pokazać, że $\forall_i a_i \equiv b_i \pmod{n} \implies \prod_i a_i \equiv \prod_i b_i \pmod{n}$. \\ \\
+Zauważmy, że $\forall_i a_i \equiv c_i \pmod{n},$ gdzie $c_i \in \{0, 1, \dots, n-1\} $. \\
+Stąd $ \forall_i \exists_{p} a_i = pn + c_i $ Oznaczmy te $p$ przez $p_i$. \\
+Wówczas $L = \prod_i (p_in + c_i) \equiv \prod_i c_i \pmod{n} = R$ . (Po wymnożeniu wszystkie wyrazy, mają zero lub więcej niż jedno n. Jedynym wyrazem który nie zawiera n jest $\prod_i c_i.$)
+
+\end{proof}
+
+\begin{lemma}
+\begin{displaymath}
+\forall_{\substack{a,b,c \in \{1, \dots, p-1\} \\ a < b}} ac \equiv bc \pmod{p} \implies a \equiv b \pmod{p}
+\end{displaymath}
+Przy założeniu, że $ p \in \mathbb{P} $.
+\end{lemma}
+\begin{proof}
+$ac \equiv bc \\ 
+\implies \exists_{t} (bc - ac) = pt \\
+\implies (b-a)c = pt$ \\
+(Zachodzi również $c \nmid p \implies c \mid t$). \\
+$\implies (b-a) = p\frac{t}{c} \implies a \equiv b \pmod{p}$
+\end{proof}
+
+\begin{proof}[Małego twierdzenia Fermata]
+Dzielimy obustronnie przez $1, \dots, {p-1}$
+\begin{displaymath}
+a^{p-1}(p-1)! \equiv (p-1)! \pmod{p} \implies a^{p-1} \equiv 1 \pmod{p}
+\end{displaymath}
+\end{proof}
+
+\section{Funkcja phi Eulera}
+$\varphi(n)$ mówi ile jest liczb względnie pierwszych z n w zbiorze $\{1, \dots, n\}$
+\begin{displaymath}
+	\varphi(n) := \{ i \in \{1, \dots, n \} : NWD(i, n) = 1 \}
+\end{displaymath}
+
+\begin{displaymath}
+    \varphi(n) = \begin{cases}
+        p^{k} - p^{k-1} & n = p^k, p \in \mathbb{P}\\
+        \prod_{i = 1}^{m} \varphi(p_i^{k_i}), & n = \prod_{i=1}^m p_i^{k_i}, \forall_i p_i n\in \mathbb{P}, k_i > 0
+        \end{cases}
+\end{displaymath}
+W szczególności: \\
+$p \in \mathbb{P} \implies \varphi(p) = p-1$ \\
+$n = 1 \implies \varphi(n) = 1$\\
+$n = 4 \implies \varphi(n) = 2$
+
+\begin{proof}[$ n = p^k$]
+Rozpatrzmy $NWD(ip + j, p), i \in \{0, 1, \dots, p^{k-1} - 1\}, j \in \{1, 2, \dots, p \}$ \\
+$NWD(ip + j, p) = 1 \iff NWD(j, p) = 1 \iff j \in \{1, 2, \dots, p - 1\}$ \\
+Takich liczb jest $|\{0, 1, \dots, p^{k-1} - 1\}\times\{1, 2, \dots, p-1\}| = p^{k-1}(p-1)$
+
+\end{proof}
+
+\begin{lemma}
+$\{ a_0 \mod{n}, a_1 \mod{n}, \dots, a_{n-1} \mod{n} \} = \{ 0, 1, \dots, n-1 \} \\
+\implies \forall_{c \in \mathbb{N}}\{ a_0 + c \mod{n}, a_1 + c \mod{n}, \dots, a_{n-1} + c \mod{n} \} = \{ 0, 1, \dots, n-1 \} $
+Po prostu przesuwamy liczby cyklicznie o $1$ $c$ razy.
+\end{lemma}
+
+\begin{proof}[$NWD(m,n) = 1 \implies \varphi(nm) = \varphi(n) \varphi(m)$]
+Niech $a_{i,j} := im + j, i \in \{0, 1, \dots, n-1 \}, j \in \{1, 2, \dots, m \}$ \\
+$NWD(a_{i,j}, mn) = 1 \iff NWD(a_{i,j}, n) = 1 \land NWD(a_{i,j}, m) = 1 $ \\ \\
+Rozpatrzmy wartości kolumnami. 
+$NWD(j, m) = 1 \iff \forall_i NWD(a_{i,j}, m) = 1$ \\
+(Wszystkie wartości w j-tej kolumnie są względnie pierwsze z m, o ile j jest względnie pierwsze z m). \\ \\
+Niech $S(j)$ oznacza zbiór wartości w k-tej kolumnie. \\
+$S(j) := \{ a_{i, j} \mod{n} : i \in \{0, 1, \dots, n-1 \} $ \\
+$S(0) = \{0, m, 2m, \dots, (n-1)m \} = \{0, 1, \dots, n-1 \}$ \\
+Z lematu wynika, że $S(j) = \{0, 1, \dots, n-1 \}$. \\ \\
+W każdej z $\varphi(m)$ kolumn dokładnie $\varphi(n)$ wartości jest względnie pierwszych z n. Stąd $\varphi(nm) = \varphi(n)\varphi(m)$
+\end{proof}
+
+\begin{theorem}[Twierdzenie Eulera]
+\begin{displaymath}
+NWD(a,m) = 1 \implies a^{\varphi(m)} \equiv 1 \pmod{m}
+\end{displaymath}
+\end{theorem}
+
+\section{Zadania}
+\begin{enumerate}
+\item Załóżmy, że maksymalna liczba włosów na głowie wynosi 500.000. Udowodnić, że spośród dowolnej populacji 3.141.592 mieszkańców, da się wybrać 7 (ale nie zawsze 8) osób takich, które mają równą liczbę włosów na głowie.
+\item Szybkie potęgowanie \url{http://pl.spoj.com/problems/PA05_POT/}
+\item Znależć wartość funkcji Eulera \url{http://www.spoj.com/problems/ETF} 
+\item Znależć odwrotność modulo $p \in \mathbb{P}$. (Będzie to potrzebne w algorytmie Karpa-Rabina) \\
+Odwrotność modulo p liczby m to liczba c, taka że ${mc \equiv 1 \pmod{p}}$
+Zwyczajowo $c$ oznaczamy poprzez $m^{-1}$. \\
+Uwaga. Poniższe równości nie muszą być prawdziwe, gdy $p \notin \mathbb{P}.$
+\begin{gather*}
+m \equiv a^k \pmod{p} \\
+m * m^{-1} \equiv 1 \pmod{p} \\
+a^{k} * m^{-1} \equiv 1 \pmod{p} \\
+a^{p-1-k} \equiv a^{p-1 - k} * a^{k} * m^{-1} \equiv a^{p-1} * m^{-1} \equiv m^{-1}  \pmod{p} \\
+m^{-1} \equiv a^{p-1-k} \pmod{p}
+\end{gather*}
+\end{enumerate}
+
+\section{Żródła}
+\begin{enumerate}
+\item \url{https://forthright48.blogspot.com/2015/09/euler-totient-or-phi-function.html}
+\item \url{https://en.wikipedia.org/wiki/Pigeonhole_principle}
+\end{enumerate}
+
+\end{document}
+

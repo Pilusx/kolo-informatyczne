@@ -1,0 +1,18 @@
+<html><head><link rel="stylesheet" href="style.css"></head><body><xmp>
+#include<iostream>
+#include<vector>
+
+using namespace std;
+using vit = vector<int>::iterator;
+
+void wypisz(vector<int> &v) {
+	cout << "Wektor: ";
+	vit it = v.begin();
+	
+	while(it != v.end()) {
+		cout << *it << " ";
+		it++;
+	}
+	cout << endl;
+}
+</xmp></body></html>

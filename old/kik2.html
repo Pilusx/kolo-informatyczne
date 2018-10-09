@@ -1,0 +1,105 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+  }
+</script>
+</head>
+<body>
+<div class="io">
+	<div class="ioalone">
+		<h3>Część 5) void wypisz_stan(unsigned x)</h3>
+		Funkcja ma wypisywać planszę zapisaną jako liczba w formacie przystępnym dla ludzi.</br>
+		Puste pole można wypisać jako podkreślenie '_'.</br>
+		Przykładowe wypisanie:</br>
+		===</br>
+		_X_ </br>
+		O_O </br>
+		X_X </br>
+		===</br>
+		Tego typu funkcje okazują się bardzo przydatne przy szukaniu błędów w algorytmie. Przecież zawsze możemy sobie wypisać stan gry, nieprawdaż?</br>
+		Czy da się to prosto zrobić to bez konstrukcji warunkowych typu if, switch?
+
+	</div>
+
+</div>
+<div class="io">
+	<div class="ioalone">
+		<h3>Część 6) void generuj_gracz(unsigned stan, unsigned gracz)</h3>
+		Należy przerobić funkcję z części 3a) </br>
+		Liczby w vectorze mają odzwierciedlać stany do których może dojść gracz, wykonując dozwolony dla tego gracza ruch.</br>
+		<ul>
+			<li>Gracz używający X(krzyżyków - 1) może stawiać tylko X i tylko na wolnych polach(0).</li>
+			<li>Gracz używający O(kółek - 2) może stawiać tylko O i tylko na wolnych polach.</li>
+		</ul>
+		Jak na razie pomijamy, to czy stan, który otrzymaliśmy ma jakikolwiek sens wg. zasad gry. (Funkcja ma się również wykonać dla planszy z ośmioma krzyżykami i pustym polem)
+	</div>
+
+</div>
+<div class="io">
+	<div class="ioalone">
+		<h3>Część 7) Funkcje sprawdzające czy gra powinna się już skończyć. </h3>
+		Do dyspozycji jest poniższy kod napisany jako globalny oraz wszystkie powyższe funkcje. Należy napisać kolejne dwie funkcje.
+		<iframe class="code" src="kik2_global" onload="resizeIframe(this)"> </iframe>
+		
+		<h3>Część 7a) int wynik_w_linii(unsigned x, int numer_sprawdzenia)</h3>
+		Tablica tablic "sprawdzenie" mowi nam o wszystkich mozliwych przekątnych/liniach poziomych/liniach pionowych, które należy sprawdzić, aby ocenić stan gry.</br>
+		Funkcja ma sprawdzać czy przypadkiem znając wyniki z pól o numerach zapisanych w tablicy sprawdzenie[numer_sprawdzenia][...] nie możemy rozstrzygnąć kto wygrywa :</br>
+		<ul>
+			<li> 1 jeśli X wygrał</li>
+			<li> -1 jeśli O wygrał</li>
+			<li> 0 jeśli powyższe warunki nie zachodzą i wszystkie 9 pól na planszy jest zajętych</li>
+			<li> -2 jesli gra się jeszcze nie skończyła</li>
+		</ul>
+		<h3> Część 7b) int wynik_w_stanie(unsigned x) </h3>
+		Funkcja ma obliczać zbiorczy wynik dla danego stanu (biorący pod uwagę wszystkie możliwe linie).
+	</div>
+</div>
+
+<div class="io">
+	<div class="ioalone">
+		<h3>Część 8) DFS, dynamiki na drzewach</h3>
+		Mamy do czynienia z grafem skierowanym (nie możemy cofać ruchów), który jest drzewem (nie ma cykli).</br>
+		|V| = liczba osiąganych stanów < liczba liczb w przedziale [0...3<sup>9</sup>-1] (= 19683)</br>
+		|E| = liczba ruchów < 9 * |V| (< 177147)</br>
+		
+		<h3>Część 8a) int dfs_rek(unsigned x, unsigned gracz) </h3>
+		Funkcja ma:
+		<ul>
+			<li>Generować na bieżąco wszystkie krawędzie wychodzące z x i zapisywać je do grafu (g)</li>
+			<li>Sprawdzać czy stan jest stanem końcowym.</li>
+			<li>Jeśli nie jest to ma rozpatrzyć wszystkie możliwe ruchy gracza i obliczyć na ich podstawie, kto jest w lepszej sytuacji (tj. wygrywa przy optymalnych strategiach) </li>
+			<li>Zapisać w vectorze "wyniki" wynik dla danego stanu należy </li>
+		</ul>
+		Proszę zwrócić uwagę na to, że gracze wykonują ruchy na zmianę.</br>
+		Złozoność O(k*V + E), gdzie k to złożoność operacji wynik_w_stanie.
+		<h3>Część 8b) void dfs_rek_odtworz(unsigned x)</h3>
+		Mając dane ustawienie x. Chcemy wypisać przykładową grę, która doprowadzi do otrzymanego wyniku.
+		<iframe class="code" src="kik8b_wypisywanie" data="txt/html" onload="resizeIframe(this)"></iframe>
+		Złozoność O(9*9 + 9*wypisywanie) = O(1) // 9 zagłębień, pesymistycznie 9 prób zagłębień na każdym poziomie
+		
+	</div>
+</div>
+
+<div class="io">
+	<div class="ioalone">
+		<h3>Przykładowe wywołanie programu.</h3>
+		<iframe class="code" src="kik_main" data="txt/html" onload="resizeIframe(this)"></iframe></br>
+		<a target="_blank" href="OI/kik.out">Przykładowe wyjście</a></br>
+		<a target="_blank" href="OI/kik2.cpp">Rozwiązanie</a>
+	</div>
+</div>
+
+<div class="io">
+	<div class="ioalone">
+		Motywacja: Przeszukiwanie grafu rekurencyjnie jest nieoptymalne pamięciowo. Przeanalizujcie na przykładach co się stanie gdy w algorytmie BFS zamiast kolejki wstawicie stos.
+		<h3>Część 9*) Porządek POSTORDER, PREORDER na drzewach, DFS przy użyciu stosu</h3>
+
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 5.1.6.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2017-12-19T02:59:56.823457821"/>
+	
+	<style type="text/css">
+		body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Liberation Sans"; font-size:x-small }
+		a.comment-indicator:hover + comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em;  } 
+		a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em;  } 
+		comment { display:none;  } 
+	</style>
+	
+</head>
+
+<body>
+<table cellspacing="0" border="0">
+	<colgroup span="16" width="85"></colgroup>
+	<tr>
+		<td height="20" align="center"><font face="Liberation Serif"><br></font></td>
+		<td align="left"><font face="Liberation Serif"><br></font></td>
+		<td align="left"><font face="Liberation Serif"><br></font></td>
+		<td align="left"><font face="Liberation Serif"><br></font></td>
+		<td align="left"><font face="Liberation Serif"><br></font></td>
+		<td align="left"><font face="Liberation Serif"><br></font></td>
+		<td align="left"><font face="Liberation Serif"><br></font></td>
+		<td colspan=2 align="center" valign=middle><font face="Ubuntu" size=3>Dodaj element</font></td>
+		<td colspan=2 align="center" valign=middle><font face="Ubuntu" size=3>Usuń element</font></td>
+		<td colspan=5 align="center" valign=middle><font face="Ubuntu" size=3>Dostęp (ang. access)</font></td>
+		</tr>
+	<tr>
+		<td height="20" align="left"><font face="Liberation Serif"><br></font></td>
+		<td align="left"><font face="Liberation Serif"><br></font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>Include &lt;...&gt;</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>Typ</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>Uwagi</font></td>
+		<td align="center"><font face="Ubuntu" size=3>Przykładowe zastosowania</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>Przykładowa deklaracja</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>Funkcja</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>Złożoność*</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>Funkcja</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>Złożoność*</font></td>
+		<td colspan=2 align="center" valign=middle><font face="Ubuntu" size=3>Czy mogę dostać się do dowolnego elementu (random access)?</font></td>
+		<td align="center"><font face="Ubuntu" size=3>Czy mogę go (ten element) modyfikować?</font></td>
+		<td align="center"><font face="Ubuntu" size=3>Funkcja</font></td>
+		<td align="center"><font face="Ubuntu" size=3>Złożoność</font></td>
+	</tr>
+	<tr>
+		<td rowspan=8 height="154" align="center" valign=middle><b><font face="Ubuntu" size=3>Struktury cz. II</font></b></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Kolejka dwustronna</font></td>
+		<td rowspan=3 align="center" valign=middle><font face="Ubuntu" size=3>queue</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>deque&lt;T&gt;</font></td>
+		<td align="left"><font face="Ubuntu" size=3>Tego radzę NIE używać, jeśli da się użyć czegoś innego. (W szczególności ktoś mógłby spróbować używać tego w roli vectora, nie jest to zalecane ze względów pamięciowych)</font></td>
+		<td align="left"><font face="Liberation Serif"><br></font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>deque&lt;int&gt; d;</font></td>
+		<td colspan=9 rowspan=8 align="center" valign=middle bgcolor="#FFFF99"><font face="Ubuntu" size=3>Ten fragment tabeli zostanie uzupełniony później, gdy przerobimy nowy materiał.</font></td>
+		</tr>
+	<tr>
+		<td rowspan=2 align="left" valign=middle><font face="Ubuntu" size=3>Kolejka priorytetowa</font></td>
+		<td rowspan=2 align="left" valign=middle><font face="Ubuntu" size=3>priority_queue&lt;T&gt;</font></td>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Ubuntu" size=3>Elementy typu T muszą dawać się porównywać, tj. musi być zdefiniowana operacja &lt; (operator&lt;).</font></td>
+		<td rowspan=2 align="center" valign=middle bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td rowspan=2 align="left" valign=middle bgcolor="#66FF66"><font face="Ubuntu" size=3>priority_queue&lt;int&gt; pq;</font></td>
+		</tr>
+	<tr>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Liberation Serif">Top zwraca element największy. (O ile nie zmanipulujemy operacji porównywania)</font></td>
+		</tr>
+	<tr>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Zbiór</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>set</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>set&lt;T&gt;</font></td>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="center" valign=middle bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="left" valign=middle bgcolor="#66FF66"><font face="Ubuntu" size=3>set&lt;int&gt; s;</font></td>
+		</tr>
+	<tr>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Nieuporządkowany zbiór</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>unordered_set</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>unordered_set&lt;T&gt;</font></td>
+		<td align="left" bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="center" valign=middle bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>unordered_set&lt;int&gt; us;</font></td>
+		</tr>
+	<tr>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Mapa</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>map</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>set&lt;K, V&gt;</font></td>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Ubuntu" size=3>Elementy typu K muszą dawać się porównywać, tj. musi być zdefiniowana operacja &lt; (operator&lt;)</font></td>
+		<td align="center" valign=middle bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="left" valign=middle bgcolor="#66FF66"><font face="Ubuntu" size=3>map&lt;int, int&gt; m;</font></td>
+		</tr>
+	<tr>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>Nieuporządkowana mapa</font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>unordered_map</font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>unordered_map&lt;K, V&gt;</font></td>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="center" valign=middle bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="left" valign=middle><font face="Ubuntu" size=3>unordered_map&lt;int&gt; um;</font></td>
+		</tr>
+	<tr>
+		<td align="left" valign=middle bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="center" valign=middle><font face="Ubuntu" size=3>bitset</font></td>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		<td align="left" valign=top bgcolor="#FFFF99"><font face="Liberation Serif"><br></font></td>
+		</tr>
+	<tr>
+		<td height="17" align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td height="17" align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td height="17" align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td colspan=16 height="401" align="left" valign=middle><font face="Ubuntu"><br>4. Iterowanie po strukturze (* Wersja niedopracowana, jeszcze będzie ulegać zmianom…)<br>Możemy to robić dla vectora, listy, zbiorów oraz map. (Te kontenery które mają funkcje begin oraz end)<br>a) Wersja I<br>T t;<br>….<br>for(T::iterator it = t.begin(); it != t.end(); ++it) {<br> … zrob cos(*it);<br>}<br><br>b) Wersja II<br>Lub prościej, jeśli tylko odczytujemy dane ze struktury.<br>for(auto v : t) {<br>  … zrob coś(v);<br>}<br><br>c) Wersja III<br>Jeśli chcemy ją zmodyfiować, musimy uzyskać referencję na obiekt.<br>for(auto &amp;v : t) {<br>  … zrób coś v<br>}</font></td>
+		</tr>
+</table>
+<!-- ************************************************************************** -->
+</body>
+
+</html>

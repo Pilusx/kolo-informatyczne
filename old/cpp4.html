@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+  }
+</script>
+
+</head>
+<body>
+<h1>Sortowanie, Zliczanie</h1>
+<div class="box">
+    <h2>Zadania algorytmiczne</h2>
+    Nowe rzeczy: zbiory, ciągi, permutacje, inwersje.</br>
+    Zakładamy, że mamy globalną tablicę t, w której mamy zapisany ciąg (t[0], ... ,t[n-1]);
+    
+    <h3>Zadanie 0a. Sortowanie bąbelkowe O(n<sup>2</sup>)</h3>
+    <xmp>
+    Po i-tej turze mamy mieć posortowany fragment o indeksach (t[n-i],...,t[n-1])
+    Przesuwamy największy element na koniec odpowiednią liczbę razy.
+    </xmp>
+    <h3>Zadanie 0b. Sortowanie przez wstawianie O(n<sup>2</sup>)</h3>
+    <xmp>
+    Po i-tej turze mamy miec posortowany fragment (t[0],...,t[i-1]).
+    W pierwszej turze (t[0]) jest posortowany.
+    W i-tej turze (i = 1..n-1) próbujemy dostawić element t[i] poprzez przesuwanie elementu t[i] w lewo.
+    Ile tur będzie potrzebnych?
+    </xmp>
+    
+    <h3>Zadanie 1. Sortowanie kubełkowe O(n+k)</h3>
+    <xmp>
+    W i-tym kubełku trzymamy liczbę liczb o wartości równej i.
+    </xmp>
+    Dodatkowo zakładamy, że wszystkie elementy ciągu są z przedziału 0 ... k</br>
+    Napisać funkcje kubelek(int n, int k), która posortuje ciąg.
+    <h3>Zadanie 2a. Mergesort O(nlogn)</h3>
+    <xmp>
+    Jeśli zbiór jest jednoelementowany to jest posortowany.
+    Jeśli nie jest to dzielimy go na pół, osobno sortujemy każdą z części i scalamy.
+    </xmp>
+    Napisać funkcję:
+    <ul>
+        <li> void merge(int i, int k, int j), która scala dwa posortowane ciągi (t[i], t[i+1] ..., t[k]) (t[k+1], ... , t[j]) i zapisuje je do globalnej tablicy jako (a[i], ... ,a[j])
+        </li>
+        <li> void mergesort(int n), która sortuje ciąg sortuje ciąg (t[0] ... t[n-1]) </li> 
+    </ul>
+    <h3>Zadanie 2b. Zlicz inwersje w permutacji O(nlogn)</h3>
+    Wskazówka: 2a.
+    
+    
+    <h3>Zadanie 3*. Bogosort</h3>
+    Mamy funkcję wypisującą vector.
+    <iframe class="code" src="03-sortowanie/wypisz.html" data="txt/html" onload="resizeIframe(this)"></iframe>
+    Proszę generować i wypisywać losowe permutacje, aż trafi się taka, która jest posortowana.</br>
+    Można używać funkcji z &ltalgorithm&gt : <a href="http://www.cplusplus.com/reference/algorithm/random_shuffle/">random_shuffle</a>, <a href="http://www.cplusplus.com/reference/algorithm/is_sorted/">is_sorted</a></br>
+    <a href="03-sortowanie/">Rozwiązanie z przykładowym użyciem iteratorów</a>
+    
+    <h3>Do domu:</h3>
+    Proszę przeczytać i zwrócić uwagę na implementację funkcji (gdzie są porównywane elementy i w jaki sposób?) oraz przykłady użycia.</br>
+    Jako ćwiczenie proszę posortować liczby od n do 1, przy użyciu sorta, w taki sposób, że wszystkie parzyste są przed (po lewej) wszystkimi nieparzystymi (po prawej).
+    Jeśli liczby mają taką samą parzystość rozpatrujemy je zwyczajnie (tj. po lewej mniejsza, po prawej większa).
+    <ul>
+        <li><a href="http://www.cplusplus.com/reference/algorithm/sort/">sort</a></li>
+        <li><a href="http://www.cplusplus.com/reference/algorithm/lower_bound/">lower_bound</a></li>
+        <li><a href="http://www.cplusplus.com/reference/algorithm/upper_bound/">upper_bound</a></li>
+        <li><a href="http://www.cplusplus.com/reference/algorithm/binary_search/">binary_search</a></li>
+    </ul>
+</div>
+    
+</body>
+</html>

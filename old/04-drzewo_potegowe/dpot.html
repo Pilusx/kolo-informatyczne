@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+  }
+</script>
+
+</head>
+<body>
+<h1>Drzewo potęgowe(Fenwicka), k-ta permutacja n-elementowa (w porządku leksykograficznym)</h1>
+
+<div class="box">
+	<h3> Zadanie 1. k-ta permutacja w O(n*log<sup>2</sup>n)</h3>
+	Proszę uzupełnić program o implementację drzewa potęgowego oraz algorytm obliczania k-tej permutacji. </br>
+	(Funkcje read, update, query, cmp, kth, kth_permutation)
+	<iframe class="code" src="kth_pocz_ind" data="txt/text" onload="resizeIframe(this)"></iframe>
+	<a href="kth.cpp">Przykładowe rozwiazanie</a>
+</div>
+
+<div class="box">
+	<p>Jako ciekawostka problem k-tej permutacji da się rozwiązać w O(n*logn) przy użyciu wzbogaconych (w każdym wierzchołku poza wartością trzymamy liczbę synów) zrównoważnych drzew binarnych np. AVL, ale o nich będzie trochę później.</p>
+	
+	<h3> Rozwiązanie słabe 1. k-ta permutacja przez generowanie kolejnych permutacji O(k*n) = O(n*n!)</h3>
+	<p> 8*8! = 322560 ... bo rozwiązanie słabe jest lepsze niż żadne. ;)</p>
+	<xmp>
+		Mamy tablicę wypełnioną liczbami od 1 do n (w kolejności rosnącej.
+		k-1 razy generujemy kolejną permutację (np. przy użyciu next_permutation z algorithm)
+	</xmp>
+	<h3> Rozwiązanie słabe 2. k-ta permutacja przez nieefektywne usuwanie ze zbioru O(n<sup>2</sup>)</h3>
+	<p> 1000*1000 = 10<sup>6</sup> ;)</p>
+	<xmp>
+		Mamy vector v wypełniony liczbami od 1 do n (w kolejności rosnącej.
+		Robimy dokładnie to samo co wcześniej tylko, że:
+		kth to k-ty element vectora : v[k]
+		usuwanie elementu z vectora (np. przy użyciu begin() w wersji iteratorowej O(n)) : v.erase(v.begin()+k)
+	</xmp>
+	Przydatne linki:
+	<a href="http://www.cplusplus.com/reference/vector/vector/erase/">erase</a>
+	<a href="http://www.cplusplus.com/reference/vector/vector/begin/">begin</a>
+	
+	<h3>Zadanie 2. (domowe z sortowania) Sprawdzić czy (a[0], ...., a[n-1]) jest permutacją w dwóch wersjach</br>
+	a) O(nlogn)</br>
+	b) O(n) </h3>
+	Wskazówka: W permutacji n-elementowej występują wszystkie liczby od 1 do n, każda dokładnie raz.</br>
+	Wejście to jedna linia: 
+	<xmp>n a[0] a[1] ... a[n-1]</xmp>
+	Wyjście to:
+	<xmp>1 jeśli jest permutacją
+0 jeśli nią nie jest.</xmp>
+	Przykład: 
+	<xmp>6 6 5 4 3 2 2 zwraca 0
+7 1 4 3 2 5 7 6 zwraca 1
+	</xmp>
+	<h3>Zadanie 3. (domowe, losowe powtórzeniowe) <a href="https://sio2.mimuw.edu.pl/c/pa-2017-1/p/">PA 2017 - Liczby drugie - runda próbna</a></h3>
+	
+</div>
+</body>
+</html>

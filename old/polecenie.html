@@ -1,0 +1,38 @@
+Mamy do dyspozycji globalną tablicę unsigned pot_n[N], której rozmiar ustalamy zmienną globalną const int N;</br>
+
+1) Napisać funkcję void potegi(unsigned n), która wypełnia tablicę pot_n kolejnymi potęgami liczby n.</br>
+Tj. po wywołaniu funkcji potegi(2) tablica będzie zawierać elementy {1, 2, 4, 8, 16 ... }</br>
+
+Złożoność oczekiwana O(N) </br>
+
+2) Mając daną liczbę n zapisaną globalnie. </br>
+Zakładamy, że została wcześniej wykonana funkcja potegi(n). </br>
+Napisać funkcję unsigned wyciagnij(unsigned x, unsigned k), która zwraca k-tą liczbę w zapisie n-arnym. </br>
+
+Przykład 1. </br>
+Wywołujemy funkcję potęgi(2) </br>
+// 13 = 1101 (w systemie dwójkowym tj. 8 + 4 + 0*2 + 1) </br>
+wyciagnij(13, 0) zwraca 1 </br>
+wyciangij(13, 1) zwraca 0 </br>
+wyciagnij(13, 2) zwraca 1 </br>
+wyciagnij(13, 3) zwraca 1 </br>
+wyciagnij(13, 4) zwraca 0 </br>
+
+Przykład 2. </br>
+Wywołujemy funkcję potęgi(3) </br>
+// 17 = 122 (w systemie trójkowym tj. 9 + 2*3 + 2*1) </br>
+wyciagnij(17, 1) zwraca 2 </br>
+
+3)
+N = 10 </br>
+Wywołana została funkcja potęgi(3); </br>
+Napisać funkcję void generuj(unsigned x), która dla danej liczby x wypisuje wszystkie liczby, których zapis 3-kowy nie przekracza 10, które można utworzyć po zmianie jednego zera (0)  </br>
+w zapisie 3-kowym na jedynkę (1) lub dwójkę (2) w dowolnej kolejności</br>
+
+Przykład.</br>
+x = 0 powinna wypisać:</br>
+1 3 9 27 81 243 729 2187 6561 19683 2 6 18 54 162 486 1458 4374 13122 39366</br>
+
+4) Wczytywanie i wypisywanie grafu</br>
+
+5) DFS1, DFS2</br>

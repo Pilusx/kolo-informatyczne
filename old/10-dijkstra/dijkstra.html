@@ -1,0 +1,65 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>
+    function resizeIframe(obj) {
+      obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+      obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+    }
+  </script>
+
+</head>
+
+<body>
+  <h1>Algorytm Dijkstry O(ElogV)</h1>
+  Algorytm służy do znajdowania najkrótszych ścieżek z danego wierzchołka do wszystkich pozostałych. </br>
+  <code>
+G = (V, E) </br>
+V - wierzchołki, zazwyczaj ponumerowane od 0, ... do |V| - 1  </br>
+E - vector vectorów krawędzi  </br>
+
+Krawędż to trójka liczb (skąd (v1), dokąd (v2), waga (w)) </br>
+Odwiedziny (Visitor) to para (gdzie (x), odleglosc (w)) </br>
+</br>
+Struktury pomocnicze: </br>
+ojciec (father) - wierzchołek z którego przyszliśmy do danego wierzchołka </br>
+odleglosc (distance) - odleglosc od wierzchołka początkowego </br>
+
+1. Ustawiamy wszystkim wierzchołkom ojca na -1. Wierzchołkowi początkowemu ustawiamy jego samego. </br>
+2. Odwiedzamy pierwszy wierzchołek. Poprzez wrzucenie odwiedzin do kopca. </br>
+3. Dopóki kopiec nie jest pusty. </br>
+&emsp;&emsp;&emsp;&emsp; Zdejmujemy z kopca odwiedziny z kopca o najmniejszej odległości. </br>
+&emsp;&emsp;&emsp;&emsp; Dla każdego sąsiada. </br>
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Jeśli użycie ścieżki z aktualnego wierzchołka coś poprawia [tzn. odleglosc(z) + waga(z, cel) > odleglosc(cel)] to wrzucamy odwiedziny nowego wierzchołka do kopca i poprawiamy odległość wierzchołkowi docelowemu. Dodatkowo możemy zapisać ojca.
+</code>
+
+
+  <h2>Zadanie 0. Zaimplementować algorytm Dijkstry</h2>
+  <h3>Uwagi.</h3>
+  <p>0. Warto skorzystać ze zmodyfikowanego kopca. (<a href="../09-fu/mst.html">Przykład. Warto również przeczytać uwagi do "Zadanie 1. Zaimplementować algorytm Prim'a." )</a></p>
+  <iframe type="text/txt" src="../09-fu/kopiec.txt" height="700" width="95%" onload="resizeIframe(this)"></iframe>
+
+
+  <h2>Zadania</h2>
+  <p>
+    <ul>
+    <li><a href="http://pl.spoj.com/problems/DIJKSTRA/"> SPOJ - DIJKSTRA</a>, po rozwiązaniu (zaakceptowane na SPOJu przy kompilacji C++ gcc 6.3) lub po <i>dłuższej i nieudanej</i> próbie implementacji możecie również zerknąć na <a href="dij.cpp">rozwiązanie.</a></br>
+    </li>
+    <li>
+        <a href="https://szkopul.edu.pl/problemset/problem/l8-ujU0a7HQFxy8UY32B4Kk_/site/?key=statement">X OI - Przemytnicy</a></br>
+        <a href="https://www.oi.edu.pl/old/download/oi10.pdf"> Omówienie str.69 (71)</a></br></li>
+    <li><a href="http://www.spoj.com/problems/tag/shortest-path"> SPOJ - Lista zadań na najkrótsze ścieżki (DFS/BFS lub Dijkstra). </a></br></li>
+    
+    </ul>
+    
+    
+    
+    
+  </p>
+</body>
+
+</html>

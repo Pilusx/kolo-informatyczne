@@ -1,0 +1,15 @@
+---
+BasedOnStyle:  LLVM
+AccessModifierOffset: -2
+AllowShortFunctionsOnASingleLine: Empty
+AlwaysBreakTemplateDeclarations: true
+BraceWrapping:
+  AfterFunction: true
+ColumnLimit:     240
+IndentWidth:     4
+PointerAlignment: Left
+SortIncludes:    true
+UseTab:          Never
+
+---
+

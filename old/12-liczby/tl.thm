@@ -1,0 +1,15 @@
+\contentsline {theorem}{{Twierdzenie}{1}{Zasada szufladkowa Dirichleta}}{1}{theorem.1}
+\contentsline {corollary}{{Wniosek}{1.{1}}{k=1}}{1}{corollary.1.1}
+\contentsline {corollary}{{Wniosek}{1.{2}}{}}{1}{corollary.1.2}
+\contentsline {theorem}{{Twierdzenie}{2}{Małe twierdzenie Fermata}}{1}{theorem.2}
+\contentsline {lemma}{{Lemat}{1}{}}{1}{lemma.1}
+\contentsline {proof}{{Dowód}{1}{}}{1}{proof.1}
+\contentsline {lemma}{{Lemat}{2}{}}{1}{lemma.2}
+\contentsline {proof}{{Dowód}{2}{}}{1}{proof.2}
+\contentsline {lemma}{{Lemat}{3}{}}{2}{lemma.3}
+\contentsline {proof}{{Dowód}{3}{}}{2}{proof.3}
+\contentsline {proof}{{Dowód}{4}{Małego twierdzenia Fermata}}{2}{proof.4}
+\contentsline {proof}{{Dowód}{5}{$ n = p^k$}}{3}{proof.5}
+\contentsline {lemma}{{Lemat}{4}{}}{3}{lemma.4}
+\contentsline {proof}{{Dowód}{6}{$NWD(m,n) = 1 \implies \varphi (nm) = \varphi (n) \varphi (m)$}}{3}{proof.6}
+\contentsline {theorem}{{Twierdzenie}{3}{Twierdzenie Eulera}}{3}{theorem.3}

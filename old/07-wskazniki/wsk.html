@@ -1,0 +1,114 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    obj.style.width = obj.contentWindow.document.body.scrollWidth + 'px';
+  }
+</script>
+
+</head>
+<body>
+
+<h1>Referencje</h1>
+<h2> Definicja drzewa BST</h2>
+<code>
+class Node { </br>
+Node *left, *right; </br>
+int value; </br>
+}; </br>
+</code> </br>
+
+    Drzewem BST nazywamy drzewo (L[eft], v[alue], R[ight]) [L, R - poddrzewa, v - wartość] w ktorym zachodzą wszystkie poniższe warunki:
+    <ol>
+    <li> wszystkie wartości w lewym poddrzewie <b>L</b> są ściśle mniejsze '&lt' od <b>v</b>, oraz <b>L</b> jest drzewem BST</li>
+    <li> wszystkie wartości w prawym poddrzewie <b>R</b> są ściśle większe '&gt' od <b>v</b>, oraz <b>R</b> jest drzewem BST</li>
+    </ol>
+    Zakładamy, że poprawnym <b>pustym</b> drzewem BST jest pusty wskaźnik, <b>NULL</b>
+
+<h2> Printf/Scanf</h2>
+<code>
+int n; </br>
+scanf("%d", &n); // Wczytuje liczbę i zapisuje ją jako n. </br>
+printf("PI=%.4f\n", 3.14159265359); // Wypisuje liczbę z dokładnością do 4 miejsc po przecinku</br> 
+printf("Hello world! %d %p\n", n, &n); // Wypisuje liczbę i jej adres w pamięci
+</code> </br> </br>
+
+%d - int</br>
+%p - pointer</br>
+%f - double</br>
+Często również przydaje się long long int, ale to już pozostawiam dla zainteresowanych <a href="http://www.cplusplus.com/reference/cstdio/scanf/">cstdio/scanf</a>.</br>
+Do wypisywania skomplikowanych stringów polecam jednak używać &ltiostream&gt (cin, cout, cerr).
+
+
+<h2>Zadanka</h2>
+<div class="box">
+    <ol>
+        <h3><li>Printf/Scanf</li></h3>
+        <b>Zadanie należy wykonać używając konstrukcji for bez indeksów.</b>
+        <ul>
+            <li>Napisać funkcję void stats(const vector&ltfloat&gt& v), która wypisuje średnią, minimum i maksimum w jednej linii.  (wartość bezwzględna każdej z wartości jest &lt 10000)</li>
+            <li>Wczytać liczbę <b>n</b> (n<1000), i <b>n</b> liczb do vectora <b>t</b> przy użyciu funkcji scanf(Uwaga na wskaźniki!).</li>
+            <li>Policzyć średnią liczb z vectora <b>t</b> i wypisać ją z dokładnością do 3 miejsc po przecinku.</li>
+            <li>Niech <b>k</b> oznacza średnią z liczb w tablicy. Dla każdej liczby <b>x</b> w vectorze <b>t</b>, należy wstawić w odpowiednie miejsce w vectorze 'odległość od średniej'. tj. |<b>x</b>-<b>k</b>| </li>
+            <li>Wypisać vector <b>t</b> z dokładnością do 2 miejsc po przecinku.</li>   
+            <li>template&ltclass T&gt vector&ltT&gt& operator+(vector&ltT&gt& t, int x) - przeciążyć tak, żeby robił push_back</li>   
+            <li>template&ltclass T&gt vector&ltT&gt& operator-(vector&ltT&gt& t, int x) - przeciążyć tak, żeby robił erase</li> </li>
+            <li>template&ltclass T&gt ostream& operator&lt&lt(ostream& os, vector&ltT&gt t) - przeciążyć tak, żeby wypisywał vektor (iostream)</li> 
+        </ul>
+        <p>&ltcstdio&gt - printf, scanf </p>
+        <p>&ltcmath&gt - abs(x) </p>
+        <p>&ltvector&gt - resize(x), size() </p>
+
+        <p><a href="wsk.in">Wejście</a></p>
+        <p><a href="wsk.temp">Wyjście</a></p>
+        <p><a href="wsk.cpp">Rozwiązanie</a></p>
+        <p><a href="przeciązenie.cpp">Rozwiązanie (template)</a></p>
+        
+        <a href="class_example.cpp">Przykładowy kod dla klas, templatów.</a>
+        
+        <h3><li>Drzewo BST</li></h3>
+            <b>Macie gotową implementację uproszczonych operacji na drzewie BST. <a href="bst_start.cpp"> Implementacja</a></b>
+            <ul>
+                <li>bool Tree::add(int v) - Dodawanie wierzchołka, funkcja zwraca false (jeśli wierzchołek o danej wartości już istnieje)</li>
+                <li>void Tree::del(int v) - Usuwanie wierzchołka w formie uproszczonej (tzn. wierzchołek może zostać usunięty wtw. gdy jest liściem), funkcja Node::del zwraca true, gdy v jest liściem lub nie ma go w drzewie</li>
+                <li>void Tree::neg(int v) - funkcja, która zmienia wszystkie wartości na przeciwne (np. 5 -> -5) i zachowuje warunek drzewa BST.</li>
+				<li>void Tree::print(ostream& os) - wypisuje elementy w porządku rosnącym na os (np. cin/cerr/cout) </li>
+				<li>bool Tree::empty() - true jeśli jest puste</li></li>
+            </ul>
+			<b>cz. I Należy przeciążyć operatory tak, żeby spełniały opisane poniżej funkcjonalności.</b>
+            <ul>
+            <li>Tree& operator+(Tree& t, int v) - alias dla funkcji add</li>
+            <li>Tree& operator-(Tree& t, int v) - alias dla funkcji del</li>
+            <li>Tree& operator!(Tree& t) - alias dla funkcji neg</li>
+            <li> &ltiostream&gt ostream& operator<<(ostream& os, const Tree& bst) - wypisuje wszystkie liczby w drzewie w porządku rosnącym na strumień <b>os</b></li>
+            </ul>
+            <b>cz. II Należy przerobić operatory +, -, ! na takie wewnątrz klasy Tree. (this)</b>
+            <ul>
+            <li>Tree& operator+(int v)</li>
+            <li>Tree& operator-(int v)</li>
+            <li>Tree& operator!(int v)</li>
+            <li>bool operator()() - alias dla empty</li>
+            <li>void operator[](ostream& os) const - wypisuje drzewo na os z dodatkowym enterem (endl)</li>
+            </ul>
+            <b>cz. III Zadanie nieco inne</b>
+            <ul>
+            <li> Przerobić klasy Tree i Node tak, by jako elementy można było w nich przechowywać dowolny obiekt ze zdefiniowanymi operatorami&lt oraz - (template&ltclass T&gt)</li>
+            Należy również odkomentować #define TEMPLATE, aby program działał sensownie.
+            <li> Należy ukryć dostęp do funkcji Tree::add, Tree::del, Tree::neg z poziomu funkcji main. (private)</li>
+            </ul>
+            
+            <a href="bst_template.cpp">Rozwiązanie bez cz. I i bez ukrytych funkcji</a></br>
+            <a href="http://en.cppreference.com/w/cpp/language/operators">Dokumentacja dla ciekawskich</a>
+    </ol>
+</div>
+
+
+
+</body>
+</html>
