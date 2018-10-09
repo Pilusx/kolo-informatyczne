@@ -1,0 +1,59 @@
+.row_subject {
+    font-weight: bold;
+}
+
+
+.column {
+    width: 40%;
+    margin-left: 3%;
+    float:left;
+    background-color: lightgray;
+}
+
+#intro {
+	padding-top: 15px;
+	padding-bottom: 30px;
+}
+
+#books, #testers, #materials {
+	background-color: lightgray;
+	width: calc(33% - 20px);
+	display: table;
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+@media screen and (max-width: 600px) {
+	#books, #testers, #materials {
+		width: calc(100vw - 10px);
+	}
+}
+
+
+#books > a, #materials > a, #testers > a, .row_links > a {
+	padding: 5px;
+	float: left;
+	display: table-cell;
+}
+
+
+.accurate_time {
+    background-color: white;
+}
+
+/* TODO Miga ostatni */
+/* .accurate_time:last-child {
+    background-color: red;
+} */
+
+.expected_time {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
