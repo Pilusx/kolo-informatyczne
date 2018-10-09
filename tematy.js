@@ -192,7 +192,7 @@ var materials = [
     new Link("http://archom.ptm.org.pl/", "ARCHOM"),
     new Link("http://smurf.mimuw.edu.pl/", "Smurf"),
     new Link("http://was.zaa.mimuw.edu.pl/", "WAS"),
-    new Link("old", "Materiały z 2017/2018"),
+    new Link("files/old/index.html", "Materiały z 2017/2018"),
 ];
 var books = [
     new Book("Kółko Matematyczne dla Olimpijczyków", "Pawłowski, Henryk", undefined, "https://www.matematyka.pl/3263.htm"),

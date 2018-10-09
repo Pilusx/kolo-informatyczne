@@ -232,7 +232,7 @@ const materials = [
     new Link("http://archom.ptm.org.pl/", "ARCHOM"),
     new Link("http://smurf.mimuw.edu.pl/", "Smurf"),
     new Link("http://was.zaa.mimuw.edu.pl/", "WAS"),
-    new Link("old", "Materiały z 2017/2018"),
+    new Link("files/old/index.html", "Materiały z 2017/2018"),
 ]
 
 const books = [
