@@ -1,3 +1,4 @@
+var DISPLAY_OFF = true;
 var Link = (function () {
     function Link(link, description, big_description) {
         this.link = link;
@@ -126,12 +127,14 @@ function add_lessons() {
     for (var _i = 0; _i < lessons.length; _i++) {
         var lesson = lessons[_i];
         //console.log(lesson_str);
-        var container = lesson.get_HTML_row(fields);
-        if (lesson.class_num == "i") {
-            table_int.appendChild(container);
-        }
-        else {
-            table_ext.appendChild(container);
+        if (!DISPLAY_OFF || lesson.date !== undefined) {
+            var container = lesson.get_HTML_row(fields);
+            if (lesson.class_num == "i") {
+                table_int.appendChild(container);
+            }
+            else {
+                table_ext.appendChild(container);
+            }
         }
     }
 }
@@ -209,10 +212,10 @@ var lessons = [
         new Link("https://en.cppreference.com/w/cpp/io/c/fopen", "fopen"),
         new Link("https://en.cppreference.com/w/cpp/io/c/fclose", "fclose"),
         new Link("https://en.cppreference.com/w/cpp/string/byte/islower", "islower"),
-        new Link("files/IO_C/init", "Start"),
-        new Link("files/IO_C/final", "Koniec")
+        new Link("files/00-IO_C/init", "Start"),
+        new Link("files/00-IO_C/final", "Koniec")
     ]),
-    new Lesson().intro().setCode("IO_2").setExpDate(10, 2018)
+    new Lesson().intro().setCode("IO_2").setExpDate(10, 2018).setDate(18, 10, 2018)
         .setIOI('PF3 (3)')
         .setSubject("&ltiostream&gt").setDesc("Operacje wejścia/wyjścia w C++, "),
     new Lesson().intro().setCode("SD_1").setExpDate(10, 2018)
@@ -228,7 +231,6 @@ var lessons = [
         new Link("https://pl.spoj.com/problems/PRZEDSZK/", "Przeszkolanka (SPOJ)"),
         new Link("https://stackoverflow.com/questions/30898575/inbuilt-gcda-b-function-in-c", "__gcd"),
         new Link("https://szkopul.edu.pl/problemset/problem/yZeuTNLgpfpx2vNXSGNRr2RE/site/?key=statement", "Liczby drugie (PA 2017)"),
-        new Link("old/00-teoria_liczb/cpp.html", "Algorytmy (old)"),
     ]),
     new Lesson().intro().setCode("MAT_3").setExpDate(12, 2018)
         .setSubject("Macierze").setDesc(),
