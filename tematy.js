@@ -26,6 +26,10 @@ var Lesson = (function () {
         this.class_num = "e";
         return this;
     };
+    Lesson.prototype.display = function (value) {
+        this.display_on = value;
+        return this;
+    };
     Lesson.prototype.intro = function () {
         this.class_num = 'i';
         return this;
@@ -61,12 +65,15 @@ var Lesson = (function () {
         return this;
     };
     Lesson.prototype.getDate = function () {
-        if (this.date == null) {
-            var date_1 = this.expected_date;
-            return (date_1.getMonth() + 1) + "/" + date_1.getFullYear() + "?";
+        if (this.date !== undefined) {
+            var date = this.date;
+            return (date.getDate()) + "/" + (date.getMonth() + 1) + " " + date.getFullYear();
         }
-        var date = this.date;
-        return (date.getDate()) + "/" + (date.getMonth() + 1) + " " + date.getFullYear();
+        if (this.expected_date !== undefined) {
+            var date = this.expected_date;
+            return (date.getMonth() + 1) + "/" + date.getFullYear() + "?";
+        }
+        return "";
     };
     Lesson.get_HTML_head = function (fields, names) {
         var row = document.createElement("tr");
@@ -90,7 +97,7 @@ var Lesson = (function () {
             if (field == 'date') {
                 var date = this.getDate();
                 col.innerHTML = date;
-                if (date.indexOf("?") != -1) {
+                if (date.indexOf("?") != -1 || date == "") {
                     row.classList.add("expected_time");
                 }
                 else {
@@ -118,23 +125,21 @@ function add_lessons() {
     var table_ext = document.createElement("table");
     var fields = ["subject", "date", "description", "links"];
     var names = ["Temat", "Data", "Opis", "Linki"];
-    lesson_section_int.appendChild(table_int);
+    // lesson_section_int.appendChild(table_int);
     lesson_section_ext.appendChild(table_ext);
     table_int.id = "introductory";
     table_ext.id = "extension";
-    table_int.appendChild(Lesson.get_HTML_head(fields, names));
+    //table_int.appendChild(Lesson.get_HTML_head(fields, names))
     table_ext.appendChild(Lesson.get_HTML_head(fields, names));
     for (var _i = 0; _i < lessons.length; _i++) {
         var lesson = lessons[_i];
         //console.log(lesson_str);
-        if (!DISPLAY_OFF || lesson.date !== undefined) {
+        if (lesson.display_on == 1) {
             var container = lesson.get_HTML_row(fields);
-            if (lesson.class_num == "i") {
-                table_int.appendChild(container);
-            }
-            else {
-                table_ext.appendChild(container);
-            }
+            //if (lesson.class_num == "i") {
+            //table_int.appendChild(container);
+            //} else {
+            table_ext.appendChild(container);
         }
     }
 }
@@ -192,7 +197,6 @@ var materials = [
     new Link("http://archom.ptm.org.pl/", "ARCHOM"),
     new Link("http://smurf.mimuw.edu.pl/", "Smurf"),
     new Link("http://was.zaa.mimuw.edu.pl/", "WAS"),
-    new Link("files/old/index.html", "Materiały z 2017/2018"),
 ];
 var books = [
     new Book("Kółko Matematyczne dla Olimpijczyków", "Pawłowski, Henryk", undefined, "https://www.matematyka.pl/3263.htm"),
@@ -200,12 +204,28 @@ var books = [
     new Book("Inne", undefined, undefined, "https://oi.edu.pl/l/oi_zalecana_literatura/")
 ];
 var lessons = [
-    new Lesson().intro().setCode("IO_1").setExpDate(10, 2018)
-        .setDate(11, 10, 2018)
-        .setSubject("&ltcstdio&gt")
+    new Lesson().ext()
+        .setSubject("Inne").display(1)
+        .setDesc("Materiały z zeszłych lat")
+        .setLinks([
+        new Link("files/old/index.html", "Stara strona (2017/2018)")
+    ]),
+    new Lesson().ext()
+        .setSubject("Programowanie dynamiczne").display(1).setDate(19, 10, 2018)
+        .setDesc("Programowanie dynamiczne na grafach, Odległość Levenshteina")
+        .setLinks([
+        new Link("files/01-Levenshtein/levenshtein.pdf", "Skrypt"),
+        new Link("https://www.spoj.com/problems/EDIST/", "SPOJ (EDIST)"),
+        new Link("https://www.spoj.com/problems/ADVEDIST/", "SPOJ (ADVEDIST)"),
+        new Link("https://oi.edu.pl/static/attachment/20171006/oi23.pdf", "23 OI - Nadajniki s.81 (dla zainteresowanych)"),
+        new Link("https://www.youtube.com/watch?v=R1C0sSrOucM", "Omówienie Nadajników (dla zainteresowanych)"),
+    ]),
+    new Lesson().ext().setCode("IO_1").setExpDate(10, 2018).display(1)
+        .setSubject("Testowanie")
         .setIOI('M (1), PF1(1-5), PF3 (1,2)')
-        .setDesc("Operacje wejścia/wyjścia w C (printf->stdout, scanf->stdin), funkcje built-in")
-        .setLinks([new Link("http://www.cplusplus.com/reference/cstdio/", "<cstdio>(CPP)"),
+        .setDesc("Operacje wejścia/wyjścia w C, pisanie testów automatycznych, obsługa plików"),
+    /*.setLinks(
+        [new Link("http://www.cplusplus.com/reference/cstdio/", "<cstdio>(CPP)"),
         new Link("https://en.cppreference.com/w/cpp/header/cstdio", "<cstdio>(CPPR)"),
         new Link("https://en.cppreference.com/w/cpp/io/c/fscanf", "scanf"),
         new Link("https://en.cppreference.com/w/cpp/io/c/fprintf", "printf"),
@@ -214,7 +234,61 @@ var lessons = [
         new Link("https://en.cppreference.com/w/cpp/string/byte/islower", "islower"),
         new Link("files/00-IO_C/init", "Start"),
         new Link("files/00-IO_C/final", "Koniec")
+        ]), */
+    new Lesson().ext().setCode("TG_7").setExpDate(10, 2018)
+        .setIOI("AL3b (8)")
+        .setSubject("LCA").setDesc("Najniższy wspólny przodek"),
+    new Lesson().ext().setCode("TG_8").setExpDate(10, 2018)
+        .setSubject("Dynamiki na drzewach").setDesc("Programowanie dynamiczne na drzewach"),
+    new Lesson().ext().setCode("ZA").setExpDate(10, 2018)
+        .setIOI("AL2 (3)")
+        .setSubject("Algorytmy zachłanne").setDesc(),
+    new Lesson().ext().setCode("GE_1").setExpDate(11, 2018)
+        .setIOI('M (6-8), AL10 (1-3)')
+        .setSubject("Geometria 1").setDesc("Liczby zespolone")
+        .setLinks([
+        new Link("https://en.cppreference.com/w/cpp/numeric/complex", "<complex>"),
+        new Link("http://codeforces.com/blog/entry/22175", "Triki (CodeForces By Hikari9)"),
     ]),
+    new Lesson().ext().setCode("GE_2").setExpDate(11, 2018)
+        .setIOI("AL10 (4-6)")
+        .setSubject("Geometria 2").setDesc(),
+    new Lesson().ext().setCode("GE_3").setExpDate(11, 2018)
+        .setIOI("AL10 (7)")
+        .setSubject("Geometria 3").setDesc("Otoczka wypukła"),
+    new Lesson().ext().setCode("SD_7").setExpDate(12, 2018)
+        .setIOI("AL3b (6)")
+        .setSubject("AVL").setDesc("Drzewo AVL Dynamiczne drzewo AVL + proste zadanie na <set>, rotacje"),
+    new Lesson().ext().setCode("TE_2").setExpDate(12, 2018)
+        .setSubject("Specjalizacja").setDesc("Wypisz mój typ.")
+        .setLinks([
+        new Link("https://www.boost.org/doc/libs/1_64_0/libs/mpl/doc/tutorial/tutorial-metafunctions.html#id41", "Dimensional analysis (***)")
+    ]),
+    new Lesson().ext().setCode("SD_8").setExpDate(12, 2018)
+        .setIOI("AL3b (5)")
+        .setSubject("Drzewo przedziałowe").setDesc(),
+    new Lesson().ext().setCode("TG_9").setExpDate(1, 2019)
+        .setSubject("Heurystyki").setDesc("Kostka rubika"),
+    new Lesson().ext().setCode("TG_10").setExpDate(1, 2019)
+        .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl eulera")
+        .setSubject("Silne spójne składowe").setDesc(),
+    new Lesson().ext().setCode("TG_11").setExpDate(2, 2019)
+        .setSubject("Grafy dwudzielne").setDesc("Skojarzenia w grafach dwudzielnych"),
+    new Lesson().ext().setCode("TG_12").setExpDate(2, 2019)
+        .setIOI("AL2 (2)")
+        .setSubject("Hamilton 1").setDesc("Cykl Hamiltona O(n*n!)")
+        .setLinks([
+        new Link("http://www.cplusplus.com/reference/algorithm/next_permutation/", "next_permutation")
+    ]),
+    new Lesson().ext().setCode("DP_2").setExpDate(2, 2019)
+        .setIOI("AL2 (1,4,6)")
+        .setSubject("Hamilton 2").setDesc("Cykl Hamiltona O(n^3 * 2^n) <bitset>, DP"),
+    new Lesson().ext().setCode("TG_13").setExpDate(3, 2019)
+        .setSubject("Genetyki").setDesc("Problem n-hetmanów"),
+    new Lesson().ext().setCode("SD_9").setExpDate(3, 2019)
+        .setSubject("Kopce").setDesc("Kopiec, Kopiec Fibonacciego, Kopiec Dwumianowy"),
+];
+var other_lessons = [
     new Lesson().intro().setCode("IO_2").setExpDate(10, 2018).setDate(18, 10, 2018)
         .setIOI('PF3 (3)')
         .setSubject("&ltiostream&gt").setDesc("Operacje wejścia/wyjścia w C++, "),
@@ -280,57 +354,5 @@ var lessons = [
     new Lesson().intro().setCode("SD_6").setExpDate(6, 2019)
         .setIOI("AL3b (5)")
         .setSubject("Drzewo potęgowe").setDesc("Implementacja statycznego drzewa potęgowego, reprezentacja ograniczonych zbiorów liczb naturalnych"),
-    new Lesson().ext().setCode("TG_7").setExpDate(10, 2018)
-        .setIOI("AL3b (8)")
-        .setSubject("LCA").setDesc("Najniższy wspólny przodek"),
-    new Lesson().ext().setCode("TG_8").setExpDate(10, 2018)
-        .setSubject("Dynamiki na drzewach").setDesc("Programowanie dynamiczne na drzewach"),
-    new Lesson().ext().setCode("ZA").setExpDate(10, 2018)
-        .setIOI("AL2 (3)")
-        .setSubject("Algorytmy zachłanne").setDesc(),
-    new Lesson().ext().setCode("GE_1").setExpDate(11, 2018)
-        .setIOI('M (6-8), AL10 (1-3)')
-        .setSubject("Geometria 1").setDesc("Liczby zespolone")
-        .setLinks([
-        new Link("https://en.cppreference.com/w/cpp/numeric/complex", "<complex>"),
-        new Link("http://codeforces.com/blog/entry/22175", "Triki (CodeForces By Hikari9)"),
-    ]),
-    new Lesson().ext().setCode("GE_2").setExpDate(11, 2018)
-        .setIOI("AL10 (4-6)")
-        .setSubject("Geometria 2").setDesc(),
-    new Lesson().ext().setCode("GE_3").setExpDate(11, 2018)
-        .setIOI("AL10 (7)")
-        .setSubject("Geometria 3").setDesc("Otoczka wypukła"),
-    new Lesson().ext().setCode("SD_7").setExpDate(12, 2018)
-        .setIOI("AL3b (6)")
-        .setSubject("AVL").setDesc("Drzewo AVL Dynamiczne drzewo AVL + proste zadanie na <set>, rotacje"),
-    new Lesson().ext().setCode("TE_2").setExpDate(12, 2018)
-        .setSubject("Specjalizacja").setDesc("Wypisz mój typ.")
-        .setLinks([
-        new Link("https://www.boost.org/doc/libs/1_64_0/libs/mpl/doc/tutorial/tutorial-metafunctions.html#id41", "Dimensional analysis (***)")
-    ]),
-    new Lesson().ext().setCode("SD_8").setExpDate(12, 2018)
-        .setIOI("AL3b (5)")
-        .setSubject("Drzewo przedziałowe").setDesc(),
-    new Lesson().ext().setCode("TG_9").setExpDate(1, 2019)
-        .setSubject("Heurystyki").setDesc("Kostka rubika"),
-    new Lesson().ext().setCode("TG_10").setExpDate(1, 2019)
-        .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl eulera")
-        .setSubject("Silne spójne składowe").setDesc(),
-    new Lesson().ext().setCode("TG_11").setExpDate(2, 2019)
-        .setSubject("Grafy dwudzielne").setDesc("Skojarzenia w grafach dwudzielnych"),
-    new Lesson().ext().setCode("TG_12").setExpDate(2, 2019)
-        .setIOI("AL2 (2)")
-        .setSubject("Hamilton 1").setDesc("Cykl Hamiltona O(n*n!)")
-        .setLinks([
-        new Link("http://www.cplusplus.com/reference/algorithm/next_permutation/", "next_permutation")
-    ]),
-    new Lesson().ext().setCode("DP_2").setExpDate(2, 2019)
-        .setIOI("AL2 (1,4,6)")
-        .setSubject("Hamilton 2").setDesc("Cykl Hamiltona O(n^3 * 2^n) <bitset>, DP"),
-    new Lesson().ext().setCode("TG_13").setExpDate(3, 2019)
-        .setSubject("Genetyki").setDesc("Problem n-hetmanów"),
-    new Lesson().ext().setCode("SD_9").setExpDate(3, 2019)
-        .setSubject("Kopce").setDesc("Kopiec, Kopiec Fibonacciego, Kopiec Dwumianowy"),
 ];
 main();

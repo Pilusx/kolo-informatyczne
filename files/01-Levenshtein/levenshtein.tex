@@ -1,0 +1,181 @@
+\documentclass[paper=a4, fontsize=11pt]{article}
+\usepackage[polish]{babel}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm, hyperref}
+\setlength\parindent{0pt} 
+
+\title{	
+\huge Indukcja na grafach
+}
+
+\date{\normalsize\today}
+
+\begin{document}
+
+\maketitle
+
+\newtheorem{mydef}{Definicja}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemma}{Lemat}
+
+\section{Definicje}
+\begin{mydef}[Suma uogoólniona] 
+\begin{gather*}
+\mathcal{A} = \{ A_i : A_i \subseteq X, i \in \mathbb{N} \} \\
+\bigcup \mathcal{A} = \bigcup_i A_i = \{ x \in X : \exists_i x \in A_i \}
+\end{gather*}
+\end{mydef}
+
+\begin{mydef} [Dowód indukcyjny na acyklicznych, skończonych grafach skierowanych]
+Dowód przebiega w następujący sposób.\\ 
+
+Najpierw definiujemy zbiór X, pewną własność C oraz zbiory poprzedników $b(x)$ wszystkich elementów zbioru X. Każdy element x ma własność C lub jej nie ma.\\
+
+Definiujemy również zbiór poprzedników danego zbioru jako.
+\begin{displaymath}
+B(X) = \bigcup_{x \in X} b(x)
+\end{displaymath}
+
+Algorytm przebiega następująco. Dzielimy graf na warstwy algorytmem BFS, zaczynając od wierzchołków do których nie wchodzi żadna krawędź (warstwa $W_0$). Wierzchołek v należy do warstwy $W_k$ wtedy i tylko wtedy, gdy jego najkrótsza ścieżka do wierzchołka z warstwy $W_0$ ma długość k. \\
+
+Zakładamy tutaj, że wszyscy poprzednicy należą do poprzednich warstw. (Graf skierowany acykliczny.)
+\begin{displaymath}
+\forall_k \forall_{w \in W_k} b(w) \subseteq \bigcup_{i < k} A_i
+\end{displaymath}
+
+Naszym celem jest pokazanie, że jeśli dla wszystkich wcześniejszych wierzchołków zachodzi własność C i potrafimy na tej podstawie udowodnić własność C dla kolejnych wierzchołków, to własność C zachodzi dla wszystkich wierzchołków.
+Dowodzimy to w następujący sposób.
+
+
+\begin{enumerate}
+\item Podstawa indukcji
+\begin{displaymath}
+\forall_{x \in W_{0}} C(x)
+\end{displaymath} 
+\item Krok indukcyjny
+\begin{displaymath}
+(\forall_{w \in W_n} (\forall_{p \in b(w)} C(p))) \implies C(w)
+\end{displaymath}
+\end{enumerate}
+
+Wówczas zachodzi:
+\begin{displaymath}
+(\forall_{n \in \mathbb{N}}( \forall_{w \in W_n} (\forall_{p \in b(w)} C(p)) \implies C(w))) \implies \forall_{x \in X} C(x)
+\end{displaymath}
+
+Uwagi!
+\begin{itemize}
+\item Graf nie musi być spójny.
+\end{itemize}
+\end{mydef}
+
+\begin{mydef}
+\begin{equation}
+[x = y] = 
+\begin{cases}
+1, & x = y \\
+0, & x \neq y
+\end{cases}
+\end{equation}
+\end{mydef}
+
+\begin{mydef}[Odległość Levenshteina]
+Mamy dwa ciągi znaków $(a_1, a_2, \dots a_{n})$ oraz $(b_1, b_2, \dots b_{m})$ długości odpowiednio n i m. Należy znaleźć minimalną liczbę operacji potrzebnych do przekształcenia ciągu a w ciąg b.
+
+Dopuszczalne są następujące operacje:
+\begin{itemize}
+\item Wstaw dowolny znak c w dowolne miejsce ciągu a.
+\item Usuń dowolny znak c z ciągu a.
+\item Zamień dowolny znak c ciągu a na inny znak.
+\end{itemize}
+
+Dla ustalenia uwagi oznaczmy, tą liczbę przez L(a,b).
+\begin{lemma} $L(a, b) \ge max(n, m) - min(n, m) = |n - m|$ \\ 
+Jeśli dwa ciągi mają różne długości to zawsze musimy przedłużyć lub skrócić ciąg [a] o różnicę ich długości.
+\end{lemma}
+\begin{lemma} $L(a,b) \le max(n, m)$ \\
+Możemy po prostu wymieniać wszystkie znaki po kolei.
+\end{lemma}
+
+Z powyższych lematów możemy wywnioskować kolejne.
+\begin{lemma} $ n = 0 \implies L(a, b) = m$ 
+\end{lemma}
+\begin{lemma} $ m = 0 \implies L(a, b) = n$
+\end{lemma}
+
+\end{mydef}
+\section{Zadanie}
+Napisać algorytm obliczający L(a, b) oraz wypisujący ciąg operacji.
+
+\begin{mydef}[Prefiks]
+Niech $a[1 \dots i]$ będzie prefikem a długości i.
+\end{mydef}
+\begin{theorem} 
+\begin{gather*}
+d(0,0) = 0 \\
+d(i,0) = i \\
+d(0,j) = j \\
+d(i, j) = min(d(i, j-1) + 1 , d(i-1, j) + 1, d(i-1, j-1) + [a_i \neq b_j])
+\end{gather*}
+Wówczas $d(i, j) = L(a[1, \dots, i], b[1, \dots, j])$
+\end{theorem}
+\begin{proof} Pokażemy to indukcyjnie. \\
+Zdefiniujmy kolejne warstwy:
+\begin{gather*}
+W_0 = \{(0, 0), `(0, 1), \dots (0, m), (1, 0), \dots, (n, 0) \} \\
+W_k = \{(i, j) : i + j - 1 = k \land min(i, j) \ge 1 \} \\
+W_{n+m} = \{(n, m)\} \\
+\begin{bmatrix}
+0 & 0 & 0 & 0 & \dots & 0 \\
+0 & 1 & 2 & 3 & \dots & m \\
+0 & 2 & 3 & 4 & \dots & m + 1 \\
+0 & 3 & 4 & 5 & \dots & m + 2\\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & n & n+1 & n+2 & \dots & n+m
+\end{bmatrix}
+\end{gather*}
+\begin{enumerate}
+\item Podstawa indukcji (k = 0), Wynika z lematów.
+\item Krok indukcyjny
+\begin{itemize}
+\item k = 1 \\
+\begin{gather}
+W_1 = \{(1, 1)\} \\
+B({W_1}) = B((1,1)) = \{(0,0), (1,0), (0,1) \} \subseteq W_0
+\end{gather}
+\item $k > 1$ \\
+\begin{gather*}
+\forall_{(i, j) \in W_k} \{(i-1, j), (i, j-1), (i-1, j-1)\} \subseteq W_0 \cup W_{k-2} \cup W_{k-1} \\
+B(W_k) \subseteq W_0 \cup W_{k-2}  \cup W_{k-1}
+\end{gather*}
+
+Wybranie wartości minimum to po prostu wybranie odpowiedniego ruchu w danym momencie, takiego dla którego sumaryczny koszt jest najniższy.
+\end{itemize}
+
+\end{enumerate}
+
+\end{proof}
+
+\section{Zadanie dodatkowe}
+Należy rozpatrzyć dwa inne przypadki.
+\begin{itemize}
+\item Wszystkie operacje mają różne koszty.
+\item Nie ma operacji zamiany znaku.
+\item Inny podział na warstwy. Pokazać, że istnieje algorytm w pamięci O(m).
+\begin{gather*}
+W_0 = \{(0,0), (1,0), \dots ,(n, 0), (0, 1), \dots, (0, m) \} \\
+W_k = \{(i,j) : (j-1)n + (i-1) + 1 = k\} \\
+W_{nm} = \{(n, m) \} \\
+\begin{bmatrix}
+0 & 0 & 0 & 0 & \dots & 0 \\
+0 & 1 & n + 1 & 2n + 1 & \dots & (m-1)n + 1 \\
+0 & 2 & n + 2 & 2n + 2 & \dots & (m-1)n + 2 \\
+0 & 3 & n + 3 & 2n + 3 & \dots & (m-1)n + 3\\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & n & 2n & 3n & \dots & mn
+\end{bmatrix}
+\end{gather*}
+\end{itemize}
+
+\end{document}
