@@ -38,9 +38,15 @@ class Lesson {
     requirements: string;
     links: Link[];
     ioi: string;
+    display_on: number;
 
     ext() {
         this.class_num = "e";
+        return this;
+    }
+
+    display(value:number) {
+        this.display_on = value;
         return this;
     }
 
@@ -86,12 +92,15 @@ class Lesson {
     }
 
     getDate() {
-        if (this.date == null) {
+        if(this.date !== undefined) {
+            let date = this.date;
+            return (date.getDate()) + "/" + (date.getMonth() + 1) + " " + date.getFullYear();
+        }        
+        if (this.expected_date !== undefined) {
             let date = this.expected_date;
             return (date.getMonth() + 1) + "/" + date.getFullYear() + "?";
         }
-        let date = this.date;
-        return (date.getDate()) + "/" + (date.getMonth() + 1) + " " + date.getFullYear();
+        return "";
     }
 
     static get_HTML_head(fields: Array<string>, names: Array<string>) {
@@ -117,7 +126,7 @@ class Lesson {
             if (field == 'date') {
                 let date = this.getDate();
                 col.innerHTML = date;
-                if (date.indexOf("?") != -1) {
+                if (date.indexOf("?") != -1 || date == "") {
                     row.classList.add("expected_time")
                 }
                 else {
@@ -147,23 +156,23 @@ function add_lessons() {
     let fields = ["subject", "date", "description", "links"];
     let names = ["Temat", "Data", "Opis", "Linki"];
 
-    lesson_section_int.appendChild(table_int);
+    // lesson_section_int.appendChild(table_int);
     lesson_section_ext.appendChild(table_ext);
 
     table_int.id = "introductory";
     table_ext.id = "extension";
 
-    table_int.appendChild(Lesson.get_HTML_head(fields, names))
+    //table_int.appendChild(Lesson.get_HTML_head(fields, names))
     table_ext.appendChild(Lesson.get_HTML_head(fields, names))
     for (let lesson of lessons) {
         //console.log(lesson_str);
-        if(!DISPLAY_OFF || lesson.date !== undefined) {
+        if(lesson.display_on == 1) {
 			let container = lesson.get_HTML_row(fields);
-			if (lesson.class_num == "i") {
-				table_int.appendChild(container);
-			} else {
+			//if (lesson.class_num == "i") {
+				//table_int.appendChild(container);
+			//} else {
 				table_ext.appendChild(container);
-			}
+			//}
         }
     }
 }
@@ -232,7 +241,6 @@ const materials = [
     new Link("http://archom.ptm.org.pl/", "ARCHOM"),
     new Link("http://smurf.mimuw.edu.pl/", "Smurf"),
     new Link("http://was.zaa.mimuw.edu.pl/", "WAS"),
-    new Link("files/old/index.html", "Materiały z 2017/2018"),
 ]
 
 const books = [
@@ -243,12 +251,29 @@ const books = [
 
 
 const lessons = [
-    new Lesson().intro().setCode("IO_1").setExpDate(10, 2018)
-        .setDate(11, 10, 2018)
-        .setSubject("&ltcstdio&gt")
+    new Lesson().ext()
+        .setSubject("Inne").display(1)
+        .setDesc("Materiały z zeszłych lat")
+        .setLinks([
+            new Link("files/old/index.html", "Stara strona (2017/2018)")
+        ]),
+
+    new Lesson().ext()
+        .setSubject("Programowanie dynamiczne").display(1).setDate(19, 10, 2018)
+        .setDesc("Programowanie dynamiczne na grafach, Odległość Levenshteina")
+        .setLinks([
+            new Link("files/01-Levenshtein/levenshtein.pdf", "Skrypt v.2"),
+            new Link("https://www.spoj.com/problems/EDIST/", "SPOJ (EDIST)"),
+            new Link("https://www.spoj.com/problems/ADVEDIST/", "SPOJ (ADVEDIST)"),
+            new Link("https://oi.edu.pl/static/attachment/20171006/oi23.pdf", "23 OI - Nadajniki s.81 (dla zainteresowanych)"),
+            new Link("https://www.youtube.com/watch?v=R1C0sSrOucM","Omówienie Nadajników (dla zainteresowanych)"),
+        ]),
+
+    new Lesson().ext().setCode("IO_1").setExpDate(10, 2018).display(1)
+        .setSubject("Testowanie")
         .setIOI('M (1), PF1(1-5), PF3 (1,2)')
-        .setDesc("Operacje wejścia/wyjścia w C (printf->stdout, scanf->stdin), funkcje built-in")
-        .setLinks(
+        .setDesc("Operacje wejścia/wyjścia w C, pisanie testów automatycznych, obsługa plików"),
+        /*.setLinks(
             [new Link("http://www.cplusplus.com/reference/cstdio/", "<cstdio>(CPP)"),
             new Link("https://en.cppreference.com/w/cpp/header/cstdio", "<cstdio>(CPPR)"),
             new Link("https://en.cppreference.com/w/cpp/io/c/fscanf", "scanf"),
@@ -258,98 +283,7 @@ const lessons = [
             new Link("https://en.cppreference.com/w/cpp/string/byte/islower", "islower"),
             new Link("files/00-IO_C/init", "Start"),
             new Link("files/00-IO_C/final", "Koniec")
-            ]),
-
-    new Lesson().intro().setCode("IO_2").setExpDate(10, 2018).setDate(18, 10, 2018)
-        .setIOI('PF3 (3)')
-        .setSubject("&ltiostream&gt").setDesc("Operacje wejścia/wyjścia w C++, "),
-
-    new Lesson().intro().setCode("SD_1").setExpDate(10, 2018)
-        .setIOI('PF3 (7)')
-        .setSubject("struct").setDesc("Struktury, tablice struktur, typedef")
-        .setLinks([new Link("https://en.cppreference.com/w/c/language/struct", "struct")]),
-
-    new Lesson().intro().setCode("MAT_2").setExpDate(11, 2018).setIOI('M (2-4)')
-        .setSubject("Modulo").setDesc("Wstęp do arytmetyki modulo"),
-
-    new Lesson().intro().setCode("MAT_1").setExpDate(11, 2018)
-        .setSubject("Rekurencja").setDesc("Liczby pierwsze, równania rekurencyjne, szeregi ciągi, zapis n-arny, NWD")
-        .setLinks([
-            new Link("http://pldml.icm.edu.pl/pldml/element/bwmeta1.element.dl-catalog-a064b502-798f-4529-935f-9b132b5667dd", "Teoria Liczb, Sierpiński Wacław (1950)"),
-            new Link("https://pl.spoj.com/problems/PRZEDSZK/", "Przeszkolanka (SPOJ)"),
-            new Link("https://stackoverflow.com/questions/30898575/inbuilt-gcda-b-function-in-c", "__gcd"),
-            new Link("https://szkopul.edu.pl/problemset/problem/yZeuTNLgpfpx2vNXSGNRr2RE/site/?key=statement", "Liczby drugie (PA 2017)"),
-        ]),
-
-
-
-
-    new Lesson().intro().setCode("MAT_3").setExpDate(12, 2018)
-        .setSubject("Macierze").setDesc(),
-
-    new Lesson().intro().setCode("SD_2").setExpDate(12, 2018)
-        .setIOI("PF3 (5,10) AL3b (1)")
-        .setSubject("&ltstack&gt, &ltlist&gt").setDesc("Alokacja pamięci w C (malloc, free), wskaźnikowa implementacja listy jednokierunkowej na przykładzie stosu"),
-
-    new Lesson().intro().setCode("SD_3").setExpDate(12, 2018)
-        .setSubject("&ltqueue&gt").setDesc("Listowa implementacja kolejki, iteratory, operator++, operator*, operator[]"),
-
-    new Lesson().intro().setCode("SD_4").setExpDate(12, 2018)
-        .setSubject("&ltvector&gt").setDesc("Alokacja pamięci w C++ (new, delete), implementacja dynamicznej tablicy, klasy w C++"),
-
-    new Lesson().intro().setCode("SO_1").setExpDate(1, 2019)
-        .setSubject("&ltalgorithm&gt").setDesc("Porządek liniowy, przeciążanie operatora&lt, wyszukiwanie binarne na strukturach (lower_bound, upper_bound, find)"),
-
-    new Lesson().intro().setCode("SO_2").setExpDate(2, 2019)
-        .setIOI('DS1 (2), PF4 (1-4), AL3a (3, 7)')
-        .setSubject("&ltalgorithm&gt").setDesc("Sortowanie kubełkowe, mergesort"),
-
-    new Lesson().intro().setCode("SD_5").setExpDate(2, 2019)
-        .setIOI("PF3 (6)")
-        .setSubject("class BST").setDesc("Dynamiczne drzewo BST"),
-
-    new Lesson().intro().setCode("DP_1").setExpDate(2, 2019)
-        .setIOI("AL2 (6)")
-        .setSubject("DP").setDesc("Programowanie dynamiczne"),
-
-    new Lesson().intro().setCode("TG_1").setExpDate(3, 2019)
-        .setIOI("PF3 (6), AL3a (9)")
-        .setSubject("DFS").setDesc("Reprezentacja grafów. Rekurencyjne przechodzenie grafu"),
-
-    new Lesson().intro().setCode("TG_2").setExpDate(3, 2019)
-        .setIOI("AL8 (1)")
-        .setSubject("Min-max").setDesc("Drzewa minimaxowe, obliczanie strategii wygrywającej na przykładzie gry kółko i krzyżyk"),
-
-    new Lesson().intro().setCode("TG_3").setExpDate(3, 2019)
-        .setIOI("AL3a (9)")
-        .setSubject("BFS").setDesc("Przechodzenie grafu przy użyciu kolejki (SPOJ)"),
-
-    new Lesson().intro().setCode("TG_4").setExpDate(4, 2019)
-        .setSubject("Dijkstra").setDesc("Znajdowanie najkrótszych ścieżek w grafach ważonych. (przy użyciu kolejek priorytetowych), Floyd-Warshall"),
-
-    new Lesson().intro().setCode("MAT_4").setExpDate(4, 2019)
-        .setIOI('DS1 (2) AL3b (4)')
-        .setSubject("Find Union").setDesc("Klasy abstrakcji, Struktura zbiorów rozłącznych"),
-
-    new Lesson().intro().setCode("TX_1").setExpDate(4, 2019)
-        .setSubject("KMP").setDesc(),
-
-    new Lesson().intro().setCode("TG_5").setExpDate(5, 2019)
-        .setIOI("AL3a (13)")
-        .setSubject("MST").setDesc("Znajdowanie minimalnego drzewa rozpinającego przy użyciu algorytmu Kruskala i Prima (przy użyciu &ltset&gt)"),
-
-    new Lesson().intro().setCode("TE_1").setExpDate(5, 2019)
-        .setSubject("Szablon").setDesc("Template w C++, mnożenie macierzy (MxN) x (NxR)"),
-
-    new Lesson().intro().setCode("MAT_5").setExpDate(5, 2019)
-        .setSubject("Arytmetyka Modulo 2").setDesc("MTF, WTF, Twierdzenie Eulera"),
-
-    new Lesson().intro().setCode("TX_2").setExpDate(6, 2019)
-        .setSubject("Karp-Rabin").setDesc("Znajdowanie wystąpienia wzorca w tekście"),
-
-    new Lesson().intro().setCode("SD_6").setExpDate(6, 2019)
-        .setIOI("AL3b (5)")
-        .setSubject("Drzewo potęgowe").setDesc("Implementacja statycznego drzewa potęgowego, reprezentacja ograniczonych zbiorów liczb naturalnych"),
+            ]), */
 
 
     new Lesson().ext().setCode("TG_7").setExpDate(10, 2018)
@@ -420,6 +354,97 @@ const lessons = [
     new Lesson().ext().setCode("SD_9").setExpDate(3, 2019)
         .setSubject("Kopce").setDesc("Kopiec, Kopiec Fibonacciego, Kopiec Dwumianowy"),
 
+]
+
+const other_lessons = [
+    new Lesson().intro().setCode("IO_2").setExpDate(10, 2018).setDate(18, 10, 2018)
+        .setIOI('PF3 (3)')
+        .setSubject("&ltiostream&gt").setDesc("Operacje wejścia/wyjścia w C++, "),
+
+    new Lesson().intro().setCode("SD_1").setExpDate(10, 2018)
+        .setIOI('PF3 (7)')
+        .setSubject("struct").setDesc("Struktury, tablice struktur, typedef")
+        .setLinks([new Link("https://en.cppreference.com/w/c/language/struct", "struct")]),
+
+    new Lesson().intro().setCode("MAT_2").setExpDate(11, 2018).setIOI('M (2-4)')
+        .setSubject("Modulo").setDesc("Wstęp do arytmetyki modulo"),
+
+    new Lesson().intro().setCode("MAT_1").setExpDate(11, 2018)
+        .setSubject("Rekurencja").setDesc("Liczby pierwsze, równania rekurencyjne, szeregi ciągi, zapis n-arny, NWD")
+        .setLinks([
+            new Link("http://pldml.icm.edu.pl/pldml/element/bwmeta1.element.dl-catalog-a064b502-798f-4529-935f-9b132b5667dd", "Teoria Liczb, Sierpiński Wacław (1950)"),
+            new Link("https://pl.spoj.com/problems/PRZEDSZK/", "Przeszkolanka (SPOJ)"),
+            new Link("https://stackoverflow.com/questions/30898575/inbuilt-gcda-b-function-in-c", "__gcd"),
+            new Link("https://szkopul.edu.pl/problemset/problem/yZeuTNLgpfpx2vNXSGNRr2RE/site/?key=statement", "Liczby drugie (PA 2017)"),
+        ]),
+
+
+    new Lesson().intro().setCode("MAT_3").setExpDate(12, 2018)
+        .setSubject("Macierze").setDesc(),
+
+    new Lesson().intro().setCode("SD_2").setExpDate(12, 2018)
+        .setIOI("PF3 (5,10) AL3b (1)")
+        .setSubject("&ltstack&gt, &ltlist&gt").setDesc("Alokacja pamięci w C (malloc, free), wskaźnikowa implementacja listy jednokierunkowej na przykładzie stosu"),
+
+    new Lesson().intro().setCode("SD_3").setExpDate(12, 2018)
+        .setSubject("&ltqueue&gt").setDesc("Listowa implementacja kolejki, iteratory, operator++, operator*, operator[]"),
+
+    new Lesson().intro().setCode("SD_4").setExpDate(12, 2018)
+        .setSubject("&ltvector&gt").setDesc("Alokacja pamięci w C++ (new, delete), implementacja dynamicznej tablicy, klasy w C++"),
+
+    new Lesson().intro().setCode("SO_1").setExpDate(1, 2019)
+        .setSubject("&ltalgorithm&gt").setDesc("Porządek liniowy, przeciążanie operatora&lt, wyszukiwanie binarne na strukturach (lower_bound, upper_bound, find)"),
+
+    new Lesson().intro().setCode("SO_2").setExpDate(2, 2019)
+        .setIOI('DS1 (2), PF4 (1-4), AL3a (3, 7)')
+        .setSubject("&ltalgorithm&gt").setDesc("Sortowanie kubełkowe, mergesort"),
+
+    new Lesson().intro().setCode("SD_5").setExpDate(2, 2019)
+        .setIOI("PF3 (6)")
+        .setSubject("class BST").setDesc("Dynamiczne drzewo BST"),
+
+    new Lesson().intro().setCode("DP_1").setExpDate(2, 2019)
+        .setIOI("AL2 (6)")
+        .setSubject("DP").setDesc("Programowanie dynamiczne"),
+
+    new Lesson().intro().setCode("TG_1").setExpDate(3, 2019)
+        .setIOI("PF3 (6), AL3a (9)")
+        .setSubject("DFS").setDesc("Reprezentacja grafów. Rekurencyjne przechodzenie grafu"),
+
+    new Lesson().intro().setCode("TG_2").setExpDate(3, 2019)
+        .setIOI("AL8 (1)")
+        .setSubject("Min-max").setDesc("Drzewa minimaxowe, obliczanie strategii wygrywającej na przykładzie gry kółko i krzyżyk"),
+
+    new Lesson().intro().setCode("TG_3").setExpDate(3, 2019)
+        .setIOI("AL3a (9)")
+        .setSubject("BFS").setDesc("Przechodzenie grafu przy użyciu kolejki (SPOJ)"),
+
+    new Lesson().intro().setCode("TG_4").setExpDate(4, 2019)
+        .setSubject("Dijkstra").setDesc("Znajdowanie najkrótszych ścieżek w grafach ważonych. (przy użyciu kolejek priorytetowych), Floyd-Warshall"),
+
+    new Lesson().intro().setCode("MAT_4").setExpDate(4, 2019)
+        .setIOI('DS1 (2) AL3b (4)')
+        .setSubject("Find Union").setDesc("Klasy abstrakcji, Struktura zbiorów rozłącznych"),
+
+    new Lesson().intro().setCode("TX_1").setExpDate(4, 2019)
+        .setSubject("KMP").setDesc(),
+
+    new Lesson().intro().setCode("TG_5").setExpDate(5, 2019)
+        .setIOI("AL3a (13)")
+        .setSubject("MST").setDesc("Znajdowanie minimalnego drzewa rozpinającego przy użyciu algorytmu Kruskala i Prima (przy użyciu &ltset&gt)"),
+
+    new Lesson().intro().setCode("TE_1").setExpDate(5, 2019)
+        .setSubject("Szablon").setDesc("Template w C++, mnożenie macierzy (MxN) x (NxR)"),
+
+    new Lesson().intro().setCode("MAT_5").setExpDate(5, 2019)
+        .setSubject("Arytmetyka Modulo 2").setDesc("MTF, WTF, Twierdzenie Eulera"),
+
+    new Lesson().intro().setCode("TX_2").setExpDate(6, 2019)
+        .setSubject("Karp-Rabin").setDesc("Znajdowanie wystąpienia wzorca w tekście"),
+
+    new Lesson().intro().setCode("SD_6").setExpDate(6, 2019)
+        .setIOI("AL3b (5)")
+        .setSubject("Drzewo potęgowe").setDesc("Implementacja statycznego drzewa potęgowego, reprezentacja ograniczonych zbiorów liczb naturalnych"),
 ]
 
 main();

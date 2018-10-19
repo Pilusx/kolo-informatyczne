@@ -214,7 +214,7 @@ var lessons = [
         .setSubject("Programowanie dynamiczne").display(1).setDate(19, 10, 2018)
         .setDesc("Programowanie dynamiczne na grafach, Odległość Levenshteina")
         .setLinks([
-        new Link("files/01-Levenshtein/levenshtein.pdf", "Skrypt"),
+        new Link("files/01-Levenshtein/levenshtein.pdf", "Skrypt v.2"),
         new Link("https://www.spoj.com/problems/EDIST/", "SPOJ (EDIST)"),
         new Link("https://www.spoj.com/problems/ADVEDIST/", "SPOJ (ADVEDIST)"),
         new Link("https://oi.edu.pl/static/attachment/20171006/oi23.pdf", "23 OI - Nadajniki s.81 (dla zainteresowanych)"),

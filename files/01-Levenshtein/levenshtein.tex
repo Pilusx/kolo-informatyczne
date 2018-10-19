@@ -6,7 +6,7 @@
 \setlength\parindent{0pt} 
 
 \title{	
-\huge Indukcja na grafach
+\huge Programowanie dynamiczne na grafach
 }
 
 \date{\normalsize\today}
@@ -32,8 +32,28 @@ Będziemy używać jedynie skończonych rodzin.
 \end{gather*}
 \end{mydef}
 
-\begin{mydef} [Dowód indukcyjny na acyklicznych, skończonych grafach skierowanych]
-Dowód przebiega w następujący sposób.\\ 
+\begin{theorem}[Wzór jawny dla ciągu Fibonacciego]
+\begin{gather*}
+F_0 = 0, F_1 = 1, F_n = F_{n-1} + F_{n-2} \\
+F_n = \frac{1}{\sqrt{5}}(\frac{1 + \sqrt{5}}{2})^n - \frac{1}{\sqrt{5}}(\frac{1 - \sqrt{5}}{2})^n
+\end{gather*}
+\end{theorem}
+\begin{proof}
+n = 0, n = 1 sprawdzamy ręcznie. \\
+Pokazujemy, że $x^2 = x + 1$, gdy $x \in \{\frac{1 + \sqrt{5}}{2}, \frac{1 - \sqrt{5}}{2}\}$ \\
+Niech $x_1 = \frac{1 + \sqrt{5}}{2}, x_2 = \frac{1 - \sqrt{5}}{2}, p = \frac{1}{\sqrt{5}}$
+
+\begin{equation*}
+\begin{split}
+F_n &= F_{n-1} + F_{n-2} = px_1^{n-1} - px_2^{n-1} + px_1^{n-2} - px_2^{n-2} \\
+&= px_1^{n-2}(1 + x_1) + px_2^{n-2}(1 + x_2) \\
+&= px_1^n + px_2^n
+\end{split}
+\end{equation*}
+\end{proof}
+
+\begin{mydef} [Programowanie dynamiczne na acyklicznych, skończonych grafach skierowanych]
+Tworzenie algorytmu przebiega w następujący sposób. \\
 
 Najpierw definiujemy zbiór X, pewną własność C oraz zbiory poprzedników $b(x)$ wszystkich elementów zbioru X. Każdy element x ma własność C lub jej nie ma.\\
 
@@ -42,7 +62,7 @@ Definiujemy również zbiór poprzedników danego zbioru jako.
 B(X) = \bigcup_{x \in X} b(x)
 \end{displaymath}
 
-Algorytm przebiega następująco. Dzielimy graf na warstwy algorytmem BFS, zaczynając od wierzchołków do których nie wchodzi żadna krawędź (warstwa $W_0$). Wierzchołek v należy do warstwy $W_k$ wtedy i tylko wtedy, gdy jego najkrótsza ścieżka do wierzchołka z warstwy $W_0$ ma długość k. \\
+Dzielimy graf na warstwy \textbf{(sortowaniem topologicznym)}, zaczynając od wierzchołków do których nie wchodzi żadna krawędź (warstwa $W_0$). Wierzchołek v należy do warstwy $W_k$ wtedy i tylko wtedy, gdy jego \textbf{najdłuższa} ścieżka do wierzchołka z warstwy $W_0$ ma długość k. \\
 
 Zakładamy tutaj, że wszyscy poprzednicy należą do poprzednich warstw. (Graf skierowany acykliczny.)
 \begin{displaymath}
@@ -165,7 +185,7 @@ Należy rozpatrzyć dwa inne przypadki.
 \begin{itemize}
 \item Wszystkie operacje mają różne koszty.
 \item Nie ma operacji zamiany znaku.
-\item Inny podział na warstwy. Pokazać, że istnieje algorytm w pamięci O(min(n,m)).
+\item Inny podział na warstwy. Pokazać, że istnieje algorytm o złożoności pamięciowej O(max(n,m)).
 Tym razem zaczniemy numerację warstw od 1.
 \begin{gather*}
 W_1 = \{(0,0) \} \\
