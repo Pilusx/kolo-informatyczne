@@ -239,8 +239,6 @@ const materials = [
     new Link("files/ioi-syllabus-2017.pdf", "IOI - Sylabus"),
     new Link("https://om.edu.pl", "OM"),
     new Link("http://archom.ptm.org.pl/", "ARCHOM"),
-    new Link("http://smurf.mimuw.edu.pl/", "Smurf"),
-    new Link("http://was.zaa.mimuw.edu.pl/", "WAS"),
 ]
 
 const books = [
@@ -260,7 +258,7 @@ const lessons = [
 
     new Lesson().ext()
         .setSubject("Programowanie dynamiczne").display(1).setDate(19, 10, 2018)
-        .setDesc("Programowanie dynamiczne na grafach, Odległość Levenshteina, Sortowanie Topologiczne")
+        .setDesc("Programowanie dynamiczne na grafach, Sortowanie topologiczne")
         .setLinks([
             new Link("files/01-Levenshtein/levenshtein.pdf", "Skrypt v.2"),
             new Link("https://www.spoj.com/problems/EDIST/", "SPOJ (EDIST)"),
