@@ -221,8 +221,13 @@ var lessons = [
     new Lesson().ext()
         .setSubject("Drzewa przedziałowe").display(1).setDate(26, 10, 2018)
         .setDesc("Statyczne drzewa przedziałowe")
-        .setLinks([]),
-    new Lesson().ext().setCode("IO_1").setExpDate(11, 2018).display(1)
+        .setLinks([
+        new Link("https://szkopul.edu.pl/problemset/problem/VYTSyRwgdwmLf56i_ffWGB0L/site/?key=statement", "9 OI - Koleje"),
+        new Link("https://oi.edu.pl/static/attachment/20110811/oi9.pdf", "Omówienie Kolei s.45"),
+        new Link("https://szkopul.edu.pl/problemset/problem/k-RYEjhwNTo_XdaCidXQUGMU/site/?key=statement", "22 OI - Kinoman"),
+        new Link("https://www.oi.edu.pl/static/attachment/20160825/oi22.pdf", "Omowienie Kinomana s.65")
+    ]),
+    new Lesson().ext().setCode("IO_1").setExpDate(11, 2018)
         .setSubject("Testowanie")
         .setIOI('M (1), PF1(1-5), PF3 (1,2)')
         .setDesc("Operacje wejścia/wyjścia w C, pisanie testów automatycznych, obsługa plików"),
@@ -243,27 +248,24 @@ var lessons = [
     new Lesson().ext().setCode("ZA").setExpDate(11, 2018).display(1)
         .setIOI("AL2 (3)")
         .setSubject("Algorytmy zachłanne").setDesc(),
-    new Lesson().ext().setCode("GE_1").setExpDate(12, 2018).display(1)
+    new Lesson().ext().setCode("GE_1").setExpDate(12, 2018)
         .setIOI('M (6-8), AL10 (1-3)')
         .setSubject("Geometria").setDesc("Liczby zespolone, rzutowania"),
-    new Lesson().ext().setCode("TG_11").setExpDate(12, 2018).display(1)
+    new Lesson().ext().setCode("TG_11").setExpDate(12, 2018)
         .setSubject("Grafy dwudzielne").setDesc("Skojarzenia w grafach dwudzielnych"),
-    new Lesson().ext().setExpDate(12, 2018).display(1)
+    new Lesson().ext().setExpDate(12, 2018)
         .setSubject("Sieci przepływowe"),
-    new Lesson().ext().setCode("TE_2").setExpDate(1, 2019).display(1)
+    new Lesson().ext().setCode("TE_2").setExpDate(1, 2019)
         .setSubject("Template").setDesc("Mnożenie macierzy, specjalizacja"),
-    new Lesson().ext().setCode("SD_7").setExpDate(1, 2019).display(1)
-        .setIOI("AL3b (6)")
-        .setSubject("AVL").setDesc("Drzewo AVL"),
-    new Lesson().ext().setCode("TG_9").setExpDate(1, 2019).display(1)
+    new Lesson().ext().setCode("TG_9").setExpDate(1, 2019)
         .setSubject("Heurystyki").setDesc("Kostka Rubika"),
     new Lesson().ext().setCode("TG_10").setExpDate(1, 2019)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
-    new Lesson().ext().setCode("TG_12").setExpDate(2, 2019).display(1)
+    new Lesson().ext().setCode("TG_12").setExpDate(2, 2019)
         .setIOI("AL2 (2)")
         .setSubject("Programowanie dynamiczne 2").setDesc("Cykl Hamiltona"),
-    new Lesson().ext().setCode("TG_13").setExpDate(2, 2019).display(1)
+    new Lesson().ext().setCode("TG_13").setExpDate(2, 2019)
         .setSubject("Genetyki").setDesc("Problem n-hetmanów"),
     new Lesson().ext().setCode("SD_9").setExpDate(3, 2019)
         .setSubject("Kopce"),
