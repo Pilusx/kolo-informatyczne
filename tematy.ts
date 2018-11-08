@@ -274,7 +274,27 @@ const lessons = [
             new Link("https://oi.edu.pl/static/attachment/20110811/oi9.pdf", "Omówienie Kolei s.45"),
             new Link("https://szkopul.edu.pl/problemset/problem/k-RYEjhwNTo_XdaCidXQUGMU/site/?key=statement", "22 OI - Kinoman"),
             new Link("https://www.oi.edu.pl/static/attachment/20160825/oi22.pdf", "Omowienie Kinomana s.65")
-    ]),
+		]),
+    
+	new Lesson().ext().setDate(9, 11, 2018).display(1)
+		.setSubject("Zbiory")
+		.setDesc("Zbiory i iteratory <set>")
+		.setLinks([
+			new Link("files/03-Set/zbiory.pdf", "Skrypt"),
+			new Link("files/03-Set/zbiory_start.cpp", "Start"),
+			new Link("files/03-Set/test.in", "test.in"),
+			new Link("files/03-Set/zbiory_rozw.cpp", "Rozwiązanie")
+		
+		]),
+    
+    new Lesson().ext().setCode("ZA").setDate(16, 11, 2018).display(0)
+        .setIOI("AL2 (3)")
+        .setLinks([
+            new Link("https://www.spoj.com/problems/BUSYMAN/", "BUSYMAN (SPOJ)"),
+            /*new Link("files/03-Zachlan/busyman.cpp", "busyman.cpp"),*/
+            new Link("https://en.cppreference.com/w/cpp/container/map", "<map>")])
+        .setSubject("Algorytmy zachłanne")
+        .setDesc("Algorytmy zachłanne. <map>"),
 
     new Lesson().ext().setCode("IO_1").setExpDate(11, 2018)
         .setSubject("Testowanie")
@@ -292,13 +312,9 @@ const lessons = [
             new Link("files/00-IO_C/final", "Koniec")
             ]), */
 
-    new Lesson().ext().setCode("TG_7").setExpDate(11, 2018).display(1)
+    new Lesson().ext().setCode("TG_7").setExpDate(11, 2018).display(0)
         .setIOI("AL3b (8)")
         .setSubject("LCA").setDesc("Najniższy wspólny przodek"),
-
-    new Lesson().ext().setCode("ZA").setExpDate(11, 2018).display(1)
-        .setIOI("AL2 (3)")
-        .setSubject("Algorytmy zachłanne").setDesc(),
 
     new Lesson().ext().setCode("GE_1").setExpDate(12, 2018)
         .setIOI('M (6-8), AL10 (1-3)')

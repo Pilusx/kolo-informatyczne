@@ -1,0 +1,90 @@
+\documentclass[paper=a4, fontsize=11pt]{article}
+\usepackage[polish]{babel}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm, hyperref}
+\usepackage{listings}
+\setlength\parindent{0pt} 
+
+\title{	
+\huge Zbiory i iteratory
+}
+
+\date{\normalsize\today}
+
+\begin{document}
+
+\maketitle
+
+\newtheorem{mydef}{Definicja}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemma}{Lemat}
+
+\section{Wypisywanka}
+Szablon pliku początkowego znajduje się w pliku zbiory\_start.cpp. \\
+
+We wszystkich poniższych zadaniach na wejściu dostajemy liczbę \textit{n} oraz ciąg \textit{n} liczb postaci.\\
+$\begin{matrix}
+n & a_1 & a_2 & \dots & a_n
+\end{matrix}$ \\
+Przykładowy ciąg z pliku test.in
+\lstinputlisting{test.in}
+
+Od tego momentu uznajemy, że jeśli w zbiorze istnieją dwa takie same elementy to wykonujemy na nich operację tylko raz. Rozpatrujemy zbiór różnych elementów.
+
+Na początku zobacz przykładowe użycie \href{https://en.cppreference.com/w/cpp/iterator/advance}{iteratorów}. Nastepnie przejdź do rozwiązywania zadań. 
+
+\begin{enumerate}
+\item Korzystając z funkcji \href{http://www.cplusplus.com/reference/set/set/insert/}{insert}. wczytaj liczby do zbioru. 
+
+\item Wypisz liczby w porządku rosnącym przy użyciu pętli \href{https://en.cppreference.com/w/cpp/language/range-based for loop}{for-range}. Nie używaj funkcji begin() oraz end().
+
+\item Korzystając z funkcji \href{http://www.cplusplus.com/reference/set/set/begin/}{begin()} i end().
+\begin{enumerate}
+
+\item Wypisz najmniejszą liczbę.
+\item Wypisz 4 najmniejsze liczby, używając pętli...
+\item Wypisz największą liczbę. Przydatny może się okazać operator- -.
+\item Wypisz liczby w porządku rosnącym korzystając z iteratorów.
+\end{enumerate}
+
+\item Wypisz liczby korzystając z odwrotnych iteratorów oraz funkcji
+\href{http://www.cplusplus.com/reference/set/set/rbegin/}{rbegin()} oraz rend(), 
+\href{http://www.cplusplus.com/reference/set/set/erase/}{erase()}.
+\begin{enumerate}
+\item Wypisz 4 największe liczby.
+\item Wypisz czwartą największą liczbę. Przydatna może się okazać funkcja \href{https://en.cppreference.com/w/cpp/iterator/advance}{advance()} z $<algorithm>$
+\item Usuń 4 największe liczby.
+\end{enumerate}
+
+\item Wypisz rozmiar zbioru. \href{http://www.cplusplus.com/reference/set/set/size/}{size()}
+\item Sprawdż przynależność do zbioru liczb 3 oraz 8.
+\begin{enumerate}
+\item Funkcją \href{http://www.cplusplus.com/reference/set/set/count/}{count()}
+\item Funkcją \href{http://www.cplusplus.com/reference/set/set/find/}{find()}. Zwróć uwagę na to co zwraca funkcja find(), gdy element nie należy do zbioru.
+
+\end{enumerate}
+
+
+\item *Przetestuj działanie funkcji \href{http://www.cplusplus.com/reference/set/set/lower_bound/}{lower\_bound()} oraz  \href{http://www.cplusplus.com/reference/set/set/upper_bound/}{upper\_bound()} dla liczb 3 i 4.
+
+\item **Przejrzyj \href{http://www.cplusplus.com/reference/set/set/set/}{dokumentację}, a następnie zmodyfikuj operator porównywania elementów w zbiorze, tak aby elementy większe były na początku. Zrób to tak, aby wszystkie poprzednie funkcje nadal działały.
+
+\end{enumerate}
+
+\section{Złożoność}
+Przeczytaj paragrafy o złożoności ('complexity') oraz ważności iteratorów ('iterator validity') wszystkich wymienionych powyżej funkcji.
+
+\section{Sortowanie}
+\begin{enumerate}
+\item Stwórz prostą strukturę uczeń (string imie, string nazwisko).
+\item Posortuj uczniow przy pomocy $<set>$ pisząc odpowiednią funkcję porównującą. 
+\item Posortuj uczniów przy pomocy \href{https://www.google.com/search?q=vector+stl}{vectora} i  funkcji \href{http://www.cplusplus.com/reference/algorithm/sort/}{sort}.
+\end{enumerate}
+Przy sortowaniu najistotniejsza jest kolejność nazwisk. Jeśli nazwiska są równe to interesuje nas kolejność imion. \\
+Poniżej podane są przykładowy nieposortowany i posortowany ciąg uczniów. \\
+(A, Nowak) (C, Kowalski) (B, Kowalski) \\
+$\rightarrow$  (B, Kowalski) (C, Kowalski) (A, Nowak)
+
+
+\end{document}
