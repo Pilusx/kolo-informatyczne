@@ -1,5 +1,5 @@
 var DISPLAY_OFF = true;
-var Link = (function () {
+var Link = /** @class */ (function () {
     function Link(link, description, big_description) {
         this.link = link;
         this.description = description;
@@ -18,8 +18,8 @@ var Link = (function () {
         return node;
     };
     return Link;
-})();
-var Lesson = (function () {
+}());
+var Lesson = /** @class */ (function () {
     function Lesson() {
     }
     Lesson.prototype.ext = function () {
@@ -88,8 +88,8 @@ var Lesson = (function () {
     };
     Lesson.prototype.get_HTML_row = function (fields) {
         var row = document.createElement("tr");
-        for (var _i = 0; _i < fields.length; _i++) {
-            var field = fields[_i];
+        for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
+            var field = fields_1[_i];
             var col = document.createElement("td");
             row.appendChild(col);
             col.classList.add("row_" + field);
@@ -117,7 +117,7 @@ var Lesson = (function () {
         return row;
     };
     return Lesson;
-})();
+}());
 function add_lessons() {
     var lesson_section_int = document.getElementById("lessons_introductory");
     var lesson_section_ext = document.getElementById("lessons_extension");
@@ -131,8 +131,8 @@ function add_lessons() {
     table_ext.id = "extension";
     //table_int.appendChild(Lesson.get_HTML_head(fields, names))
     table_ext.appendChild(Lesson.get_HTML_head(fields, names));
-    for (var _i = 0; _i < lessons.length; _i++) {
-        var lesson = lessons[_i];
+    for (var _i = 0, lessons_1 = lessons; _i < lessons_1.length; _i++) {
+        var lesson = lessons_1[_i];
         //console.log(lesson_str);
         if (lesson.display_on == 1) {
             var container = lesson.get_HTML_row(fields);
@@ -140,10 +140,11 @@ function add_lessons() {
             //table_int.appendChild(container);
             //} else {
             table_ext.appendChild(container);
+            //}
         }
     }
 }
-var Book = (function () {
+var Book = /** @class */ (function () {
     function Book(name, author, comment, link) {
         this.name = name;
         this.author = author;
@@ -166,10 +167,10 @@ var Book = (function () {
         return node;
     };
     return Book;
-})();
+}());
 function iter_add_elements_to_parent(parent, array) {
-    for (var _i = 0; _i < array.length; _i++) {
-        var elem = array[_i];
+    for (var _i = 0, array_1 = array; _i < array_1.length; _i++) {
+        var elem = array_1[_i];
         parent.appendChild(elem.getHTML());
     }
 }
@@ -236,53 +237,49 @@ var lessons = [
         new Link("files/03-Set/test.in", "test.in"),
         new Link("files/03-Set/zbiory_rozw.cpp", "Rozwiązanie")
     ]),
-    new Lesson().ext().setCode("ZA").setDate(16, 11, 2018).display(0)
+    new Lesson().ext().setCode("ZA").setDate(16, 11, 2018).display(1)
         .setIOI("AL2 (3)")
         .setLinks([
         new Link("https://www.spoj.com/problems/BUSYMAN/", "BUSYMAN (SPOJ)"),
         /*new Link("files/03-Zachlan/busyman.cpp", "busyman.cpp"),*/
-        new Link("https://en.cppreference.com/w/cpp/container/map", "<map>")])
+        new Link("https://en.cppreference.com/w/cpp/container/map", "<map>")
+    ])
         .setSubject("Algorytmy zachłanne")
         .setDesc("Algorytmy zachłanne. <map>"),
-    new Lesson().ext().setCode("IO_1").setExpDate(11, 2018)
-        .setSubject("Testowanie")
-        .setIOI('M (1), PF1(1-5), PF3 (1,2)')
-        .setDesc("Operacje wejścia/wyjścia w C, pisanie testów automatycznych, obsługa plików"),
-    /*.setLinks(
-        [new Link("http://www.cplusplus.com/reference/cstdio/", "<cstdio>(CPP)"),
-        new Link("https://en.cppreference.com/w/cpp/header/cstdio", "<cstdio>(CPPR)"),
-        new Link("https://en.cppreference.com/w/cpp/io/c/fscanf", "scanf"),
-        new Link("https://en.cppreference.com/w/cpp/io/c/fprintf", "printf"),
-        new Link("https://en.cppreference.com/w/cpp/io/c/fopen", "fopen"),
-        new Link("https://en.cppreference.com/w/cpp/io/c/fclose", "fclose"),
-        new Link("https://en.cppreference.com/w/cpp/string/byte/islower", "islower"),
-        new Link("files/00-IO_C/init", "Start"),
-        new Link("files/00-IO_C/final", "Koniec")
-        ]), */
-    new Lesson().ext().setCode("TG_7").setExpDate(11, 2018).display(0)
+    new Lesson().ext().setCode("TG_7").setExpDate(11, 2018).display(1)
         .setIOI("AL3b (8)")
         .setSubject("LCA").setDesc("Najniższy wspólny przodek"),
-    new Lesson().ext().setCode("GE_1").setExpDate(12, 2018)
+    new Lesson().ext().setCode("GE_1").setExpDate(11, 2018).display(0)
         .setIOI('M (6-8), AL10 (1-3)')
-        .setSubject("Geometria").setDesc("Liczby zespolone, rzutowania"),
-    new Lesson().ext().setCode("TG_11").setExpDate(12, 2018)
-        .setSubject("Grafy dwudzielne").setDesc("Skojarzenia w grafach dwudzielnych"),
-    new Lesson().ext().setExpDate(12, 2018)
-        .setSubject("Sieci przepływowe"),
-    new Lesson().ext().setCode("TE_2").setExpDate(1, 2019)
-        .setSubject("Template").setDesc("Mnożenie macierzy, specjalizacja"),
-    new Lesson().ext().setCode("TG_9").setExpDate(1, 2019)
-        .setSubject("Heurystyki").setDesc("Kostka Rubika"),
-    new Lesson().ext().setCode("TG_10").setExpDate(1, 2019)
+        .setSubject("Geometria").setDesc("Liczby zespolone, rzutowania")
+    /*.setLinks([
+        new Link("https://en.cppreference.com/w/cpp/numeric/complex", "<complex>"),
+        new Link("http://codeforces.com/blog/entry/22175", "Triki (CodeForces By Hikari9)"),
+    ])*/ ,
+    new Lesson().ext().setCode("TG_10").setExpDate(2, 2018).display(0)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
-    new Lesson().ext().setCode("TG_12").setExpDate(2, 2019)
+    new Lesson().ext().setExpDate(12, 2018).setExpDate(2, 2018).display(0)
+        .setSubject("Sieci przepływowe").setDesc("Optymalizacja"),
+    new Lesson().ext().setCode("TG_11").setExpDate(3, 2018).display(0)
+        .setSubject("Grafy dwudzielne").setDesc("Skojarzenia w grafach dwudzielnych"),
+    new Lesson().ext().setCode("TG_12").setExpDate(4, 2019).display(0)
         .setIOI("AL2 (2)")
-        .setSubject("Programowanie dynamiczne 2").setDesc("Cykl Hamiltona"),
-    new Lesson().ext().setCode("TG_13").setExpDate(2, 2019)
-        .setSubject("Genetyki").setDesc("Problem n-hetmanów"),
-    new Lesson().ext().setCode("SD_9").setExpDate(3, 2019)
-        .setSubject("Kopce"),
+        .setSubject("Programowanie dynamiczne 2").setDesc("Cykl Hamiltona")
+    /*
+    .setLinks([
+        new Link("http://www.cplusplus.com/reference/algorithm/next_permutation/", "next_permutation"),
+        new Link("https://en.cppreference.com/w/cpp/utility/bitset", "<bitset>")
+    ])*/ ,
+    new Lesson().ext().setCode("TG_13").setExpDate(4, 2019).display(0)
+        .setSubject("Programowanie genetyczne").setDesc(""),
+    new Lesson().ext().setCode("TG_9").setExpDate(5, 2019).display(0)
+        .setSubject("Heurystyki").setDesc("Kostka Rubika"),
+    new Lesson().ext().setCode("TE_2").setExpDate(5, 2019).display(0)
+        .setSubject("Template").setDesc("Wypisz mój typ, specjalizacja")
+        .setLinks([
+        new Link("https://www.boost.org/doc/libs/1_64_0/libs/mpl/doc/tutorial/tutorial-metafunctions.html#id41", "Do poczytania (dla chętnych)")
+    ]),
 ];
 var other_lessons = [
     new Lesson().intro().setCode("IO_2").setExpDate(10, 2018).setDate(18, 10, 2018)
@@ -350,5 +347,9 @@ var other_lessons = [
     new Lesson().intro().setCode("SD_6").setExpDate(6, 2019)
         .setIOI("AL3b (5)")
         .setSubject("Drzewo potęgowe").setDesc("Implementacja statycznego drzewa potęgowego, reprezentacja ograniczonych zbiorów liczb naturalnych"),
+    new Lesson().ext().setCode("IO_1").setExpDate(11, 2018)
+        .setSubject("Testowanie")
+        .setIOI('M (1), PF1(1-5), PF3 (1,2)')
+        .setDesc("Operacje wejścia/wyjścia w C, pisanie testów automatycznych, obsługa plików"),
 ];
 main();
