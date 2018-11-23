@@ -246,10 +246,13 @@ var lessons = [
     ])
         .setSubject("Algorytmy zachłanne")
         .setDesc("Algorytmy zachłanne. <map>"),
-    new Lesson().ext().setCode("TG_7").setExpDate(11, 2018).display(1)
+    new Lesson().ext().setCode("TG_7").setDate(23, 11, 2018).display(1)
         .setIOI("AL3b (8)")
-        .setSubject("LCA").setDesc("Najniższy wspólny przodek"),
-    new Lesson().ext().setCode("GE_1").setExpDate(11, 2018).display(0)
+        .setSubject("LCA").setDesc("Najniższy wspólny przodek")
+        .setLinks([
+        new Link("https://www.spoj.com/problems/LCASQ/", "LCASQ (SPOJ)")
+    ]),
+    new Lesson().ext().setCode("GE_1").setExpDate(11, 2018).display(1)
         .setIOI('M (6-8), AL10 (1-3)')
         .setSubject("Geometria").setDesc("Liczby zespolone, rzutowania")
     /*.setLinks([
