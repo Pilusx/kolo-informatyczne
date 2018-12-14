@@ -252,13 +252,19 @@ var lessons = [
         .setLinks([
         new Link("https://www.spoj.com/problems/LCASQ/", "LCASQ (SPOJ)")
     ]),
-    new Lesson().ext().setCode("GE_1").setExpDate(11, 2018).display(1)
+    new Lesson().ext().setCode("GE_1").setDate(30, 11, 2018).display(1)
         .setIOI('M (6-8), AL10 (1-3)')
         .setSubject("Geometria").setDesc("Liczby zespolone, rzutowania")
     /*.setLinks([
         new Link("https://en.cppreference.com/w/cpp/numeric/complex", "<complex>"),
         new Link("http://codeforces.com/blog/entry/22175", "Triki (CodeForces By Hikari9)"),
     ])*/ ,
+    new Lesson().ext().setCode("GE_2").setDate(14, 12, 2018).display(1)
+        .setIOI('M (6-8), AL10 (1-3)')
+        .setSubject("Geometria 2").setDesc("Otoczka wypukła")
+        .setLinks([
+        new Link("https://www.spoj.com/problems/BSHEEP/", "BSHEEP (SPOJ)")
+    ]),
     new Lesson().ext().setCode("TG_10").setExpDate(2, 2018).display(0)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
