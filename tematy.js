@@ -265,6 +265,21 @@ var lessons = [
         .setLinks([
         new Link("https://www.spoj.com/problems/BSHEEP/", "BSHEEP (SPOJ)")
     ]),
+    new Lesson().ext().setCode("TG_12").setDate(4, 01, 2019).display(1)
+        .setIOI("AL2 (2)")
+        .setSubject("Kombinatoryka").setDesc("Cykl Hamiltona")
+        .setLinks([
+        new Link("https://en.cppreference.com/w/cpp/utility/bitset", "<bitset>"),
+        new Link("https://www.spoj.com/SHORTEN/problems/BINOMIAL/", "Binomial (SPOJ)"),
+        new Link("https://www.spoj.com/problems/IE5/", "IE5 (SPOJ)"),
+    ]),
+    new Lesson().ext().setDate(4, 01, 2019).display(0)
+        .setSubject("Teoria Gier").setDesc("Gra Nim")
+        .setLinks([
+        new Link("https://www.spoj.com/problems/REPEAT/", "REPEAT (SPOJ)"),
+        new Link("https://www.oi.edu.pl/old/download/oi11.pdf", "11 OI - Gra (Do rozwiązania)"),
+        new Link("https://oi.edu.pl/static/attachment/20171006/oi23.pdf", "23 OI - Wcale nie nim (Do poczytania)")
+    ]),
     new Lesson().ext().setCode("TG_10").setExpDate(2, 2018).display(0)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
@@ -272,14 +287,6 @@ var lessons = [
         .setSubject("Sieci przepływowe").setDesc("Optymalizacja"),
     new Lesson().ext().setCode("TG_11").setExpDate(3, 2018).display(0)
         .setSubject("Grafy dwudzielne").setDesc("Skojarzenia w grafach dwudzielnych"),
-    new Lesson().ext().setCode("TG_12").setExpDate(4, 2019).display(0)
-        .setIOI("AL2 (2)")
-        .setSubject("Programowanie dynamiczne 2").setDesc("Cykl Hamiltona")
-    /*
-    .setLinks([
-        new Link("http://www.cplusplus.com/reference/algorithm/next_permutation/", "next_permutation"),
-        new Link("https://en.cppreference.com/w/cpp/utility/bitset", "<bitset>")
-    ])*/ ,
     new Lesson().ext().setCode("TG_13").setExpDate(4, 2019).display(0)
         .setSubject("Programowanie genetyczne").setDesc(""),
     new Lesson().ext().setCode("TG_9").setExpDate(5, 2019).display(0)
