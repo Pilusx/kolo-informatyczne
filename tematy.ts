@@ -261,8 +261,8 @@ const lessons = [
         .setDesc("Programowanie dynamiczne na grafach, Sortowanie topologiczne")
         .setLinks([
             new Link("files/01-Indukcja/indukcja.pdf", "Skrypt"),
-            new Link("https://www.spoj.com/problems/EDIST/", "SPOJ (EDIST)"),
-            new Link("https://www.spoj.com/problems/ADVEDIST/", "SPOJ (ADVEDIST)"),
+            new Link("https://www.spoj.com/problems/EDIST/", "EDIST (SPOJ)"),
+            new Link("https://www.spoj.com/problems/ADVEDIST/", "ADVEDIST (SPOJ)"),
             new Link("https://oi.edu.pl/static/attachment/20171006/oi23.pdf", "23 OI - Nadajniki s.81 (dla zainteresowanych)"),
             new Link("https://www.youtube.com/watch?v=R1C0sSrOucM","Omówienie Nadajników (dla zainteresowanych)"),
         ]),
@@ -324,14 +324,16 @@ const lessons = [
         .setLinks([
             new Link("https://en.cppreference.com/w/cpp/utility/bitset", "<bitset>"),
             new Link("https://www.spoj.com/SHORTEN/problems/BINOMIAL/", "Binomial (SPOJ)"),
-            new Link("https://www.spoj.com/problems/IE5/", "IE5 (SPOJ)"),
+            new Link("https://code.google.com/codejam/contest/dashboard?c=32004#s=p2", "Cycles (Google Code Jam)"),
         ]),
-    new Lesson().ext().setDate(4, 01, 2019).display(0)
+    new Lesson().ext().setDate(11, 01, 2019).display(1)
         .setSubject("Teoria Gier").setDesc("Gra Nim")
         .setLinks([
+            new Link("files/08-Nim/build/nim.pdf", "Uwagi do zadań!"),
             new Link("https://www.spoj.com/problems/REPEAT/", "REPEAT (SPOJ)"),
-            new Link("https://www.oi.edu.pl/old/download/oi11.pdf", "11 OI - Gra (Do rozwiązania)"),
-            new Link("https://oi.edu.pl/static/attachment/20171006/oi23.pdf", "23 OI - Wcale nie nim (Do poczytania)")
+            new Link("https://szkopul.edu.pl/p/default/problemset/oi/17", "17 OI - Gra w minima"),
+            new Link("https://szkopul.edu.pl/p/default/problemset/oi/11", "11 OI - Gra"),
+            new Link("https://szkopul.edu.pl/p/default/problemset/oi/23", "Do poczytania: 23 OI - Wcale nie nim"),
         ]),
 
 
