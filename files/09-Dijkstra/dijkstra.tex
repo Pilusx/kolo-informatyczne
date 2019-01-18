@@ -1,0 +1,186 @@
+\documentclass[paper=a4, fontsize=11pt]{article}
+\usepackage[polish]{babel}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts,amsthm, hyperref}
+\usepackage{listings}
+\setlength\parindent{0pt} 
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{	
+\huge Programowanie dynamiczne
+}
+
+\date{\normalsize\today}
+
+\begin{document}
+
+\maketitle
+
+\newtheorem{mydef}{Definicja}
+\newtheorem{theorem}{Twierdzenie}
+\newtheorem{lemma}{Lemat}
+\newtheorem{observation}{Obserwacja}
+
+
+\section{FCANDY (Wcale nie gra w minima)}
+\subsection{Wejście}
+\begin{description}
+\item $N$ $(1 \leq i \leq N \leq 100)$ - liczba rodzajów cukierków.
+\item $k_i$ $(1 \leq k_i \leq 500)$ - liczba cukierków danego rodzaju
+\item $c_i$ $(1 \leq c_i \leq 200)$ - liczba kalorii danego cukierka
+\end{description}
+Dodatkowo zdefiniujmy:
+\begin{description}
+\item $K := max_i k_i$
+\item $C := max_i c_i$
+\end{description}
+
+\subsection{O co chodzi?}
+
+Mamy dany multizbiór S, należy znaleźć podział na dwa rozłączne podzbiory $P, P-S$, taki aby zminimalizować wartość bezwzględną różnic sum elementów w podzbiorach.
+
+\begin{align*}
+&f(P) := sum(P) - sum(P - S) \\
+&\hat{f}(S) := min_{P \subseteq S} |f(P)|
+\end{align*}
+
+\subsection{Bruteforce $O(2^{NK})$}
+Sprawdzamy wszystkie możliwe kombinacje P i wypisujemy tą z najmniejszą wartością $\hat{f}(P)$. Algorytm będzie działał w czasie $O(2^{NK})$
+\begin{observation} Różnica dla zerowej liczby cukierków wynosi 0.
+\begin{observation} $jc - (n - j)c  = (2j - n)c$
+
+\end{observation}
+
+\begin{lstlisting}[language=c++]
+vector<int> k;
+vector<int> c;
+int brute(int wynik, int i) {
+	if(i > k.size()) return abs(wynik);
+	int res = INT_MAX;	
+	for(j = 1; j <= k[i], j++) {
+		int czesc = (2 * j - k[i]) * c[i];
+		res = min(res, brute(wynik + czesc, i+1);
+	}
+	return res;
+}
+res = brute(1);
+
+\end{lstlisting}
+
+\subsection{Programowanie dynamiczne $O(CK^2N^2)$}
+\begin{observation} Liczba możliwych różnic jest ograniczona.
+\begin{gather*}
+	M_1 := CKN \leq 10^7 \\
+	\forall_{P\subseteq S} -M_1 \leq f(P) \leq M_1
+\end{gather*}
+\end{observation}
+\begin{observation} Nie trzeba rozpatrywać wszystkich kombinacji. \\
+Dla każdego prefiksu interesuje nas jedynie zbiór uzyskanych różnic częsciowych.
+\end{observation}
+
+\end{observation}
+\begin{observation} Mając dany zbiór możliwych różnic częsciowych funkcji f dla pierwszych i rodzajów cukierków potrafimy policzyć zbiór możliwych wartości częsciowych dla $i+1$ rodzajów cukierków.
+\end{observation}
+\begin{observation} Wystarczy pamiętać jedynie dwa ostatnie zbiory.
+\end{observation}
+
+\begin{lstlisting}[language=c++]
+S[0] = {0}, S[1] = {};
+for(i = 1,...,n) {
+	S[i mod 2] = {};
+	for(v : S[(i+1) mod 2]) {
+		for(j = 0,...,k[i]) {
+			dc = (2*j - k[i])*c[i];
+			S[i mod 2].insert(v + dc);
+		}
+	}
+}
+res = INT_MAX;
+for(v : S[n%2]) res = min(res,|v|);
+\end{lstlisting}
+Algorytm działa w pamięci $O(M_1)$ oraz czasie
+\begin{description}
+	\item $O(KNM_1logM_1)$ z std::set
+	\item $O(KNM_1) = O(CK^2N^2)$ z std::unordered\_set 
+\end{description}
+Dla dużych danych algorytm jest nadal za wolny.
+
+\subsection{Optymalizacja $O(CK^2N)$}
+\begin{lemma} Wynik jest ograniczony z góry przez $C$.
+\begin{proof} Posortujmy cukierki pod względem liczby kalorii, a następnie ustawmy je w rządku. Połóżmy je następnie na osi X układu współrzędnych, a następnie nadajmy kolejne indeksy. Przydzielając cukierki parami (2k-1, 2k), otrzymamy pewne odcinki i punkty na osi X. Możemy tak uczynić zawsze, gdy liczba cukierków jest parzysta. W przypadku nieparzystym wystarczy dodać fikcyjny cukierek o kaloryczności 0.
+
+Zauważmy, że suma ich długości jest ograniczona z góry przez C.
+\end{proof}
+\end{lemma}
+\begin{lemma} Jeśli wartość funkcji na każdym prefiksie jest ograniczona i rośnie, to jeśli wartość na prefiksie przekroczy pewien próg, to wówczas tej kombinacji można nie rozpatrywać.
+\begin{proof}
+\begin{align*}
+&D:= \sum_i k_i c_i \\
+&min_{[a]} |\sum_i (2a_i - k_i) c_i| \\
+&min_{[a]} |2\sum_i a_i c_i - D| \\
+\end{align*}
+
+A więc w interesującym nas przypadku:
+\begin{align*}	
+& 0 \leq 2\sum_i a_ic_i \leq D + C \leq (K+1)C = M_2 \\
+& M_2 = O(KC)
+\end{align*}
+\end{proof}
+\end{lemma}
+\begin{displaymath}
+\end{displaymath}
+Wystarczy więc jedynie zmienić sposób wrzucania do zbioru, oraz nie wrzucać do niego elementów większych od $M_2$. \\
+Otrzymaliśmy algorytm $O(KNM_2) = O(CK^2N)$. Niestety, jest on nadal zbyt wolny.
+\subsection{Optymalizacja $O(CKN)$}
+\begin{observation} Dodając kolejne cukierki tak naprawdę dodajemy osiągalne sumy do zbioru. Można to interpretować jako odwiedzanie kolejnych wierzchołków, które te sumy reprezentują.
+\end{observation}
+
+\begin{observation} Dwie najbardziej wewnętrzne pętle wykonują zdecydowanie za dużo operacji. Między innymi przepisujemy cały poprzedni zbiór, a następnie odwiedzamy wielokrotnie wcześniej już odwiedzone wierzchołki. Operacja dodania danego typu cukierków kosztowała nas O(MK). Zauważmy, że wystarczy wykonać jedynie O(M) operacji.
+\end{observation}
+
+
+\begin{lstlisting}[language=c++, breaklines=True]
+// Odwiedzone
+bool visited = (true, false, false, ..., false)
+// Kolejki wierzcholkow do zaktualizowania
+U[0] = {}, U[1] = {} 
+// Dla kazdego typu cukierkow
+for (i = 1, ..., n) {
+// Oblicz przyrost wynikajacy z dodania jednego nowego cukierka
+	dc = 2 * c[i];
+	for (v = dc,...,M) {
+// Dla kazdego nieodwiedzonego wierzcholka, do ktorego da sie dojsc
+		if(visited[v] && !visited[v - dc]) {
+// Oznacz nowy wierzcholek jako odwiedzony
+			visited[v] = true;
+// Dodaj do kolejki do przetworzenia
+			U[1].insert(v);
+		}
+	}
+// Dla kazdego dodanego cukierka
+	for(j = 2, ..., k[i]) {
+// Stworz nowa pusta kolejke
+		U[i%2] = {};
+// Dla kazdego wierzcholka z  poprzedniej kolejki
+		for(v : U[(i+1)%2]) {
+// Znajdz wartosc sumy po dodaniu cukierka
+			nv = v + dc; 
+// Jesli wczesniej nie uzyskalismy tej sumy.
+			if(!visited[nv]) {
+ // Oznacz uzyskanie sumy jako odwiedzony.
+				visited[nv] = true;
+// Dodaj do nowej kolejki
+				U[i%2].insert(v);
+			}			
+		}
+	}
+}
+\end{lstlisting}
+Jako kolejkę wystarczy użyc standardowego std::vector.
+Powyższy algorytm działa w czasie $O(NM_2) = O(CKN)$.
+
+\end{document}

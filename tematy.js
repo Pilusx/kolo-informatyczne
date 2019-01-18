@@ -282,6 +282,13 @@ var lessons = [
         new Link("https://szkopul.edu.pl/p/default/problemset/oi/11", "11 OI - Gra"),
         new Link("https://szkopul.edu.pl/p/default/problemset/oi/23", "Do poczytania: 23 OI - Wcale nie nim"),
     ]),
+    new Lesson().ext().setDate(18, 01, 2019).display(1)
+        .setSubject("Programowanie dynamiczne").setDesc("Dijkstra II")
+        .setLinks([
+        new Link("files/old/10-dijkstra/dijkstra.html", "Dijkstra 2017/2018"),
+        new Link("files/09-Dijkstra/build/dijkstra.pdf", "Skrypt"),
+        new Link("https://www.spoj.com/problems/FCANDY/", "FCANDY (SPOJ)"),
+    ]),
     new Lesson().ext().setCode("TG_10").setExpDate(2, 2018).display(0)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
