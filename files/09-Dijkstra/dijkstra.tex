@@ -175,42 +175,27 @@ $V_i$ to nowe sumy osiągnięte przez dodanie i cukierków danego typu.
 \begin{observation} Dwie najbardziej wewnętrzne pętle wykonują zdecydowanie za dużo operacji. Między innymi przepisujemy cały poprzedni zbiór, a następnie odwiedzamy wielokrotnie wcześniej już odwiedzone wierzchołki. Operacja dodania danego typu cukierków kosztowała nas O(KM). Zauważmy, że wystarczy wykonać jedynie O(M) operacji.
 \end{observation}
 
-\begin{lstlisting}[language=c++, breaklines=True]
-// Odwiedzone
-bool visited = (true, false, false, ..., false)
-// Kolejki wierzcholkow do zaktualizowania
-U[0] = {}, U[1] = {} 
-// Dla kazdego typu cukierkow
-for (i = 1, ..., n) {
-// Oblicz przyrost wynikajacy z dodania jednego nowego cukierka
-	dc = c[i];
-	for (v = 0,...,M-dc) {
-// Dla kazdego nieodwiedzonego wierzcholka, do ktorego da sie dojsc
-		if(visited[v] && !visited[v+dc) {
-// Oznacz nowy wierzcholek jako odwiedzony
-			visited[v+dc] = true;
-// Dodaj do kolejki do przetworzenia
-			U[1].insert(v);
-		}
-	}
-// Dla kazdego dodanego cukierka
-	for(j = 2, ..., k[i]) {
-// Stworz nowa pusta kolejke
-		U[i%2] = {};
-// Dla kazdego wierzcholka z  poprzedniej kolejki
-		for(v : U[(i+1)%2]) {
-// Znajdz wartosc sumy po dodaniu cukierka
-			nv = v + dc; 
-// Jesli wczesniej nie uzyskalismy tej sumy.
-			if(!visited[nv]) {
- // Oznacz uzyskanie sumy jako odwiedzony.
-				visited[nv] = true;
-// Dodaj do nowej kolejki
-				U[i%2].insert(v);
-			}			
-		}
-	}
+\begin{lstlisting}[breaklines=True]
+void visit(int nv) {
+    visited[nv] = true;
+    res = min(res, abs(2*nv - D));
 }
+Pseudokod:
+0. Odwiedz 0.
+1. (i=1,..,n) Dla kazdego typu cukierkow
+1.1 Policz przyrost dc = c[i]
+{kolejka U[1] powinna byc pusta}
+1.2 (nv = M-1,...,dc) Dla kazdego nieodwiedzonego wierzcholka nv, do ktorego da sie dojsc
+1.2.1 Odwiedz nv.
+1.2.2 Dodaj nv do kolejki U[1].
+1.3 (j = 0,...,k[i]) Dla kazdego dodanego cukierka (danego typu).
+1.3.1 Wyczysc kolejke U[j%2].
+1.3.2 (v : U[(j+1)%2]) Dla kazdej sumy v z poprzedniej kolejki.
+1.3.2.1 nv = v + dc
+1.3.2.2 Jesli wczesniej nie uzyskalismy sumy nv.
+1.3.2.2.1 Odwiedz nv.
+1.3.2.2.2 Dodaj nv do kolejnej kolejki.
+	
 \end{lstlisting}
 
 Jako kolejkę wystarczy użyc standardowego std::vector.
