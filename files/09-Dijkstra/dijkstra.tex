@@ -56,10 +56,11 @@ Sprawdzamy wszystkie możliwe kombinacje P i wypisujemy tą z najmniejszą warto
 \end{observation}
 
 \begin{lstlisting}[language=c++]
+int n;
 vector<int> k;
 vector<int> c;
 int brute(int wynik, int i) {
-	if(i > k.size()) return abs(wynik);
+	if(i > n) return abs(wynik);
 	int res = INT_MAX;	
 	for(j = 1; j <= k[i], j++) {
 		int czesc = (2 * j - k[i]) * c[i];
@@ -111,10 +112,10 @@ Dla dużych danych algorytm jest nadal za wolny.
 
 \subsection{Optymalizacja $O(CK^2N)$}
 \begin{lemma} Wynik jest ograniczony z góry przez $C$.
-\begin{proof} Posortujmy cukierki pod względem liczby kalorii, a następnie ustawmy je w rządku. Połóżmy je następnie na osi X układu współrzędnych, a następnie nadajmy kolejne indeksy. Przydzielając cukierki parami (2k-1, 2k), otrzymamy pewne odcinki i punkty na osi X. Możemy tak uczynić zawsze, gdy liczba cukierków jest parzysta. W przypadku nieparzystym wystarczy dodać fikcyjny cukierek o kaloryczności 0.
-
-Zauważmy, że suma ich długości jest ograniczona z góry przez C.
+\begin{proof}
+Pierwszy cukierek dajemy komukolwiek. Kolejne cukierki dajemy zawsze temu który ma mniej. W ten sposób nigdy nie będziemy mieć różnicy większej niż C.
 \end{proof}
+
 \end{lemma}
 \begin{lemma} Jeśli wartość funkcji na każdym prefiksie jest ograniczona i rośnie, to jeśli wartość na prefiksie przekroczy pewien próg, to wówczas tej kombinacji można nie rozpatrywać.
 \begin{proof}
@@ -126,22 +127,53 @@ Zauważmy, że suma ich długości jest ograniczona z góry przez C.
 
 A więc w interesującym nas przypadku:
 \begin{align*}	
-& 0 \leq 2\sum_i a_ic_i \leq D + C \leq (K+1)C = M_2 \\
-& M_2 = O(KC)
+& 0 \leq 2\sum_i a_ic_i \leq D + C \leq (K+1)C  \\
+& 0 \leq \sum_i a_ic_i \leq \frac{D+C}{2} = M_2 \\
+& M_2 = O(CK)
 \end{align*}
 \end{proof}
 \end{lemma}
 \begin{displaymath}
 \end{displaymath}
 Wystarczy więc jedynie zmienić sposób wrzucania do zbioru, oraz nie wrzucać do niego elementów większych od $M_2$. \\
-Otrzymaliśmy algorytm $O(KNM_2) = O(CK^2N)$. Niestety, jest on nadal zbyt wolny.
+Otrzymaliśmy algorytm $O(KM_2N) = O(CK^2N)$. Niestety, jest on nadal zbyt wolny.
 \subsection{Optymalizacja $O(CKN)$}
-\begin{observation} Dodając kolejne cukierki tak naprawdę dodajemy osiągalne sumy do zbioru. Można to interpretować jako odwiedzanie kolejnych wierzchołków, które te sumy reprezentują.
+\begin{observation} Dodając kolejne cukierki tak naprawdę dodajemy osiągalne sumy do zbioru. Można to interpretować jako odwiedzanie, kolejnych sum (wierzchołków).
 \end{observation}
 
-\begin{observation} Dwie najbardziej wewnętrzne pętle wykonują zdecydowanie za dużo operacji. Między innymi przepisujemy cały poprzedni zbiór, a następnie odwiedzamy wielokrotnie wcześniej już odwiedzone wierzchołki. Operacja dodania danego typu cukierków kosztowała nas O(MK). Zauważmy, że wystarczy wykonać jedynie O(M) operacji.
-\end{observation}
+W tablicy visited przechowujemy informację o możliwych do osiągnięcia sumach kalorii dla pierwszej osoby. \\
+Rozpatrzmy przykładową aktualizację dla cukierka ($M_2 = 16, c=2, k=4$). \\
+X oznacza odwiedzenie nowego wierzchołka, \\
+O oznacza odwiedzenie wcześniej odwiedzonego wierzchołka \\
+$V_i$ to nowe sumy osiągnięte przez dodanie i cukierków danego typu.
+\begin{center}
+    \begin{tabular}{| l | l | l | l | l | l | p{2cm} |}
+    \hline
+    $id$ & $visited$ & $V_1(U_1)$ & $V_2(U_0)$ & $V_3(U_1)$ & $V_4(U_0)$ & $visited'$ \\
+    \hline
+    16 & & & X & & &+ \\
+    15 &+& & &O & &+ \\
+    14 & &X & & & &+ \\
+    13 & & &X & & &+ \\
+    12 &+& & & & &+ \\
+    11 & &X & & & &+ \\
+    10 & & & & & & \\
+    9 &+& & &O & &+ \\
+    8 & & & & & X &+ \\
+    7 & & &X & & &+ \\
+    6 & & & &X & &+ \\
+    5 & &X & & & &+ \\
+    4 & & &X & & &+ \\
+    3 &+& & & & &+ \\
+    2 & &X & & & &+ \\
+    1 & & & & & & \\
+    0 &+ & & & & &+ \\
+    \hline
+    \end{tabular}
+\end{center}
 
+\begin{observation} Dwie najbardziej wewnętrzne pętle wykonują zdecydowanie za dużo operacji. Między innymi przepisujemy cały poprzedni zbiór, a następnie odwiedzamy wielokrotnie wcześniej już odwiedzone wierzchołki. Operacja dodania danego typu cukierków kosztowała nas O(KM). Zauważmy, że wystarczy wykonać jedynie O(M) operacji.
+\end{observation}
 
 \begin{lstlisting}[language=c++, breaklines=True]
 // Odwiedzone
@@ -151,12 +183,12 @@ U[0] = {}, U[1] = {}
 // Dla kazdego typu cukierkow
 for (i = 1, ..., n) {
 // Oblicz przyrost wynikajacy z dodania jednego nowego cukierka
-	dc = 2 * c[i];
-	for (v = dc,...,M) {
+	dc = c[i];
+	for (v = 0,...,M-dc) {
 // Dla kazdego nieodwiedzonego wierzcholka, do ktorego da sie dojsc
-		if(visited[v] && !visited[v - dc]) {
+		if(visited[v] && !visited[v+dc) {
 // Oznacz nowy wierzcholek jako odwiedzony
-			visited[v] = true;
+			visited[v+dc] = true;
 // Dodaj do kolejki do przetworzenia
 			U[1].insert(v);
 		}
@@ -180,7 +212,8 @@ for (i = 1, ..., n) {
 	}
 }
 \end{lstlisting}
+
 Jako kolejkę wystarczy użyc standardowego std::vector.
-Powyższy algorytm działa w czasie $O(NM_2) = O(CKN)$.
+Powyższy algorytm działa w czasie $O(M_2N) = O(CKN)$.
 
 \end{document}

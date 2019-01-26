@@ -286,8 +286,13 @@ var lessons = [
         .setSubject("Programowanie dynamiczne").setDesc("Dijkstra II")
         .setLinks([
         new Link("files/old/10-dijkstra/dijkstra.html", "Dijkstra 2017/2018"),
-        new Link("files/09-Dijkstra/build/dijkstra.pdf", "Skrypt"),
+        new Link("files/09-Dijkstra/build/dijkstra.pdf", "Skrypt v.2"),
         new Link("https://www.spoj.com/problems/FCANDY/", "FCANDY (SPOJ)"),
+    ]),
+    new Lesson().ext().setDate(25, 01, 2019).display(1)
+        .setSubject("Programowanie dynamiczne").setDesc("FCANDY c.d")
+        .setLinks([
+        new Link("files/09-Dijkstra/fcandy.cpp", "Rozwiązanie")
     ]),
     new Lesson().ext().setCode("TG_10").setExpDate(2, 2018).display(0)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")

@@ -5,10 +5,11 @@
 
 using namespace std;
 
-int n, D, M, C, res = INT_MAX;
+int n, D, M, C, res = INT_MAX, nv;
 vector<int> k;
 vector<int> c;
 vector<bool> visited;
+vector<int> update[2];
 
 int main() {
     ios_base::sync_with_stdio(0);
@@ -18,28 +19,31 @@ int main() {
     c.resize(n+1);
     D = 0;
     C = 0;
-    for(int i = 1; i <= n; i++) {
+    for(int i = 1; i <= n; i++) { // O(N)
         cin >> k[i] >> c[i];
         D += k[i] * c[i];
         C = max(C, c[i]);
     }
-    M = D + C;
+    M = (D + C)/2;
     visited.resize(M+1, false);
     visited[0] = true;
     
-    for(int i = 1; i <= n; i++) { // O(N)
-        int dc = 2 * c[i];
-        vector<int> update[2];
-        for(int i = 0; i < visited.size() - dc; i++) 
-            if(visited[i] && !visited[i + dc]) update[0].push_back(i);
+    for(int i = 1; i <= n; i++) { // O(CKN)
+        int dc = c[i];
+        for(int i = 0; i < 2; i++)
+            update[i].clear();
         
-        for(int j = 1; j <= k[i] && !update[(j+1)%2].empty(); j++) { // O(KC)
+        for(int i = 0; i + dc < visited.size(); i++)
+            if(visited[i] && !visited[i + dc]) 
+                update[0].push_back(i);
+        
+        for(int j = 1; j <= k[i] && !update[(j+1)%2].empty(); j++) {
             update[j%2].clear();
             for(auto& v : update[(j+1)%2]) {
-                int nv = v + dc;
+                nv = v + dc;
                 if(nv < visited.size() && !visited[nv]) {
                     visited[nv] = true;
-                    res = min(res, abs(nv - D));
+                    res = min(res, abs(2*nv - D));
                     update[j%2].push_back(nv);
                 }
             }
