@@ -65,7 +65,7 @@ ostream& operator<<(ostream& os, const Matrix& A) {
   return os;
 }
 
-/* Mnozy przez siebie wektor i macierz */
+/* b = A * X */
 void matvecmul(const Matrix& A, const Vector& x, Vector& b) {
   const int I = A.shape[0], J = A.shape[1];
   assert(J == x.shape);
@@ -78,7 +78,7 @@ void matvecmul(const Matrix& A, const Vector& x, Vector& b) {
   }
 }
 
-/* Kopiuje macierz A do B */
+/* B = A */
 void matcpy(const Matrix& A, Matrix& B) {
   const int I = A.shape[0], J = A.shape[1];
   assert(I == B.shape[0] && J == B.shape[1]);

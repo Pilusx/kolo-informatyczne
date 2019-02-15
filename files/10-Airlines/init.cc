@@ -11,119 +11,60 @@
 using namespace std;
 
 struct Mask {
-  int mask;
-  int used;
+  ?
 };
 
 /* Wypisuje maske na strumien */
 ostream& operator<<(ostream& os, const Mask& mask) {
   const int B = 4;
-  bitset<B> b = mask.mask;
-  os << "(" << b.to_string() << " " << mask.used << ")";
+  bitset<B> b = ? ;
+  os << "(" << b.to_string() << " " << ? << ")";
   return os;
 }
 
 /* Sprawdza czy maska jest dobra (tzn. nie ma dwoch kolejnych zapalonych bitow)
  */
 inline bool good_mask(int x) {
-  bool last = x % 2;
-  x /= 2;
-  while (x > 0) {
-    if (x % 2 == 1 && last) return false;
-    last = x % 2;
-    x /= 2;
-  }
-  return true;
+  // TODO
 }
 
 /* Oblicza liczbe zapalonych bitow (tj. bitset::count() dla intow */
 inline int count(int x) {
-  int count = 0;
-  while (x > 0) {
-    if (x % 2 == 1) count++;
-    x /= 2;
-  }
-  return count;
+  // TODO
 }
 
 /* Zapisuje wszystkie dobre maski (rozmiaru maksymalnie m, uzywajacych
  * maksymalnie k bitow) do vectora */
 void get_good_masks(vector<Mask>& v, int m, int k) {
-  int used;
-  v.clear();
-  for (int i = 0; i < (1 << m); i++) {
-    used = count(i);
-    if (good_mask(i) && used <= k) {
-      v.push_back({i, used});
-    }
-  }
+  // TODO
 }
 
 bool operator<(const Mask& lhs, const Mask& rhs) {
-  return lhs.mask < rhs.mask || (lhs.mask == rhs.mask && (lhs.used < rhs.used));
+  // TODO
 }
 
 int task_1(int m, int n, int k) {
   /* Znajdz dobre maski i zapisz je do vectora */
-  vector<Mask> masks;
-  get_good_masks(masks, m, k);
+  // TODO
 
   /* Zainicjalizuj liczbe sposobow dla pierwszej warstwy dp[1]. Dla kazdej maski
    * wynosi ona 1. */
-  map<Mask, int> dp[2];
-  for (Mask mask : masks) {
-    dp[1][mask] = 1;
-  }
+  // TODO
 
   /* Oblicz wszystkie mozliwe kombinacje par dla nastepujacych po sobie warstw.
    */
-  int r = 0;
-  map<int, set<int>> pairs;
-  for (Mask& mask : masks) {
-    for (Mask& mask2 : masks) {
-      if ((mask.mask & mask2.mask) == 0) {
-        pairs[mask.mask].insert(mask2.mask);
-        r++;
-      }
-    }
-  }
+  // TODO
 
   /* Przejdz po wszystkich warstwach obliczajac liczbe kombinacji */
-  Mask current;
-  int options;
-  for (int l = 2; l <= n; l++) {
-    cerr << l << " iteration" << endl;
-    auto& dpc = dp[l % 2];
-    auto& dpf = dp[(l + 1) % 2];
-    dpc.clear();
-    for (auto& state : dpf) {
-      // cout << state.first << "->" << state.second << ", ";
-      for (int mask : pairs[state.first.mask]) {
-        current.mask = mask;
-        current.used = count(mask) + state.first.used;
-        options = state.second;
-        if (current.used <= k) {
-          auto it = dpc.find(current);
-          dpc[current] =
-              (it != dpc.end() ? madd(it->second, options) : options);
-        }
-      }
-    }
-    // cout << endl;
-  }
+  // TODO
 
   /* Przejdz po ostatniej warstwie i zsumuj wszystkie dobre mozliwosci (tj.
    * wszystkie warstwy uzywajace dokladnie k osob) */
-  int res = 0;
-  for (auto& state : dp[n % 2]) {
-    current = state.first;
-    if (state.first.used == k) {
-      // cout << current << "->" << state.second << endl;
-      res = madd(res, state.second);
-    }
-  }
+  // TODO
+
   return res;
 }
+
 /*
   different_used - liczba roznych wartosci "used" dla maski (zazwyczaj k+1)
   mask - maska
@@ -148,16 +89,12 @@ void decode(int different_used, Mask& mask, const vector<Mask>& masks,
 }
 
 int task_2(int m, int n, int k) {
-  vector<Mask> masks;
   /* Znajdz wszystkie dobre maski */
-  get_good_masks(masks, m, k);
+  // TODO
 
   /* Znajdz funkcje odwrotna (mape) dla funkcji indeks -> maska (tj. maska ->
    * indeks w vectorze) */
-  map<int, int> inv_mask;
-  for (int i = 0; i < masks.size(); i++) {
-    inv_mask[masks[i].mask] = i;
-  }
+  // TODO
 
   /* Znajdz macierz T tranzycji miedzy warstwami. Rozpatrz masks.size() * (k+1)
    * roznych stanow. Kazdy stan to maska (ze zmodyfikowana liczba posadzonych
@@ -165,26 +102,7 @@ int task_2(int m, int n, int k) {
    * Mozliwych opcji jest [liczba roznych masek] * [liczba
    * roznych liczb posadzonych osob 0...k]
    */
-  const int X = masks.size() * (k + 1);
-  const int shape[2] = {X, X};
-  Matrix T(shape);
-  T.zeros();
-
-  Mask last, current;
-  int j;
-  for (int i = 0; i < X; i++) {
-    decode(k + 1, last, masks, i);
-    for (auto& mask : masks) {
-      if ((mask.mask & last.mask) == 0) {
-        current.mask = mask.mask;
-        current.used = last.used + mask.used;
-        if (current.used <= k) {
-          encode(k + 1, current, inv_mask, j);
-          T[j][i] = 1;
-        }
-      }
-    }
-  }
+  // TODO
 
   /*
     Znajdz:
@@ -193,28 +111,12 @@ int task_2(int m, int n, int k) {
     niej 0 osob.)
     - R = T ^ n;
     */
-  Matrix R(shape);
-  R.zeros();
-  Vector s0(X), sn(X);
-  current.mask = 0;
-  current.used = 0;
-  encode(k + 1, current, inv_mask, j);
-  s0[j] = 1;
-
-  power(T, n, R);
-  matvecmul(R, s0, sn);
-  cerr << sn << endl;
+  // TODO
 
   /* Przejdz po ostatniej warstwie i zsumuj wszystkie dobre mozliwosci (tj.
    * wszystkie sn[i] takie, że i-ta maska w wektorze uzywa dokladnie k
    * osob) */
-  int res = 0;
-  for (int i = 0; i < X; i++) {
-    decode(k + 1, current, masks, i);
-    if (current.used == k) {
-      res = madd(res, sn[i]);
-    }
-  }
+  // TODO
 
   return res;
 }
