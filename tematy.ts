@@ -348,18 +348,29 @@ const lessons = [
             new Link("files/09-Dijkstra/fcandy.cpp", "Rozwiązanie")
         ]),
 
+    new Lesson().ext().setDate(15, 2, 2018).display(1)
+        .setSubject("Programowanie dynamiczne").setDesc("Maski bitowe")
+        .setLinks([
+            new Link("https://www.spoj.com/problems/AIRLINES/", "AIRLINES (SPOJ)"),
+            new Link("files/10-Airlines/matrix.hpp", "Mala biblioteka do mnozenia macierzy mod P"),
+            new Link("files/10-Airlines/init.cc", "Start")
+        ]),
+        
+    new Lesson().ext().setDate(1, 3, 2018).display(0)
+        .setSubject("Układy równań liniowych").setDesc("Eliminacja Gaussa"),
 
-    new Lesson().ext().setCode("TG_10").setExpDate(2, 2018).display(0)
+    new Lesson().ext().setCode("TG_10").setExpDate(3, 2018).display(0)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
 
+    new Lesson().ext().setExpDate(3, 2018).display(0)
+        .setSubject("Algorytmy tekstowe").setDesc("Aho-Corasick"),
 
-    new Lesson().ext().setExpDate(12, 2018).setExpDate(2, 2018).display(0)
+    new Lesson().ext().setExpDate(3, 2018).display(0)
         .setSubject("Sieci przepływowe").setDesc("Optymalizacja"),
 
     new Lesson().ext().setCode("TG_11").setExpDate(3, 2018).display(0)
-        .setSubject("Grafy dwudzielne").setDesc("Skojarzenia w grafach dwudzielnych"),
-
+        .setSubject("Grafy dwudzielne").setDesc("Maksymalne skojarzenia"),
 
     new Lesson().ext().setCode("TG_13").setExpDate(4, 2019).display(0)
         .setSubject("Programowanie genetyczne").setDesc(""),
