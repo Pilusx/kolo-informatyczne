@@ -348,12 +348,23 @@ const lessons = [
             new Link("files/09-Dijkstra/fcandy.cpp", "Rozwiązanie")
         ]),
 
-    new Lesson().ext().setDate(15, 2, 2018).display(1)
+    new Lesson().ext().setDate(15, 2, 2019).display(1)
         .setSubject("Programowanie dynamiczne").setDesc("Maski bitowe")
         .setLinks([
             new Link("https://www.spoj.com/problems/AIRLINES/", "AIRLINES (SPOJ)"),
             new Link("files/10-Airlines/matrix.hpp", "Mala biblioteka do mnozenia macierzy mod P"),
             new Link("files/10-Airlines/init.cc", "Start")
+        ]),
+    new Lesson().ext().setDate(1, 3, 2019).display(1)
+        .setSubject("Programowanie dynamiczne").setDesc("Maski bitowe c.d."),
+
+    new Lesson().ext().setDate(8, 3, 2019).display(1)
+        .setSubject("Algorytmy tekstowe").setDesc("Aho-Corasick")
+        .setLinks([
+            new Link("https://www.spoj.com/problems/SUB_PROB/", "SUB_PROB (SPOJ)"),
+            new Link("files/11-Corasick/test.zip", "Testy"),
+            new Link("files/11-Corasick/start.zip", "Start"),
+            new Link("files/11-Corasick/rozw.zip", "Rozwiazania")        
         ]),
         
     new Lesson().ext().setDate(1, 3, 2018).display(0)
