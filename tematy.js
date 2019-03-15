@@ -311,17 +311,18 @@ var lessons = [
         new Link("files/11-Corasick/start.zip", "Start"),
         new Link("files/11-Corasick/rozw.zip", "Rozwiazania")
     ]),
+    new Lesson().ext().setCode("TG_11").setDate(16, 3, 2018).display(1)
+        .setSubject("Grafy dwudzielne").setDesc("Maksymalne skojarzenia (Hopcroft-Karp)")
+        .setLinks([
+        new Link("https://www.spoj.com/problems/MATCHING/", "MATCHING (SPOJ)")
+    ]),
     new Lesson().ext().setDate(1, 3, 2018).display(0)
         .setSubject("Układy równań liniowych").setDesc("Eliminacja Gaussa"),
     new Lesson().ext().setCode("TG_10").setExpDate(3, 2018).display(0)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
     new Lesson().ext().setExpDate(3, 2018).display(0)
-        .setSubject("Algorytmy tekstowe").setDesc("Aho-Corasick"),
-    new Lesson().ext().setExpDate(3, 2018).display(0)
         .setSubject("Sieci przepływowe").setDesc("Optymalizacja"),
-    new Lesson().ext().setCode("TG_11").setExpDate(3, 2018).display(0)
-        .setSubject("Grafy dwudzielne").setDesc("Maksymalne skojarzenia"),
     new Lesson().ext().setCode("TG_13").setExpDate(4, 2019).display(0)
         .setSubject("Programowanie genetyczne").setDesc(""),
     new Lesson().ext().setCode("TG_9").setExpDate(5, 2019).display(0)
