@@ -367,12 +367,20 @@ const lessons = [
             new Link("files/11-Corasick/rozw.zip", "Rozwiazania")        
         ]),
         
-    new Lesson().ext().setCode("TG_11").setDate(16, 3, 2018).display(1)
+    new Lesson().ext().setCode("TG_11").setDate(15, 3, 2018).display(1)
         .setSubject("Grafy dwudzielne").setDesc("Maksymalne skojarzenia (Hopcroft-Karp)")
         .setLinks([
             new Link("https://www.spoj.com/problems/MATCHING/", "MATCHING (SPOJ)")
         ]),
         
+    new Lesson().ext().setDate(22, 3, 2018).display(1)
+        .setSubject("Sieci przepływowe").setDesc("Maksymalny przepływ (Dinic)"),
+    new Lesson().ext().setDate(29, 3, 2019).display(1)
+        .setSubject("Sieci przepływowe").setDesc("c.d.")
+        .setLinks([
+            new Link("https://szkopul.edu.pl/p/default/problemset/oi/12", "Kości (12 OI)")
+        ]),
+
     new Lesson().ext().setDate(1, 3, 2018).display(0)
         .setSubject("Układy równań liniowych").setDesc("Eliminacja Gaussa"),
 
@@ -380,8 +388,7 @@ const lessons = [
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
 
-    new Lesson().ext().setExpDate(3, 2018).display(0)
-        .setSubject("Sieci przepływowe").setDesc("Optymalizacja"),
+
 
     new Lesson().ext().setCode("TG_13").setExpDate(4, 2019).display(0)
         .setSubject("Programowanie genetyczne").setDesc(""),
