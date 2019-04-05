@@ -316,12 +316,17 @@ var lessons = [
         .setLinks([
         new Link("https://www.spoj.com/problems/MATCHING/", "MATCHING (SPOJ)")
     ]),
-    new Lesson().ext().setDate(22, 3, 2018).display(1)
+    new Lesson().ext().setDate(22, 3, 2019).display(1)
         .setSubject("Sieci przepływowe").setDesc("Maksymalny przepływ (Dinic)"),
     new Lesson().ext().setDate(29, 3, 2019).display(1)
         .setSubject("Sieci przepływowe").setDesc("c.d.")
         .setLinks([
         new Link("https://szkopul.edu.pl/p/default/problemset/oi/12", "Kości (12 OI)")
+    ]),
+    new Lesson().ext().setDate(5, 4, 2019).display(1)
+        .setSubject("Punkty artykulacji").setDesc("Funkcja Low")
+        .setLinks([
+        new Link("https://szkopul.edu.pl/p/default/problemset/oi/15", "Blokada (15 OI)")
     ]),
     new Lesson().ext().setDate(1, 3, 2018).display(0)
         .setSubject("Układy równań liniowych").setDesc("Eliminacja Gaussa"),

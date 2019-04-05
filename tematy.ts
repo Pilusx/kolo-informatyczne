@@ -373,12 +373,19 @@ const lessons = [
             new Link("https://www.spoj.com/problems/MATCHING/", "MATCHING (SPOJ)")
         ]),
         
-    new Lesson().ext().setDate(22, 3, 2018).display(1)
+    new Lesson().ext().setDate(22, 3, 2019).display(1)
         .setSubject("Sieci przepływowe").setDesc("Maksymalny przepływ (Dinic)"),
+    
     new Lesson().ext().setDate(29, 3, 2019).display(1)
         .setSubject("Sieci przepływowe").setDesc("c.d.")
         .setLinks([
             new Link("https://szkopul.edu.pl/p/default/problemset/oi/12", "Kości (12 OI)")
+        ]),
+    
+    new Lesson().ext().setDate(5, 4, 2019).display(1)
+        .setSubject("Punkty artykulacji").setDesc("Funkcja Low")
+        .setLinks([
+            new Link("https://szkopul.edu.pl/p/default/problemset/oi/15", "Blokada (15 OI)")
         ]),
 
     new Lesson().ext().setDate(1, 3, 2018).display(0)
@@ -387,8 +394,6 @@ const lessons = [
     new Lesson().ext().setCode("TG_10").setExpDate(3, 2018).display(0)
         .setIOI("AL3a (15) Dodać gdzieś Mosty i punkty artykulacji, cykl")
         .setSubject("Silnie spójne składowe").setDesc(),
-
-
 
     new Lesson().ext().setCode("TG_13").setExpDate(4, 2019).display(0)
         .setSubject("Programowanie genetyczne").setDesc(""),
@@ -401,7 +406,6 @@ const lessons = [
         .setLinks([
             new Link("https://www.boost.org/doc/libs/1_64_0/libs/mpl/doc/tutorial/tutorial-metafunctions.html#id41", "Do poczytania (dla chętnych)")
         ]),
-
 ]
 
 const other_lessons = [
