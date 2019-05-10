@@ -382,7 +382,7 @@ const lessons = [
             new Link("https://szkopul.edu.pl/p/default/problemset/oi/12", "Kości (12 OI)")
         ]),
     
-    new Lesson().ext().setDate(5, 4, 2019).display(1)
+    new Lesson().ext().setDate(10, 5, 2019).display(1)
         .setSubject("Punkty artykulacji").setDesc("Funkcja Low")
         .setLinks([
             new Link("https://szkopul.edu.pl/p/default/problemset/oi/15", "Blokada (15 OI)")
