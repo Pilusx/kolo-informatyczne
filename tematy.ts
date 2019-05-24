@@ -388,6 +388,22 @@ const lessons = [
             new Link("https://szkopul.edu.pl/p/default/problemset/oi/15", "Blokada (15 OI)")
         ]),
 
+    new Lesson().ext().setDate(17, 5, 2019).display(1)
+        .setSubject("Izomorfizm drzew").setDesc("Pchły")
+        .setLinks([
+            new Link("https://szkopul.edu.pl/p/default/problemset/oi/8", "Wędrowni Treserzy Pcheł (8 OI)"),
+            new Link("http://www.deltami.edu.pl/temat/informatyka/2011/03/30/Roztanczone_pchly/", "Roztańczone pchły (Deltami)"),
+            new Link("http://www.deltami.edu.pl/temat/informatyka/algorytmy/2018/11/26/Problem_izomorfizmu_grafow/", "Izomorfizmy (Deltami)"),
+        ]),
+
+    new Lesson().ext().setDate(23, 5, 2019).display(1)
+        .setSubject("Kolorowanie grafów").setDesc("")
+        .setLinks([
+            new Link("http://www.deltami.edu.pl/temat/matematyka/zastosowania/2014/10/30/O_modelowaniu_przydzialu_czestot/", "Kolorowanie grafów (Deltami)"),
+            new Link("https://szkopul.edu.pl/p/default/problemset/oi/18","Konspiracja (18 OI)"),
+            new Link("https://arxiv.org/pdf/1804.02385.pdf", "Ładne obrazki (Arxiv)")
+        ]),
+
     new Lesson().ext().setDate(1, 3, 2018).display(0)
         .setSubject("Układy równań liniowych").setDesc("Eliminacja Gaussa"),
 
