@@ -342,6 +342,14 @@ var lessons = [
         new Link("https://szkopul.edu.pl/p/default/problemset/oi/18", "Konspiracja (18 OI)"),
         new Link("https://arxiv.org/pdf/1804.02385.pdf", "Ładne obrazki (Arxiv)")
     ]),
+    new Lesson().ext().setDate(30, 5, 2019).display(1)
+        .setSubject("Metaprogramowanie").setDesc("")
+        .setLinks([
+        new Link("https://wandbox.org/", "Kompilator c++ (z boost 1.70.0)"),
+        new Link("https://theboostcpplibraries.com/boost.format", "boost::format"),
+        new Link("https://en.cppreference.com/w/cpp/language/fold", "Fold"),
+        new Link("https://www.boost.org/doc/libs/1_64_0/libs/mpl/doc/tutorial/tutorial-metafunctions.html#id41", "Do poczytania (dla chętnych)")
+    ]),
     new Lesson().ext().setDate(1, 3, 2018).display(0)
         .setSubject("Układy równań liniowych").setDesc("Eliminacja Gaussa"),
     new Lesson().ext().setCode("TG_10").setExpDate(3, 2018).display(0)
@@ -353,9 +361,7 @@ var lessons = [
         .setSubject("Heurystyki").setDesc("Kostka Rubika"),
     new Lesson().ext().setCode("TE_2").setExpDate(5, 2019).display(0)
         .setSubject("Template").setDesc("Wypisz mój typ, specjalizacja")
-        .setLinks([
-        new Link("https://www.boost.org/doc/libs/1_64_0/libs/mpl/doc/tutorial/tutorial-metafunctions.html#id41", "Do poczytania (dla chętnych)")
-    ]),
+        .setLinks([]),
 ];
 var other_lessons = [
     new Lesson().intro().setCode("IO_2").setExpDate(10, 2018).setDate(18, 10, 2018)
